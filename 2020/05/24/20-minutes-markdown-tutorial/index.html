@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  <title>20分钟Markdown入门教程 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小黑杂说</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="20分钟Markdown入门教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-24 12:19" pubdate>
+        2020年5月24日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">20分钟Markdown入门教程</h1>
+            
+            <div class="markdown-body">
+              <p>Markdown是一种轻量级标记语言，允许人们使用易读易写的纯文本格式编写文档，现在很多Markdown编辑软件还支持各种css（Cascading Style Sheets，层叠样式表）导出成HTML网页或者pdf文件等。</p>
+<p>Markdown原生语法支持富文本的各种基本格式：<strong>加粗</strong>、_斜体_、插入图片、表格、超链接、列表等等，还可以通过扩展语法支持删除线、上^标^、下<del>标</del> 、LaTeX公式、流程图等等。</p>
+<p>另外，Markdown天生支持HTML语法，比如我常用的一段转pdf文件时用的分页代码如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;page-break-after: always;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>和类似于Microsoft Word这种文本编辑软件相比，Markdown要轻量的太多了，它不需要特别的软件，使用普通记事本就可以编写，只不过最终渲染后文档效果，依赖于具体软件css样式表呈现。</p>
+<h2 id="编辑软件"><a href="#编辑软件" class="headerlink" title="编辑软件"></a>编辑软件</h2><p>我们常在各类软件的安装目录或者源代码目录看到<code>*.md</code>，就是Markdown文档格式。</p>
+<p>你用文本编辑器打开时这就是个普通的文本文件，有些特殊的符号标记，而换成Markdown编辑器打开时就可以看到最终效果了。</p>
+<ul>
+<li><p>  电脑端软件，这里推荐跨平台的免费软件<code>Typora</code>，所见即所得，反应迅速，特别棒。如果简单点，使用印象笔记电脑端也可以新建Markdown，只是时间长了，使用过程中会出现卡顿，好处是各个平台移动端随时查看（无法编辑）比较方便。</p>
+</li>
+<li><p>  Android端，推荐<code>坚果云Markdown</code>、<code>纯纯写作</code>、<code>Memorize</code>，其中只有坚果云Markdown是个单纯的文档编辑软件，后两者一个是写作一个是日记，但对Markdown支持都比较好。之前纯纯写作特价买的，现在比较贵了。</p>
+</li>
+<li><p>  iOS端，推荐<code>坚果云Markdown</code>、<code>小章鱼</code>、<code>MWeb</code>，坚果云的理由还是跨平台同步，MWeb和小章鱼都有自己文档库管理，支持iCloud，MWeb免费版有所限制，没法在网盘创建新文档，但是优势是macOS端软件功能强大。小章鱼真的是让我惊艳，免费软件，界面做的清新优美，和android端的纯纯写作不相伯仲，记得在一开始安装时允许通过邮箱找到，不然会影响iCloud同步，而且似乎找不到重新触发的方式😂。</p>
+</li>
+</ul>
+<p>总的来说，多个平台间同步文档可以用网盘同步文件夹来解决，这时坚果云的优势就出来了，可以把坚果云理解成国内版的dropbox，很强大。</p>
+<h2 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a>Markdown基本语法</h2><h3 id="标题与正文"><a href="#标题与正文" class="headerlink" title="标题与正文"></a>标题与正文</h3><p>Markdown通过<code>#</code>作为前缀表示标题级别，不带修饰的就是正文格式，通常两个回车换行表示新段落，或者说叫一个block块，（也就是段落间有一个空白行）。</p>
+<h1 id="一级标题h1-一级标题"><a href="#一级标题h1-一级标题" class="headerlink" title="一级标题h1 # 一级标题"></a>一级标题h1 <code># 一级标题</code></h1><h2 id="二级标题h2-二级标题"><a href="#二级标题h2-二级标题" class="headerlink" title="二级标题h2 ## 二级标题"></a>二级标题h2 <code>## 二级标题</code></h2><h3 id="三级标题h3-三级标题"><a href="#三级标题h3-三级标题" class="headerlink" title="三级标题h3 ### 三级标题"></a>三级标题h3 <code>### 三级标题</code></h3><h4 id="四级标题h4-四级标题"><a href="#四级标题h4-四级标题" class="headerlink" title="四级标题h4 #### 四级标题"></a>四级标题h4 <code>#### 四级标题</code></h4><h5 id="五级标题h5-五级标题"><a href="#五级标题h5-五级标题" class="headerlink" title="五级标题h5 ##### 五级标题"></a>五级标题h5 <code>##### 五级标题</code></h5><p>这是正常的普通正文格式，需要一个空白行表示分段。</p>
+<p>这是第二段文字。</p>
+<p>另外，markdown并不支持首行缩进，一般这是由渲染预览样式的css实现。如果十分迫切的想要加上首行缩进，可以使用html中的<code>&amp;nbsp;</code>来实现，一个<code>&amp;nbsp;</code>代表一个空格。</p>
+<p>分割线（<code>---</code>）通常一个空行加上用连续的三个以上短横线或者星号表示分割线。注意短横线前面不应有任何字符，包括空格。</p>
+<p>效果如下：</p>
+<hr>
+<h3 id="基本格式与扩展"><a href="#基本格式与扩展" class="headerlink" title="基本格式与扩展"></a>基本格式与扩展</h3><p>类似html语法，markdown也使用前后标记包裹的方式定义文字格式。</p>
+<p><strong>加粗</strong>（<code>**加粗**</code>）、_斜体_（<code>*斜体*</code>）是markdown文档里最常用的强调格式了。</p>
+<p>还有通用扩展语法支持的删除线（删除线）和==高亮==（<code>==高亮==</code>）。</p>
+<p>而上^角标^（<code>上^角标^</code>）和下<del>角标</del>（<code>下~角标~</code>）这些扩展语法和编辑软件支持有关系，并不是很通用，不同编辑器实现并不相同。</p>
+<h3 id="行内代码与代码块"><a href="#行内代码与代码块" class="headerlink" title="行内代码与代码块"></a>行内代码与代码块</h3><p>语法如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-code">`这是行内代码`</span><br><br><span class="hljs-code">```语言名称（c、cpp、java等）</span><br><span class="hljs-code">这是一段代码</span><br><span class="hljs-code">会按照语言名称进行高亮显示</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br>### 引用文字<br><br>引用段落以&#96;&gt;&#96;开头，若引用一篇包含多段的文字，建议多段文字以空行间隔开，因为markdown默认以空行作为分段标志，有些软件渲染时会把不加空行的两个段落连接成一段。同时，空行前也加上&#96;&gt;&#96;，否则，会在渲染时视作两个单独段落的引用。<br><br>&#96;&#96;&#96;markdown<br>&gt; 这是一个引用段落。<br>&gt; <br>&gt; 如果引用一个多段文字，建议多段文字以空行间隔，防止不同软件渲染时认为是一段文字。<br><br>&gt; 同时，空行也需要加上&#96;&gt;&#96;，防止不同软件渲染时当作两个段落引用。<br></code></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<blockquote>
+<p>这是一个引用段落。</p>
+<p>如果引用一个多段文字，建议多段文字以空行间隔，防止不同软件渲染时认为是一段文字。</p>
+</blockquote>
+<blockquote>
+<p>同时，空行也需要加上<code>&gt;</code>，防止不同软件渲染时当作两个段落引用。</p>
+</blockquote>
+<h2 id="列表与待办"><a href="#列表与待办" class="headerlink" title="列表与待办"></a>列表与待办</h2><p>列表包括有序列表和无序列表，待办是无序列表的一种。</p>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 数字+英文句号+空格，就组成了有序列表项的基本元素<br><span class="hljs-bullet">2.</span> 这就是有序列表的示例<br><span class="hljs-bullet">3.</span> 有些软件需要额外空行表示一个列表项结束<br><span class="hljs-bullet">    1.</span> 可以用<span class="hljs-code">`TAB`</span>键缩进，来表示次级列表<br><span class="hljs-bullet">    2.</span> 这是一个次级列表项<br></code></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<ol>
+<li> 数字+英文句号+空格，就组成了有序列表项的基本元素</li>
+<li> 这就是有序列表的示例</li>
+<li>有些软件需要额外空行表示一个列表项结束<ol>
+<li> 可以用<code>TAB</code>键缩进，来表示次级列表</li>
+<li> 这是一个次级列表项</li>
+</ol>
+</li>
+</ol>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">*</span> 无序列表项通常以<span class="hljs-code">`-`</span>、<span class="hljs-code">`+`</span>、<span class="hljs-code">`*`</span>开头，加上空格为起始<br><span class="hljs-bullet">    -</span> 缩进表示次级列表项<br><span class="hljs-bullet">    +</span> 我通常习惯一个级别的无序列表统一一种符号起始，但混用也没关系<br><span class="hljs-bullet">*</span> 待办列表通常以<span class="hljs-code">`- [ ]`</span>加空格为起始，最前面的<span class="hljs-code">`- `</span>便是无序列表的起始，也可以改成<span class="hljs-code">`+`</span>或者<span class="hljs-code">`*`</span><br><span class="hljs-bullet">    -</span> [ ] 中括号中包含空格，表示未完成<br><span class="hljs-bullet">    -</span> [x] 中括号中包含x，则表示已完成<br></code></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<ul>
+<li><p>无序列表项通常以<code>-</code>、<code>+</code>、<code>*</code>开头，加上空格为起始</p>
+<ul>
+<li><p>  缩进表示次级列表项</p>
+</li>
+<li><p>  我通常习惯一个级别的无序列表统一一种符号起始，但混用也没关系</p>
+</li>
+</ul>
+</li>
+<li><p>待办列表通常以<code>- [ ]</code>加空格为起始，最前面的<code>-</code>便是无序列表的起始，也可以改成<code>+</code>或者<code>*</code></p>
+<ul>
+<li>  [ ] 中括号中包含空格，表示未完成</li>
+<li>  [x] 中括号中包含x，则表示已完成</li>
+</ul>
+</li>
+</ul>
+<h2 id="链接与图片"><a href="#链接与图片" class="headerlink" title="链接与图片"></a>链接与图片</h2><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>基本的网址超链接，语法如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[<span class="hljs-string">超链接文本描述</span>](<span class="hljs-link">超链接地址 &quot;超链接提示&quot;</span>)<br>[<span class="hljs-string">必应</span>](<span class="hljs-link">www.bing.com &quot;微软必应&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>效果如示：<a href="www.bing.com" title="微软必应">必应</a></p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>图片的本质也是链接，用图片的语法告诉编辑器图片文件的地址，编辑器自己就会处理图片的显示问题。</p>
+<p>语法类似超链接，在之前多一个感叹号：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown">![<span class="hljs-string">图片名称</span>](<span class="hljs-link">图片路径 &quot;图片提示&quot;</span>)<br>![<span class="hljs-string">I love MD</span>](<span class="hljs-link">https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRN4x6j51UkoIw18k0xO_9lm08qBr060A_wbNLg00zLk0666j7S&amp;usqp=CAU &quot;I love markdown&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>图片路径可以是本地文件路径，也可以是图片的网址。效果如下：</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN4x6j51UkoIw18k0xO_9lm08qBr060A_wbNLg00zLk0666j7S&usqp=CAU" srcset="/img/loading.gif" alt="I love MD" title="I love markdown"></p>
+<h2 id="目录与脚注"><a href="#目录与脚注" class="headerlink" title="目录与脚注"></a>目录与脚注</h2><p>目录和脚注也可以看成是特殊的链接，只不过由编辑器替你实现。</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>目录语法超级简单，会按照标题h1、h2等级别自动生成。但是也得看编辑器支持与否。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[TOC]<br></code></pre></td></tr></table></figure>
+<p>效果如下： [TOC]</p>
+<h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h3><p>脚注的语法特殊一些，包含两个部分：</p>
+<ol>
+<li> 脚注标号，通常在行末加上<code>[^脚注名称]</code>。</li>
+<li> 单独写脚注信息，如<code>[^脚注名称]: 这是一条脚注信息</code>，<strong>注意是英文冒号且后面有一个空格</strong>。</li>
+</ol>
+<p>效果如示：这是一个的脚注示例。[^脚注名称] [^脚注名称]: 这是一行脚注信息。</p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>表格的语法用一堆<code>-</code>和表示横线和竖线。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"> 表头1  表头2  <br>---  --- <br> 这是表格内容    上面短横线表示表头的分隔  <br> blablabla    想要更多列就在右侧每行多一个英文竖线  <br></code></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p>表头1</p>
+<p>表头2</p>
+<p>这是表格内容</p>
+<p>上面短横线表示表头的分隔</p>
+<p>blablabla</p>
+<p>想要更多列就在右侧每行多一个英文竖线</p>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p>这里画流程图使用的是<code>mermaid</code>（🧜‍♀️）库，其实markdown还支持时序图、甘特图等更复杂的图。</p>
+<p>mermaid语法可以看作代码块的扩展，但是mermaid库的支持和编辑器的关系很大，有些不支持有些支持不全，下面示例代码里的语法算是比较通用。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-code">```mermaid // 类似声明代码块语法名</span><br><span class="hljs-code">graph TD   // graph表示流程图，TD表示方向从上到下，LR表示从左到右</span><br><span class="hljs-code">A(这是圆角矩形框) --&gt; 短横线*2加右英文书名号表示直线箭头 B[这是直角矩形框]</span><br><span class="hljs-code">B --&gt; 双竖线内为线上文字 C&#123;这是菱形框&#125;</span><br><span class="hljs-code">C --&gt; 是 D</span><br><span class="hljs-code">C --&gt; 否 E</span><br><span class="hljs-code">E --&gt; F((这是圆形框))</span><br><span class="hljs-code">D --&gt; F</span><br></code></pre></td></tr></table></figure>
+<p>```</p>
+<p>效果如下：</p>
+<p><img src="https://wuruofan.com/wp-content/uploads/2020/05/WX20200531-152922@2x-1-551x1024.png" srcset="/img/loading.gif"></p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>以上，大概就可以覆盖markdown日常使用99%的场景了，熟练使用之后，你就会发现写文档不用操心格式是多么美妙的一件事情。</p>
+<p>等到使用熟练之后，任何文本编辑器都会是markdown发光发热的地方，你也就可以成为人肉markdown文档渲染器了。</p>
+<p><em>图片来自网络：<a target="_blank" rel="noopener" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN4x6j51UkoIw18k0xO%5C_9lm08qBr060A%5C_wbNLg00zLk0666j7S&amp;usqp=CAU">https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRN4x6j51UkoIw18k0xO\_9lm08qBr060A\_wbNLg00zLk0666j7S&amp;usqp=CAU</a></em></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/20%E5%88%86%E9%92%9F%E6%95%99%E7%A8%8B/">20分钟教程</a>
+                    
+                      <a class="hover-with-bg" href="/tags/markdown/">markdown</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/">软件推荐</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/09/cmake-cross-compile-static-zlib-openssl-curl/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CMake 跨平台交叉编译zlib、OpenSSL、Curl</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/24/cmake-static-link-openssl-curl/">
+                        <span class="hidden-mobile">CMake静态链接openssl和curl</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

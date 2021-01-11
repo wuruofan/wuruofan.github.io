@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  <title>vim-gutentags插件异常问题解决 &amp; gtags源码编译安装 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>小黑杂说</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vim-gutentags插件异常问题解决 & gtags源码编译安装">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-07 22:18" pubdate>
+        2020年7月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vim-gutentags插件异常问题解决 &amp; gtags源码编译安装</h1>
+            
+            <div class="markdown-body">
+              <p>在ubuntu上gtags总是运行不正常，<code>ctrl-]</code>无法找到tags，<code>gutentags</code>有报错信息，今天找了下原因，记录下坎坷过程。</p>
+<p>首先在<code>.vimrc</code>中加上<code>let g:gutentags_trace = 1</code>，然后就可以用<code>:messages</code>查看具体出错日志。</p>
+<p>发现<strong>默认<code>exuberant-ctags</code>不支持<code>--output-format=e-ctags</code>，这个参数是给universal-ctags(gtags)用的，因此生成tags数据库出错了。</strong></p>
+<h2 id="apt仓库安装universal-ctags"><a href="#apt仓库安装universal-ctags" class="headerlink" title="apt仓库安装universal-ctags"></a>apt仓库安装universal-ctags</h2><p><strong>在Ubuntu的apt仓库用<code>sudo apt-get install global</code>安装。</strong></p>
+<p>实际运行发现生成tags的时候在<code>~/.cache/tags/xxx_project/</code>目录下有gtags相关文件，<strong>但是始终不去生成<code>~/.cache/tags/xxx_project.tags</code>数据库文件</strong>，这就是找不到tags的原因。</p>
+<h3 id="用snap安装universal-ctags"><a href="#用snap安装universal-ctags" class="headerlink" title="用snap安装universal-ctags"></a>用snap安装universal-ctags</h3><p><strong>用<code>sudo snap install universal-ctags</code>安装。</strong></p>
+<p>实际运行发现生成tags数据库的时候遇到权限错误：</p>
+<figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sml">gutentags: [job stderr]: [<span class="hljs-symbol">&#x27;ctags</span>: cannot <span class="hljs-keyword">open</span> <span class="hljs-built_in">option</span> file <span class="hljs-string">&quot;/home/parallels/.vim/bundle/v</span><br><span class="hljs-string">im-gutentags/res/ctags_recursive.options&quot;</span> : <span class="hljs-type">Permission</span> denied&#x27;, <span class="hljs-string">&#x27;&#x27;</span>]<br></code></pre></td></tr></table></figure>
+<p>把ctags_recursive.options文件的权限改成666或者777，仍然是这个错误，依旧无法生成tags数据库。</p>
+<p>搜了很久在一个网站看到有人遇到相同的问题，似乎是snap上gtags的问题。</p>
+<blockquote>
+<p>This is more of a warning to other users since i discovered the hard-way that universal-ctags installed by snap is NOT compatible with gutentags. For me it manifested as permission errors reading the ctags_recursive.options file, but I could imagine different file perm errors depending on your config. The fs limitations are mentioned at <a target="_blank" rel="noopener" href="https://snapcraft.io/universal-ctags">https://snapcraft.io/universal-ctags</a> and in <a target="_blank" rel="noopener" href="https://github.com/universal-ctags/ctags-snap/issues/26">https://github.com/universal-ctags/ctags-snap/issues/26</a>. I don’t think there is anything for gutentags to do except maybe include a warning in the doc about snap installed ctags.</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.bountysource.com/issues/90002621-universal-ctags-installed-by-snap-not-compatible-with-vim-gutentags" title="universal-ctags installed by snap not compatible with vim-gutentags">https://www.bountysource.com/issues/90002621-universal-ctags-installed-by-snap-not-compatible-with-vim-gutentags</a></p>
+</blockquote>
+<h2 id="源码安装universal-ctags"><a href="#源码安装universal-ctags" class="headerlink" title="源码安装universal-ctags"></a>源码安装universal-ctags</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/universal-ctags/ctags.git<br><span class="hljs-built_in">cd</span> ctags<br>./autogen.sh<br>./configure<br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
+<p>其中，<code>./autogen.sh</code>这一步使用<code>autotools</code>进行配置，依赖<code>autoconf</code>和<code>pk-config</code>包，需要apt安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install autoconf<br>sudo apt-get install pk-config<br></code></pre></td></tr></table></figure>
+<p>编译安装完成之后，默认会装到<code>/usr/local/bin/ctags</code>目录，<code>ctags --version</code>已经可以看到<code>Universal Ctags</code>相关字样了。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Universal</span> Ctags <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>(<span class="hljs-number">3671</span>ad<span class="hljs-number">72</span>), Copyright (C) <span class="hljs-number">2015</span> Universal Ctags Team<br><span class="hljs-attribute">Universal</span> Ctags is derived from Exuberant Ctags.<br><span class="hljs-attribute">Exuberant</span> Ctags <span class="hljs-number">5</span>.<span class="hljs-number">8</span>, Copyright (C) <span class="hljs-number">1996</span>-<span class="hljs-number">2009</span> Darren Hiebert<br>  <span class="hljs-attribute">Compiled</span>: May  <span class="hljs-number">7</span> <span class="hljs-number">2020</span>, <span class="hljs-number">17</span>:<span class="hljs-number">26</span>:<span class="hljs-number">30</span><br>  <span class="hljs-attribute">URL</span>: https://ctags.io/<br>  <span class="hljs-attribute">Optional</span> compiled features: +wildcards, +regex, +iconv, +option-directory, +packcc<br></code></pre></td></tr></table></figure>
+<p>然后世界就恢复正常了！tags数据库已经可以正常生成了。</p>
+<h2 id="源码安装gtags（GNU-Global）"><a href="#源码安装gtags（GNU-Global）" class="headerlink" title="源码安装gtags（GNU Global）"></a>源码安装gtags（GNU Global）</h2><p><code>vim-gutentags</code>插件此时还没法用<code>cscope</code>相关命令，搜索符号引用相关功能，还需要<code>gtags</code>支持，即<code>GNU Global</code>，是一套跨环境的源码标签系统（GNU GLOBAL is a source code tagging system that works the same way across diverse environments）。</p>
+<p>可以使用<code>sudo apt-get install global</code>从默认源安装，但是，以防万一，还是源码编译安装好了。</p>
+<p>从<a target="_blank" rel="noopener" href="https://www.gnu.org/software/global/download.html" title="Getting GLOBAL">https://www.gnu.org/software/global/download.html</a>官网下载最新软件包，配置、编译并安装。</p>
+<blockquote>
+<p>注意：安装过程中，会依赖<code>curses</code>库，执行<code>./configure</code>的时候会提示<code>curses library is required but not found</code>，需要执行<code>sudo apt-get install libncurses5-dev</code>安装相关库。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget http://tamacom.com/global/global-6.6.4.tar.gz<br>tar xzvf global-6.6.4.tar.gz<br><span class="hljs-built_in">cd</span> global-6.6.4<br><br>./configure --with-universal-ctags=`<span class="hljs-built_in">which</span> ctags` <span class="hljs-comment"># 指定使用universal-ctags路径</span><br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
+<p>默认安装到<code>/usr/local/bin/gtags</code>，运行<code>gtags --version</code>，得到如下信息。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">gtags</span> (GNU GLOBAL) <span class="hljs-number">6</span>.<span class="hljs-number">6</span>.<span class="hljs-number">4</span><br><span class="hljs-attribute">Powered</span> by Berkeley DB <span class="hljs-number">1</span>.<span class="hljs-number">85</span>.<br><span class="hljs-attribute">Copyright</span> (c) <span class="hljs-number">1996</span>-<span class="hljs-number">2019</span> Tama Communications Corporation<br><span class="hljs-attribute">License</span> GPLv<span class="hljs-number">3</span>+: GNU GPL version <span class="hljs-number">3</span> or later &lt;http://www.gnu.org/licenses/gpl.html&gt;<br><span class="hljs-attribute">This</span> is free software; you are free to change and redistribute it.<br><span class="hljs-attribute">There</span> is NO WARRANTY, to the extent permitted by law.<br></code></pre></td></tr></table></figure>
+<p>大功告成！</p>
+<hr>
+<p>最后，附上tags相关的VIM配置。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-string">&quot;&quot;</span>设置标签<span class="hljs-keyword">tags</span><br>set tags=./.tags;,.tags<br><span class="hljs-comment">&quot;设置根据打开文件自动更换目录</span><br><span class="hljs-comment">&quot;set autochdir</span><br><br><span class="hljs-comment">&quot; gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_project_root</span> = [<span class="hljs-string">&#x27;.root&#x27;</span>, <span class="hljs-string">&#x27;.svn&#x27;</span>, <span class="hljs-string">&#x27;.git&#x27;</span>, <span class="hljs-string">&#x27;.hg&#x27;</span>, <span class="hljs-string">&#x27;.project&#x27;</span>]<br><span class="hljs-comment">&quot; 所生成的数据文件的名称</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_ctags_tagfile</span> = <span class="hljs-string">&#x27;.tags&#x27;</span><br><br><span class="hljs-comment">&quot; 同时开启 ctags 和 gtags 支持：</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_modules</span> = []<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">executable</span>(<span class="hljs-string">&#x27;ctags&#x27;</span>)<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_modules</span> += [<span class="hljs-string">&#x27;ctags&#x27;</span>]<br><span class="hljs-keyword">endif</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">executable</span>(<span class="hljs-string">&#x27;gtags-cscope&#x27;</span>) &amp;&amp; <span class="hljs-built_in">executable</span>(<span class="hljs-string">&#x27;gtags&#x27;</span>)<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_modules</span> += [<span class="hljs-string">&#x27;gtags_cscope&#x27;</span>]<br><span class="hljs-keyword">endif</span><br><br><span class="hljs-comment">&quot; 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">s:vim_tags</span> = <span class="hljs-built_in">expand</span>(<span class="hljs-string">&#x27;~/.cache/tags&#x27;</span>)<br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_cache_dir</span> = <span class="hljs-variable">s:vim_tags</span><br><span class="hljs-string">&quot; 检测 ~/.cache/tags 不存在就新建 &quot;</span><br><span class="hljs-keyword">if</span> !isdirectory(<span class="hljs-variable">s:vim_tags</span>)<br>   silent! <span class="hljs-keyword">call</span> <span class="hljs-built_in">mkdir</span>(<span class="hljs-variable">s:vim_tags</span>, <span class="hljs-string">&#x27;p&#x27;</span>)<br><span class="hljs-keyword">endif</span><br><br><span class="hljs-comment">&quot; 配置 ctags 的参数</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_ctags_extra_args</span> = [<span class="hljs-string">&#x27;--fields=+niazSl&#x27;</span>]<br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_ctags_extra_args</span> += [<span class="hljs-string">&#x27;--c++-kinds=+px&#x27;</span>]<br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_ctags_extra_args</span> += [<span class="hljs-string">&#x27;--c-kinds=+px&#x27;</span>]<br><br><span class="hljs-comment">&quot; Get ctags version</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:ctags_version</span> = <span class="hljs-built_in">system</span>(<span class="hljs-string">&#x27;ctags --version&#x27;</span>)[<span class="hljs-number">0</span>:<span class="hljs-number">8</span>]<br><br><span class="hljs-comment">&quot; 如果使用 universal ctags 需要增加下面一行</span><br><span class="hljs-keyword">if</span> <span class="hljs-variable">g:ctags_version</span> == <span class="hljs-string">&quot;Universal&quot;</span><br>  <span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_ctags_extra_args</span> += [<span class="hljs-string">&#x27;--extras=+q&#x27;</span>, <span class="hljs-string">&#x27;--output-format=e-ctags&#x27;</span>]<br><span class="hljs-keyword">endif</span><br><br><span class="hljs-comment">&quot; 禁用 gutentags 自动加载 gtags 数据库的行为</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_auto_add_gtags_cscope</span> = <span class="hljs-number">1</span><br><span class="hljs-comment">&quot;Change focus to quickfix window after search (optional).</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_plus_switch</span> = <span class="hljs-number">1</span><br><span class="hljs-comment">&quot;Enable advanced commands: GutentagsToggleTrace, etc.</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_define_advanced_commands</span> = <span class="hljs-number">1</span><br><span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_trace</span> = <span class="hljs-number">0</span><br><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-keyword">cscope</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">has</span>(<span class="hljs-string">&quot;cscope&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">executable</span>(<span class="hljs-string">&#x27;gtags-cscope&#x27;</span>) &amp;&amp; <span class="hljs-built_in">executable</span>(<span class="hljs-string">&#x27;gtags&#x27;</span>)<br>        <span class="hljs-comment">&quot;禁用原GscopeFind按键映射</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">g:gutentags_plus_nomap</span> = <span class="hljs-number">1</span><br>        <span class="hljs-comment">&quot;Find this C symbol 查找C语言符号，即查找函数名、宏、枚举值等出现的地方</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;s :GscopeFind s <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find this difinition 查找函数、宏、枚举等定义的位置，类似ctags所提供的功能</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;g :GscopeFind g <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find functions called by this function 查找本函数调用的函数</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;d :GscopeFind d <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find functions calling this function 查找调用本函数的函数</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;<span class="hljs-keyword">c</span> :GscopeFind <span class="hljs-keyword">c</span> <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find this text string 查找指定的字符串</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;t :GscopeFind t <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find this egrep pattern 查找egrep模式，相当于egrep功能，但查找速度快多了</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;<span class="hljs-keyword">e</span> :GscopeFind <span class="hljs-keyword">e</span> <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find this file 查找并打开文件，类似vim的能</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;<span class="hljs-keyword">f</span> :GscopeFind <span class="hljs-keyword">f</span> <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cfile&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;Find files #including this file 查找包含本文件的文件</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;i :GscopeFind i ^<span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cfile&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span>$<span class="hljs-symbol">&lt;CR&gt;</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">set</span> csto=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">set</span> <span class="hljs-keyword">cst</span><br>        <span class="hljs-keyword">set</span> nocsverb<br>        <span class="hljs-comment">&quot; add any database in current directory</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">filereadable</span>(<span class="hljs-string">&quot;cscope.out&quot;</span>)<br>            <span class="hljs-keyword">cs</span> <span class="hljs-built_in">add</span> <span class="hljs-keyword">cscope</span>.out<br>        <span class="hljs-keyword">endif</span><br>        <span class="hljs-keyword">set</span> csverb<br><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;s :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> s <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;g :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> g <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;d :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> d <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;<span class="hljs-keyword">c</span> :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> <span class="hljs-keyword">c</span> <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;t :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> t <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;<span class="hljs-keyword">e</span> :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> <span class="hljs-keyword">e</span> <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cword&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;<span class="hljs-keyword">f</span> :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> <span class="hljs-keyword">f</span> <span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cfile&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-keyword">nmap</span> &lt;C-\&gt;i :<span class="hljs-keyword">cs</span> <span class="hljs-keyword">find</span> i ^<span class="hljs-symbol">&lt;C-R&gt;</span>=<span class="hljs-built_in">expand</span>(<span class="hljs-string">&quot;&lt;cfile&gt;&quot;</span>)<span class="hljs-symbol">&lt;CR&gt;</span>$<span class="hljs-symbol">&lt;CR&gt;</span><br><br>        <span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;C-F12&gt;</span> :<span class="hljs-keyword">cs</span> <span class="hljs-built_in">add</span> <span class="hljs-keyword">cscope</span>.out<span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;F12用ctags生成tags</span><br>        <span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;F12&gt;</span> :!ctags -R --<span class="hljs-keyword">c</span>++-kinds=+<span class="hljs-keyword">p</span> --fields=+ialS --extra=+q -<span class="hljs-keyword">f</span> .<span class="hljs-keyword">tags</span><span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot;--language-force=C++</span><br>        <span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;S-F12&gt;</span> :!cscope -Rbkq<span class="hljs-symbol">&lt;CR&gt;</span><br>        <span class="hljs-comment">&quot; cscope参数</span><br>        <span class="hljs-comment">&quot;-R: 在生成索引文件时，搜索子目录树中的代码</span><br>        <span class="hljs-comment">&quot;-b: 只生成索引文件，不进入cscope的界面</span><br>        <span class="hljs-comment">&quot;-d: 只调出cscope gui界面，不跟新cscope.out</span><br>        <span class="hljs-comment">&quot;-k: 在生成索引文件时，不搜索/usr/include目录</span><br>        <span class="hljs-comment">&quot;-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度</span><br>        <span class="hljs-string">&quot;-i: 如果保存文件列表的文件名不是cscope.files时，需要加此选项告诉cscope到哪儿去找源文件列表。可以使用&quot;</span>-<span class="hljs-comment">&quot;，表示由标准输入获得文件列表。</span><br>        <span class="hljs-comment">&quot;-I dir: 在-I选项指出的目录中查找头文件</span><br>        <span class="hljs-comment">&quot;-u: 扫描所有文件，重新生成交叉索引文件</span><br>        <span class="hljs-comment">&quot;-C: 在搜索时忽略大小写</span><br>        <span class="hljs-comment">&quot;-P path: 在以相对路径表示的文件前加上的path，这样，你不用切换到你数据库文件所在的目录也可以使用</span><br>    <span class="hljs-keyword">endif</span><br><span class="hljs-keyword">endif</span><br><br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/">软件工具</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/GNU-Global/">GNU Global</a>
+                    
+                      <a class="hover-with-bg" href="/tags/gtags/">gtags</a>
+                    
+                      <a class="hover-with-bg" href="/tags/gtags-scope/">gtags-scope</a>
+                    
+                      <a class="hover-with-bg" href="/tags/source-code-compilation/">source code compilation</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Universal-Ctags/">Universal Ctags</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vim/">vim</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vim-gutentags/">vim-gutentags</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/09/macos-cmake-static-link-libcurl-ldap-related-undefined-symbols-error/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MacOS CMake链接Curl静态库找不到ldap相关符号问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/09/cmake-cross-compile-static-zlib-openssl-curl/">
+                        <span class="hidden-mobile">CMake 跨平台交叉编译zlib、OpenSSL、Curl</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
