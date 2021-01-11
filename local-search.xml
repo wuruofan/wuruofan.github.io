@@ -99,6 +99,8 @@
     
     <tags>
       
+      <tag>vim</tag>
+      
       <tag>GNU Global</tag>
       
       <tag>gtags</tag>
@@ -108,8 +110,6 @@
       <tag>source code compilation</tag>
       
       <tag>Universal Ctags</tag>
-      
-      <tag>vim</tag>
       
       <tag>vim-gutentags</tag>
       
@@ -262,11 +262,11 @@
     
     <tags>
       
-      <tag>vim</tag>
-      
       <tag>dotfiles</tag>
       
       <tag>git</tag>
+      
+      <tag>vim</tag>
       
       <tag>zsh</tag>
       
