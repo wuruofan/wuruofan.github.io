@@ -17,8 +17,6 @@ before_install:
 install:
   - npm install
   - npm install --save hexo-theme-fluid
-  - cp -v resources/img/default.png node_modules/hexo-theme-fluid/source/img/
-  - cp -v resources/img/favicon.png node_modules/hexo-theme-fluid/source/img/
 
 script:
   - hexo g
