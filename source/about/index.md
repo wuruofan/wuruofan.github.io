@@ -6,10 +6,12 @@ layout: about
 
 <center>
 
-C/C++，Java，Linux kernel/driver，Android。
+C/C++，Java，Linux Kernel/Driver，Android。
 
 半完美主义强迫症患者，Vimer，音乐审美挑剔者，阅读者。
 
-2020对于我来说，是走出舒适区、重新出发的一年，2021希望是突破的一年。
+2020，对于我来说，是走出舒适区、重新出发的一年，
+
+希望2021会是突破的一年。
 
 </center>
