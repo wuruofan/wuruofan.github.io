@@ -67,6 +67,8 @@ tags:
 
 ![22个同名类](https://i.loli.net/2021/01/31/mWbk9YwyBeVdlZQ.png)
 
+![脚本运行日志](https://i.loli.net/2021/02/01/fKUZn6kRFbd1O8S.png)
+
 ## 进一步优化
 
 存在这么多同名source，除去混淆引入，其实还有个另外的可能，就是小米文件管理器使用了太多的匿名内部类。
