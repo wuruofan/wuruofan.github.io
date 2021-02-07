@@ -56,10 +56,9 @@ tags:
 将**source相同** 且 **同一个包目录下** 的类重命名成不同的名字。
 
 1. 遍历所有类，将发现的source字段保存成字典映射，对应一个嵌套字典，外层字典的键Key为待重命名成的类名，即`source`字段或者source字段加一个后缀组成的字符串。
-
-2. 内层嵌套字典的键Key为当前类地址的父路径，即所在模块名称，内层字典的值为列表，储存JEB重命名操作所需的`IDexUnit`和`IDexClass`对象，即`{ source, { parent_pkg_name, [unit, class] } }`。一旦发现已记录的source字段，就字符串自增为`source_N`判断下一个，直到找到不存在的source，并加入字典记录下来。
-
-3. 遍历字典调用JEB重命名接口
+2. 内层嵌套字典的键Key为当前类地址的父路径，即所在模块名称，内层字典的值为列表，储存JEB重命名操作所需的`IDexUnit`和`IDexClass`对象，即`{ source, { parent_pkg_name, [unit, class] } }`。
+3. 一旦发现已记录的source字段，就字符串自增为`source_N`判断下一个，直到找到不存在的source，并加入字典记录下来。
+4. 遍历字典调用JEB重命名接口。
 
 ## 修改结果
 
