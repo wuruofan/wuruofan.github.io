@@ -12,6 +12,7 @@ tags:
 ---
 
 ## 前言
+
 小黑用Linux系统可以追溯到上学时期某一次玩DOTA时候XP系统蓝屏了，一生气就把双系统的XP盘格式化了，只保留了Ubuntu系统，从那时候开始学会使用vim，由于工作内容基本是C/C++，所以之后基本开发都是Ubuntu+Vim为主了。
 
 上班后虽说公司配的是古老的winXP电脑，但是好在有一台带界面的Ubuntu服务器可以供我使用，基本环境也是xlaunch+Ubuntu+Vim。
@@ -19,8 +20,6 @@ tags:
 自己的电脑是Mac，说白了也是Unix系统，出差在外也是Vim为主，涉及Windows版本就虚拟机
 
 去年换了工作后，公司配的依旧是Windows本，不过是Win10了，依旧很难使用。
-
-
 
 ## 命令行与WSL
 
@@ -34,7 +33,7 @@ tags:
 
 我们可以看一下`WSL`和`WSL2`之间的区别，官网给出的比较如下图：
 
-![image-20210317133442273](https://i.loli.net/2021/03/17/JDBljOc2tYkgZeu.png)
+![WSL1与WSL2功能对比](https://i.loli.net/2021/03/17/JDBljOc2tYkgZeu.png)
 
 WSL2以虚拟机的形式运行完整的Linux内核，也就是说Windows现在可以享受到最新Linux发行版了。
 
@@ -48,7 +47,7 @@ WSL2以虚拟机的形式运行完整的Linux内核，也就是说Windows现在�
 
 去“控制面板” -  “程序” - “程序和功能” - “启用或关闭Windows功能”中开启“**适用于 Linux 的 Windows 子系统**”，如果需要使用WSL2，还要勾选“**虚拟机平台**”特性。
 
-![image-20210318144418330](https://i.loli.net/2021/03/18/VyPeo1XvGwkpME8.png)
+![启用WSL所需Windows功能](https://i.loli.net/2021/03/18/VyPeo1XvGwkpME8.png)
 
 另外，WSL2要求Windows10版本在2004或更高版本以上。
 
@@ -66,7 +65,7 @@ WSL2以虚拟机的形式运行完整的Linux内核，也就是说Windows现在�
 
 去[Microsoft Store](https://aka.ms/wslstore)市场，选择想安装的Linux版本，点击获取，自动安装就可以啦。
 
-![image-20210318145836567](https://i.loli.net/2021/03/18/syDrY5ojizauOXS.png)
+![微软市场WSL支持的发行版](https://i.loli.net/2021/03/18/syDrY5ojizauOXS.png)
 
 目前商店里支持的Linux有不少，小黑选择的是Ubuntu-20.04 LTS版本。
 
@@ -83,7 +82,7 @@ WSL2以虚拟机的形式运行完整的Linux内核，也就是说Windows现在�
 
 在升级WSL之前，需要查看要升级的Linux发行版名称，使用`wsl --list --verbose`查看，缩写命令是`wsl -l -v`。该命令会列出当前已安装所有Linux发行版本的名称、状态、版本号。
 
-![image-20210318151206727](https://i.loli.net/2021/03/18/Yzqm3KZiMk9XQ6l.png)
+![WSL状态](https://i.loli.net/2021/03/18/Yzqm3KZiMk9XQ6l.png)
 
 然后使用`wsl --set-version <distribution name> <versionNumber>`，比如`wsl --set-version Ubuntu-20.04 2`。
 
@@ -94,7 +93,7 @@ WSL2以虚拟机的形式运行完整的Linux内核，也就是说Windows现在�
 
 Windows Terminal简单来说就是一个命令行程序的终端软件，可以运行/加载命令行工具、 PowerShell 和WSL命令行），它的主要功能包括多个选项卡、窗格、Unicode 和 UTF-8 字符支持、GPU 加速文本呈现引擎，支持各种自定义配置。
 
-![image-20210326181547010](https://i.loli.net/2021/03/26/D6SQHk1sXd58vTw.png)
+![Windows Terminal界面](https://i.loli.net/2021/03/26/D6SQHk1sXd58vTw.png)
 
 上面图片是官方介绍给出的图片，具体如何配置可以参考[官方文档](https://docs.microsoft.com/zh-cn/windows/terminal/)，以及少数派的文章：[新生代 Windows 终端：Windows Terminal 的全面自定义](https://sspai.com/post/59380)。
 
@@ -127,15 +126,15 @@ Windows Terminal安装完成后应该会在文件管理器右键添加`Open in W
 
 VSCode的`Remote - WSL`插件支持在WSL环境中打开工程目录，插件会把WSL认为是一台远程机器，然后尝试连接，并在WSL环境下打开工程。
 
-![image-20210329172501442](https://i.loli.net/2021/03/29/ptQBOmEUkaz2XKv.png)
+![Remote-WSL插件](https://i.loli.net/2021/03/29/ptQBOmEUkaz2XKv.png)
 
 一旦使用WSL打开，那么编译环境、执行环境、终端都会切换到WSL，VSCode加载的配置文件、插件等都是安装在WSL中的。
 
-![image-20210329172729942](https://i.loli.net/2021/03/29/XQqhTdNxSrGsvkL.png)
+![Remote-WSL状态](https://i.loli.net/2021/03/29/XQqhTdNxSrGsvkL.png)
 
 打开后界面左下角会有一个蓝色标注，显示当前是本地环境打开还是用WSL打开；点击即可切换打开方式。
 
-![image-20210329174404119](https://i.loli.net/2021/03/29/IN4mJPEh7cqY9v8.png)
+![Remote-WSL指令](https://i.loli.net/2021/03/29/IN4mJPEh7cqY9v8.png)
 
 ## WSL运行exe
 
@@ -150,8 +149,6 @@ WSL命令行里其实是可以运行Windows可执行程序（`exe`）文件的�
 首先，不要使用`apt-get`安装的adb工具，若已经安装，需要先卸载。从Android开发者官网下载[SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools)，Windows版本和Linux版本都需要下载。
 
 WSL1下的adb使用简单些，只需要Windows和Linux中adb版本一致即可，WSL中adb遇到问题需要在命令行提示符cmd中`adb kill-server`和`adb start-server`即可恢复。
-
-
 
 WSL2下的adb就坑一些，保持相同版本号已经不行了，可能和使用了虚拟化平台后，网络连接变化有关，虚拟机中的网卡和真实网卡桥接起来了。不像是原WSL1的系统调用类似半虚拟化，adb直接可以访问到Windows中的adb server，现在必须手动设置Windows中adb服务端和WSL中adb客户端连接了。
 
@@ -193,14 +190,18 @@ adb.exe -a -P 5037 nodaemon server
 
 之后，WSL2中的adb就可以正常运行了！现在还有一点不好的是，cmd还不能关闭，因为adb server还在运行。
 
-解决方案是建立一个vbs脚本并加入开机启动，或者每次手动运行，vbs脚本如下：
+解决方案是建立一个vbs脚本并加入开机启动，或者每次手动双击运行。
+
+vbs脚本如下，其中具体adb的路径和个人路径有关，需要自行修改。：
 
 ```
 CreateObject("WScript.Shell").Run "%USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe kill-server", 0, True
 CreateObject("WScript.Shell").Run "%USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -a -P 5037 nodaemon server", 0, True
 ```
 
-具体adb的路径和个人路径有关，需要自行修改。
+我的脚本名称为`start_adb.vbs`，放到系统环境变量所在路径下，使用`Win-R`后输入脚本名称进行运行。
+
+![运行vbs脚本](https://i.loli.net/2021/04/01/wvF2UdahBZV3n8s.png)
 
 ## 其他小工具
 
@@ -208,7 +209,7 @@ CreateObject("WScript.Shell").Run "%USERPROFILE%\AppData\Local\Android\Sdk\platf
 
 这是微软自己出品的小工具集合，包含窗口管理器、颜色选择、批量重命名、快速启动等工具。
 
-![image-20210331175237526](https://i.loli.net/2021/03/31/6W8ASKJBjY5Twl7.png)
+![PowerToys设置界面](https://i.loli.net/2021/03/31/6W8ASKJBjY5Twl7.png)
 
 窗口管理器（FancyZones）功能可以自定义各程序窗口的布局。
 
@@ -216,7 +217,7 @@ PowerToys Run也就是快速启动，勉强称为MacOS下`Alfred`的极简版吧
 
 PowerToys Run可以通过快捷键`Win+Space`呼出一个对话框，执行各种快速操作，如启动应用、搜索文件、访问网址、切换窗口等，可惜不支持更多的自定义插件。
 
-![image-20210331180016427](https://i.loli.net/2021/03/31/PcLSnYuCZbDelhr.png![image-20210331180118973](https://i.loli.net/2021/03/31/saXFRx39pQj4kgT.png)
+![PowerToys Run输入chrome](https://i.loli.net/2021/03/31/PcLSnYuCZbDelhr.png![image-20210331180118973](https://i.loli.net/2021/03/31/saXFRx39pQj4kgT.png)
 
 ### uTools：快速启动
 
@@ -226,11 +227,11 @@ PowerToys Run可以通过快捷键`Win+Space`呼出一个对话框，执行各�
 
 其实Windows平台下Wox可能大家推荐的多一些，但是个人觉得uTools的界面更好看，插件中心更易用一些。
 
-![image-20210331182430811](https://i.loli.net/2021/03/31/VrsB7Jd6Lc3UWeO.png)
+![uTools插件中心界面](https://i.loli.net/2021/03/31/VrsB7Jd6Lc3UWeO.png)
 
 uTools的输入框支持拼音、中文联想，激活插件，执行功能。
 
-![image-20210331182543100](https://i.loli.net/2021/03/31/TG2oWcvKJkDlmFM.png)
+![uTools翻译插件使用界面](https://i.loli.net/2021/03/31/TG2oWcvKJkDlmFM.png)
 
 总的来说，uTools还是不错的，但是发现PowerToys Run的切换当前运行的窗口功能似乎uTools并不支持。
 
@@ -242,9 +243,7 @@ MacOS以及最新Ubuntu相同已经支持选中一个文件后，点击空格即
 
 QuickLook支持各种文件类型的插件，Markdown和Office文档都无压力。
 
-![image-20210331190359989](https://i.loli.net/2021/03/31/JuXiYV3wWqBm8t6.png)
-
-
+![QuickLook预览Markdown文件](https://i.loli.net/2021/03/31/JuXiYV3wWqBm8t6.png)
 
 ### CLCL：多粘贴板
 
@@ -252,7 +251,7 @@ Win10其实自己默认支持多剪切板，设置里搜索剪贴板即可，使
 
 CLCL是一个比较久远的程序了，支持保存一些自定义的短语，设置界面`Template`右键`New Item`即可。
 
-![image-20210331190742906](https://i.loli.net/2021/03/31/FedtONEC2ZvAohV.png)
+![CLCL设置界面](https://i.loli.net/2021/03/31/FedtONEC2ZvAohV.png)
 
 ### Snipaste：截图工具
 
@@ -260,31 +259,23 @@ Win10自带截图的快捷键是`Win-Shift-S`，支持窗口、全屏、自定�
 
 但是Snipaste更强大一些，支持将刚截的图再贴回屏幕上，或者固定在屏幕上。这个功能在对比文字、图片细节时很好用。
 
-![image-20210331191606025](https://i.loli.net/2021/03/31/JEqf1nOpNZWe6dK.png)
+![Snipaste固定截图到屏幕](https://i.loli.net/2021/03/31/JEqf1nOpNZWe6dK.png)
 
 ### EasyWindowSwitcher：同应用窗口切换
 
 Win10现在的窗口切换器已经支持多个虚拟桌面，也支持类似MacOS的expose窗口展示的功能。但是，同一个应用多个窗口间的切换居然不支持。在Ubuntu和MacOS使用`` Alt+` ``即可切换同一个应用内的多个窗口。还好已经有人实现了这个功能，安装EasyWindowSwitcher接可，这个软件功能很单纯，就这一个功能，开机之后也找不到它，省心。
 
-
-
 ### Velocity：代码手册阅读
 
 MacOS下有一个神器叫做`dash`，整合了各种语言的参考手册，可以下载离线使用。Velocity就是Windows版的dash，界面还算ok，支持dash的文档源。
 
-![image-20210331200822757](https://i.loli.net/2021/03/31/2vc7KFy8hqMePTx.png)
+![Velocity界面](https://i.loli.net/2021/03/31/2vc7KFy8hqMePTx.png)
 
 在输入框中输入语言名称后，再输入`:`，就可以指定搜索该语言的文档。
+
+该软件可以免费使用，但是每隔一段时间会弹出提示窗口，可以技术上去除。
 
 ## 最后
 
 大概就是以上这些，已经足够我日常Windows平台的开发工作了。
-
-
-
-
-
-
-
-
 
