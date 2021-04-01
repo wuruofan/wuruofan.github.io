@@ -217,7 +217,7 @@ PowerToys Run也就是快速启动，勉强称为MacOS下`Alfred`的极简版吧
 
 PowerToys Run可以通过快捷键`Win+Space`呼出一个对话框，执行各种快速操作，如启动应用、搜索文件、访问网址、切换窗口等，可惜不支持更多的自定义插件。
 
-![PowerToys Run输入chrome](https://i.loli.net/2021/03/31/PcLSnYuCZbDelhr.png![image-20210331180118973](https://i.loli.net/2021/03/31/saXFRx39pQj4kgT.png)
+![PowerToys Run输入chrome](https://i.loli.net/2021/03/31/saXFRx39pQj4kgT.png)
 
 ### uTools：快速启动
 
