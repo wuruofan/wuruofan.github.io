@@ -1,5 +1,5 @@
 ---
-title: XML排序小工具——`xmlabit`
+title: XML排序小工具——xmlabit
 date: 2021-05-20 20:55:45
 categories:
   - 软件工具
@@ -20,6 +20,8 @@ tags:
 工具名叫`xmlabit`，是`xml alphabet it`的缩写。代码很简单，主要依赖`pugixml`库对XML文件节点进行重排序，仓库地址：[https://github.com/wuruofan/xmlabit](https://github.com/wuruofan/xmlabit)。
 
 `pugixml`是一个C++实现的轻量级XML操作库，支持XPath路径表达式，仓库地址：[https://github.com/zeux/pugixml](https://github.com/zeux/pugixml)。
+
+<!-- more -->
 
 
 ## 功能简介
@@ -268,7 +270,7 @@ $ make install
 
 ### 添加子模块
 
-使用命令`git submodule add https://github.com/zeux/pugixml.git`将``pugixml`仓库添加为`xmlabit`的子模块。
+使用命令`git submodule add https://github.com/zeux/pugixml.git`将`pugixml`仓库添加为`xmlabit`的子模块。
 
 这时运行`git status`会发现本地仓库里多了一个`.gitmodules`文件，里面内容记录了当前仓库包含的子模块信息。
 
@@ -319,13 +321,13 @@ endif()
 
 GitHub仓库界面上有一个名为Actions的Tab，点击之后会自动推荐此仓库适合使用的workflow，也就是工作流程脚本。GitHub自身提供了一个市场，可以搜索到他人提交的Actions，也可以自己上传。
 
-<img src="https://i.loli.net/2021/05/20/fQXNntKRuYJskA9.png" alt="image-20210520203422821" style="zoom:50%;" />
+<img src="https://i.loli.net/2021/05/20/fQXNntKRuYJskA9.png" alt="GitHub Actions" style="zoom:50%;" />
 
 
 
 xmlabit使用CMake进行编译，就自动推荐了一个CMake相关的workflow，点击添加即可。以后每次提交代码，就会触发CMake自动编译的workflow。
 
-现在可以使用如下Markdown链接在README中添加一个小徽章来显示当前workflow的状态，自动编译成功之后，会显示一个小绿标<img src="https://i.loli.net/2021/05/20/peVFA8g71OUaEZI.png" alt="截屏2021-05-20 20.49.00" style="zoom: 50%;" />。
+现在可以使用如下Markdown链接在README中添加一个小徽章来显示当前workflow的状态，自动编译成功之后，会显示一个小绿标<img src="https://i.loli.net/2021/05/20/peVFA8g71OUaEZI.png" alt="编译成功徽章" style="zoom: 50%;" />。
 
 ```markdown
 ![GitHub Action](https://github.com/wuruofan/xmlabit/actions/workflows/cmake.yml/badge.svg)
