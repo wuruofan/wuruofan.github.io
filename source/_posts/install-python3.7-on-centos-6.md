@@ -1,18 +1,16 @@
 ---
-title: CentOS6安装Python3
+title: 【避坑指北】CentOS 6安装Python3.7+
 date: 2021-06-23 20:01:28
 categories:
-  - 经验总结
+  - 避坑指北
 tags:
   - 遇坑总结
-  - 源码编译
+  - 避坑指北
   - python
   - openssl
   - centos
 
 ---
-
-
 由于某种未知原因，一台老服务器上python3环境不见了，不清楚原安装方法与位置，现重新配置。
 
 用`cat /etc/issue`查看了下发行版信息，是CentOS 6.10。CentOS 6默认安装python版本为2.6，安装python3需要自行下载源码编译。
@@ -25,13 +23,14 @@ tags:
 CentOS 6版本yum安装的openssl-devel包版本是1.0.1（使用`openssl version`查看），目前Python3.7以上使用的openssl版本是1.0.2以上版本，使用默认openssl编译会提示[libressl库不兼容此版本的API](https://github.com/libressl-portable/portable/issues/381)，需要本机编译openssl库，编译过程会有很多坑。
 
 ### 安装源码依赖软件包
+
 ```bash
 sudo yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel expat-devel
 ```
 
 这部分依赖软件包有些应该可以不装，可以在编译过程中根据提示错误一个个安装。
 
-注意，由于yum本身就是一个python脚本，在python环境有问题时，这一步安装可能就会有问题。
+注意，由于yum本身就是一个python脚本，在python环境有问题时，这一步安装可能就会有问题，需要先恢复原python2.6的环境。
 
 另外，CentOS 6在2020年11月底官方软件源就停止维护了，如遇到问题，需要更换成阿里云的软件源。
 
@@ -46,7 +45,6 @@ sudo yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-de
 #### 编译安装
 
 ```bash
-
 # 这里没配置prefix，默认安装路径在/usr/local/ssl
 ./config shared zlib
 
@@ -54,13 +52,11 @@ make
 
 # 表示将标准错误2和标准输出1的缓冲区内容都写入install.log
 sudo make install > install.log 2>&1
-
 ```
 
 #### 配置环境
 
 ```bash
-
 # 养成备份源文件的习惯
 sudo mv /usr/bin/openssl /usr/bin/openssl.bak
 sudo mv /usr/include/openssl /usr/include/openssl.bak
@@ -75,7 +71,6 @@ source ~/.bashrc
 
 # 查看openssl版本
 openssl version
-
 ```
 
 ### 编译python3
@@ -90,8 +85,7 @@ openssl version
 进入解压后源码目录，执行如下命令：
 
 ```bash
-
-# 使用上一步编译ssl
+# 使用上一步编译的ssl目录
 ./configure --prefix=/usr/local/python3 --with-openssl=/usr/local/ssl --enable-shared 
  
 make
@@ -101,9 +95,9 @@ sudo make install
 
 这里`--enable-shared`记得加上，否则可能会出现找不到so的错误。
 
-由于安装到/usr/local/目录下，所有用户都可以访问，需要su权限安装。
+由于安装到`/usr/local/`目录下，所有用户都可以访问，需要su权限安装。
 
-卸载如需要卸载，直接删除/usr/local/python3目录即可。
+卸载如需要卸载，直接删除`/usr/local/python3`目录即可。
 
 
 
@@ -121,7 +115,7 @@ sudo make install
 
 #### 更新软连接
 
-将/usr/bin/python链接到/usr/local/python3/bin/python3，这样默认使用python3。
+将`/usr/bin/python`链接到`/usr/local/python3/bin/python3`，这样默认使用python3。
 
 ```bash
 sudo mv /usr/bin/python /usr/bin/python.bak
@@ -149,7 +143,7 @@ source ~/.bashrc
 
 由于CentOS的软件管理工具yum是默认依赖python2的，如果运行出现错误，需要修改yum脚本。
 
-用vim编辑/usr/bin/yum将首行#!/usr/bin/python改为#!/usr/bin/python2.6即可。
+用vim编辑`/usr/bin/yum`将首行`#!/usr/bin/python`改为`#!/usr/bin/python2.6`即可。
 
 
 ## 其他
@@ -158,8 +152,9 @@ source ~/.bashrc
 
 ```bash
 unset $PYTHONHOME
+
 unset $PYTHONPATH
 ```
 
- 或者退出当前登陆，重新建立ssh连接。
+或者退出当前登陆，重新建立ssh连接。
 
