@@ -11,15 +11,32 @@ tags:
   - Effective Java
 ---
 
-整理自《编写高质量代码：改善Java程序的151个建议》一书前四章，这本书有些年了，但是知识点较全面，是本查漏补缺的书。
+整理自《编写高质量代码：改善Java程序的151个建议》一书前四章，这本书有些年了，但是知识点较全面，是本查漏补缺的书，整本书的写作风格参考《Effective C++》条款式风格，是一本适合碎片时间阅读的书。
+
+> 可以关注微信公众号：**小黑杂说**，回复关键字“java151电子书”获取完整电子书下载链接。
 
 思维导图大纲截图如下。
 
 ![《编写高质量代码：改善Java程序的151个建议》1~4章](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/java-151-chapter-1-4.png)
 
 
-前4章思维导图链接：[https://www.mubucm.com/doc/0iKf700ea-r](https://www.mubucm.com/doc/0iKf700ea-r)。长按或扫描下面二维码也可以直达。
+前4章基本是Java基础知识，个人觉得容易遗忘、混淆的知识点和比较重要的知识点有：
 
+- 建议3，三元操作符类型的转换规则
+- 建议7，Java对自增的处理
+- 建议12～14，序列化相关
+- 建议21，取余
+- 建议23，Java先运算后类型转换
+- 建议25，四舍五入的几种模式
+- 建议28，整型池
+- 建议36、37，代码块相关
+- 建议38，静态内部类
+- 建议39、40，匿名类的构造函数
+- 建议43、44，对象的深、浅拷贝相关
+- 建议45～48，equals相关
+- 建议56，字符串连接
+
+前4章思维导图链接：[https://www.mubucm.com/doc/0iKf700ea-r](https://www.mubucm.com/doc/0iKf700ea-r)。长按或扫描下面二维码也可以直达。
 
 ![思维导图二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qrcode-java-151-chapter-1-4.png)
 
