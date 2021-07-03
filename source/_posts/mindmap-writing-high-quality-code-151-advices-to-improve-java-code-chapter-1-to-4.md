@@ -25,7 +25,7 @@ tags:
 
 点击每个“小标题”的箭头即可查看每个子项；点击右上角思维导图图标，可以切换大纲模式和导图模式。
 
-![导图模式](https://raw.githubusercontent.com/wuruofan/image_repo/main/img%E5%AF%BC%E5%9B%BE%E6%A8%A1%E5%BC%8F.png)
+![导图模式](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%AF%BC%E5%9B%BE%E6%A8%A1%E5%BC%8F.png)
 
 ---
 
@@ -33,7 +33,7 @@ tags:
 
 欢迎使用我的邀请链接（[https://mubu.com/inv/19150](https://mubu.com/inv/19150)）进行注册，赠送30天会员。长按或扫描下面二维码也可以直达。
 
-![幕布邀请二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/imgmubu_invite.png)
+![幕布邀请二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mubu_invite.png)
 
 **注意**：在校学生记得认证学生身份，赠送一年会员。
 
