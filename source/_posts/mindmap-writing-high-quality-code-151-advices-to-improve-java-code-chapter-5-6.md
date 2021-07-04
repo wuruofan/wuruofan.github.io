@@ -44,7 +44,7 @@ tags:
 
 
 
-![第5章 数组和集合](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/第5章　数组和集合.png)
+![第5章 数组和集合](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mindmap-java-151-chapter-5.png)
 
 
 
