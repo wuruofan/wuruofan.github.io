@@ -71,3 +71,7 @@ tags:
 最后，欢迎分享。
 
 欢迎关注“小黑杂说”公众号，回复想了解的技术、思维导图或者电子书都可以。
+
+
+
+![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)

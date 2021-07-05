@@ -55,3 +55,7 @@ tags:
 **注意**：在校学生记得认证学生身份，赠送一年会员。
 
 最后，欢迎分享。
+
+
+
+![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)
