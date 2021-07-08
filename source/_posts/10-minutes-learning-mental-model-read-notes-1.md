@@ -14,7 +14,8 @@ tags:
 > 笔记整理自《思维模型——建立高品质思维的30种模型》一书，作者（美）彼得·霍林斯。
 >
 > 这本书是年初时部门复盘培训活动的小组奖品，本以为是一本网文凑数的书，觉得可能2、3个小时也就翻完了，后来才发现这是本不错的书，放在床头每晚读两篇，是上半年读过二十多本书中的TOP3。
-
+>
+> ![书上折的那些角](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mental-model-book.jpg)
 
 
 ## 芒格与思维模型
@@ -95,3 +96,7 @@ tags:
 - “不重要任务”，对你自己不那么重要的任务，但不代表对别人不重要(不过也不排除这种可能)，这些活动由其他人来完成或许更合适或更有意义。
 
 ![思维模型1_关注“重要”任务，忽略“紧急”任务](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B1_%E5%85%B3%E6%B3%A8%E2%80%9C%E9%87%8D%E8%A6%81%E2%80%9D%E4%BB%BB%E5%8A%A1%EF%BC%8C%E5%BF%BD%E7%95%A5%E2%80%9C%E7%B4%A7%E6%80%A5%E2%80%9D%E4%BB%BB%E5%8A%A1.png)
+
+---
+
+![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)
