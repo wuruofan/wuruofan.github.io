@@ -1,6 +1,8 @@
 ---
 title: 【读书笔记】10分钟学点《思维模型》（四）
 date: 2021-07-27 23:30:00
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%BB%91%E5%A4%A9%E9%B9%85%E4%BA%8B%E4%BB%B6.jpeg
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%BB%91%E5%A4%A9%E9%B9%85%E4%BA%8B%E4%BB%B6.jpeg
 categories:
   - 读书笔记
 tags:
@@ -31,8 +33,12 @@ tags:
 
 **异常值不应该改变你的想法。**
 
-
 说实话，这两年看到“黑天鹅”的字眼几乎都是在股市的新闻中，其实，“黑天鹅”只是作为隐喻，描述了*令人的认知、视角和理解发生巨大变化的不可预测的事件*。
+
+![中国股市跳水](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E4%B8%AD%E5%9B%BD%E8%82%A1%E5%B8%82%E8%B7%B3%E6%B0%B4.jpeg)
+
+
+
 
 ### 黑天鹅三大特性
 
@@ -72,7 +78,9 @@ tags:
 
 **收益递减规律**是指其他投入固定不变时，连续地增加某一种投入，所新增的产出最终会减少的规律。
 
- 这表明，我们应该寻找均衡点，以此准确评估和了解信息，以决定我们为了实现某个结果，应该投入多少努力。
+![收益递减](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%94%B6%E7%9B%8A%E9%80%92%E5%87%8F.png)
+
+ 这表明，我们应该寻找均衡点（或者转折点），以此准确评估和了解信息，以决定我们为了实现某个结果，应该投入多少努力。
 
 > 比如，如果你学钢琴的强度太大，就会产生倦怠，感到厌烦。如果连续学习9小时，你多半没记住多少内容。
 
