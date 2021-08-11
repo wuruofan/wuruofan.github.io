@@ -1,8 +1,8 @@
 ---
 title: 【读书笔记】10分钟学点《思维模型》（六）
 date: 2021-08-11 23:55:00
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4.webp
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4.webp
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%BF%9B%E5%8C%96%E8%AE%BA.jpg
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%BF%9B%E5%8C%96%E8%AE%BA.jpg
 categories:
   - 读书笔记
 tags:
