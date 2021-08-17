@@ -1,8 +1,8 @@
 ---
 title: 10分钟学点《思维模型》7：接受同行评议 & 找出自我缺陷
 date: 2021-08-18 00:35:00
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%AE%A1%E8%A7%86%E8%87%AA%E5%B7%B1.jpeg
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%AE%A1%E8%A7%86%E8%87%AA%E5%B7%B1.jpeg
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/prisoner%20of%20azkaban%20stills.jpeg
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/prisoner%20of%20azkaban%20stills.jpeg
 categories:
   - 读书笔记
 tags:
