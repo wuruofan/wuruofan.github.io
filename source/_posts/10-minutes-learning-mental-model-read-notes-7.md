@@ -1,8 +1,8 @@
 ---
 title: 10分钟学点《思维模型》7：接受同行评议 & 找出自我缺陷
 date: 2021-08-18 00:35:00
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/prisoner%20of%20azkaban%20stills.jpeg
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/prisoner%20of%20azkaban%20stills.jpeg
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%8E%84%E9%87%8C%E6%96%AF%E9%AD%94%E9%95%9C.jpg
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%8E%84%E9%87%8C%E6%96%AF%E9%AD%94%E9%95%9C.jpg
 categories:
   - 读书笔记
 tags:
@@ -25,8 +25,7 @@ tags:
 本文将开始**第三章《如何找到解决方案的思维模型》**，介绍两个思维模型——接受同行评议与找出自我缺陷。
 
 
-
-## **思维模型13：让你的观点接受同行评议**
+## 思维模型13：让你的观点接受同行评议
 
 **了解共识观点和你的观点为何跟大家不一样。**
 
@@ -54,7 +53,7 @@ tags:
 
 
 
-同样，同行评议就好比获取到的新数据点，通过这些新数据点与旧数据结合，可以从不同而有新颖的角度看待问题。
+同样，同行评议就好比获取到的新数据点，通过这些新数据点与旧数据结合，可以从不同而又新颖的角度看待问题。
 
 有点让我想到中国的一句俗语：“他山之石，可以攻玉”，大概也有这层意思吧。
 
@@ -111,7 +110,7 @@ tags:
 
 
 
-#### 承认自己1%的错误
+### 承认自己1%的错误
 
 这个思维模型适用的一个重要方面是人际关系，尤其当我们和他人产生冲突时，我们应该努力地寻找“第三者叙述”。很多时候，死命为自己辩护并不能解决现有的问题。
 
