@@ -1,5 +1,5 @@
 ---
-title: 10分钟学点《思维模型》8：寻找根本原因（五问法 & 鱼骨图）
+title: 10分钟学点《思维模型》8：寻找根本原因（五问法&鱼骨图）
 date: 2021-08-24 20:00:00
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE2.png
 banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE2.png
@@ -26,7 +26,7 @@ tags:
 
 
 
-# 思维模型15：相关性不等于因果关系
+## 思维模型15：相关性不等于因果关系
 
 **想解决一个问题，要了解真正需要处理的方面是什么。**
 
@@ -82,7 +82,7 @@ tags:
 
 
 
-## **思维模型16：从结果反推原因**
+## 思维模型16：从结果反推原因
 
  用于更有效地确定因果关系。
 
@@ -96,7 +96,7 @@ tags:
 
 
 
-### **如何制作“鱼骨图”**
+### 如何制作“鱼骨图”
 
 
 
@@ -145,11 +145,12 @@ tags:
 - 这个原因与问题的关系是正确的吗？是否应该认真看待？
 
 
-
+<p>
 
 ---
 
 <p>
+
 以上，就是今天介绍的两个思维模型，主要用来找到问题的根本原因。
 
 
@@ -161,6 +162,5 @@ tags:
 <p>
 
 
----
 
 ![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)
