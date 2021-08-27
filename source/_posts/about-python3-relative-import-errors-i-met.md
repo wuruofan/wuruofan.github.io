@@ -1,6 +1,8 @@
 ---
 title: 【避坑指北】Python3相对路径导入方法
-date: 2021-08-27 16:30:00
+date: 2021-08-27 20:00:00
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Python.jpeg
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Python.jpeg
 categories:
 
   - 避坑指北
