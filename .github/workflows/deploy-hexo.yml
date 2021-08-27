@@ -43,13 +43,13 @@ jobs:
         run: 
           hexo g
           
-      - name: commit to master
+      - name: Commit to master
         run: |
           cd ./public
           export TZ='Asia/Shanghai'
           git init
           git config user.name "wuruofan"
           git config user.email "demonsimon@gmail.com"
-          git add .
+          git add . -A
           git commit -m "GitHub Action CI Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-          git push --force --quiet "https://${secrets.ACCESS_TOKEN}@${REPO}" master:master
+          git push --force --quiet "https://${{secrets.ACCESS_TOKEN}}@${REPO}" master:master
