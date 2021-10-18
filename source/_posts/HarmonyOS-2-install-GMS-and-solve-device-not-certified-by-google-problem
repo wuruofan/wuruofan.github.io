@@ -2,13 +2,16 @@
 ---
 title: 鸿蒙OS 2.0安装谷歌服务框架 & 解决设备未经Play认证问题
 date: 2021-10-18 16:00:00
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg
 categories:
-
   - 避坑指北
-
 tags:
   - 避坑指北
   - 遇坑总结
+  - 鸿蒙OS
+  - 安装GMS
+  - 此设备未经过Play认证
 
 ---
 
