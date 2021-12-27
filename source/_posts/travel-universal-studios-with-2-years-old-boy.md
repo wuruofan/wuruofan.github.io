@@ -4,7 +4,7 @@ date: 2021-11-06 22:00:00
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg
 banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg
 categories:
-  - 游记
+  - 生活小记
 
 tags:
   - 带娃日记
