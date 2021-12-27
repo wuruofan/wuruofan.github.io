@@ -1,7 +1,7 @@
 ---
 title: 这是我的避世小角落，你的呢？
 date: 2021-12-27 22:30:00
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/cat-also-like-fish-tank.jpg
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/my-medaka-fish-tank.jpg
 categories:
   - 生活小记
 tags:
@@ -89,3 +89,15 @@ PS.这也是我喜欢魔兽世界的原因。
 **其实，生活的诗意未必在远方，也在你的那个避世小角落里。**
 
 ![doge](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/cat-also-like-fish-tank.jpg)
+
+<p>
+
+---
+
+<p>
+
+以上，欢迎关注公众号“**小黑杂说**”。
+
+<p>
+
+![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)
