@@ -1,5 +1,5 @@
 ---
-title: 环球影城和肩膀差点裂开的爸爸
+title: 环球影城与肩膀差点裂开的爸爸
 date: 2021-11-06 22:00:00
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg
 banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg
