@@ -401,17 +401,17 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /img/default.png
+  banner_img: /img/eagle-banner.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
   # Available: 0 - 100
-  banner_img_height: 100
+  banner_img_height: 85
 
   # 头图黑色蒙版的不透明度，available: 0 - 1.0， 1 是完全不透明
   # Opacity of the banner mask, 1.0 is completely opaque
   # Available: 0 - 1.0
-  banner_mask_alpha: 0.3
+  banner_mask_alpha: 0.2
 
   # 首页副标题的独立设置
   # Independent config of home page subtitle
@@ -473,13 +473,13 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: /img/default.png
+  banner_img: /img/valley-banner.jpg
   banner_img_height: 70
-  banner_mask_alpha: 0.3
+  banner_mask_alpha: 0.2
 
   # 文章在首页的默认封面图，当没有指定 index_img 时会使用该图片，若两者都为空则不显示任何图片
   # Path of the default post cover when `index_img` is not set. If both are empty, no image will be displayed
-  default_index_img:
+  default_index_img: /img/valley-banner.jpg
 
   # 文章标题下方的元信息
   # Meta information below title
@@ -518,7 +518,7 @@ post:
     # 浏览量计数
     # Number of visits
     views:
-      enable: false
+      enable: true
       # 统计数据来源
       # Data Source
       # Options: busuanzi | leancloud
@@ -547,7 +547,7 @@ post:
     headingSelector: "h1,h2,h3,h4,h5,h6"
     # 层级的折叠深度，0 是全部折叠，大于 0 后如果存在下级标题则默认展开
     # Collapse depth. If 0, all headings collapsed. If greater than 0, it will be expanded by default if there are sub headings
-    collapseDepth: 0
+    collapseDepth: 1
 
   # 版权声明，会显示在每篇文章的结尾
   # Copyright, will be displayed at the end of each post
@@ -739,9 +739,9 @@ twikoo:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/default.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img: /img/train-banner.jpg
+  banner_img_height: 70
+  banner_mask_alpha: 0.2
   subtitle:
 
 
@@ -751,9 +751,9 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/default.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img: /img/forest-banner.jpg
+  banner_img_height: 70
+  banner_mask_alpha: 0.2
   subtitle:
 
   # 单个分类中折叠展示文章数的最大值，超过限制会显示 More
@@ -776,9 +776,9 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/default.png
-  banner_img_height: 80
-  banner_mask_alpha: 0.3
+  banner_img: /img/cloud-banner.png
+  banner_img_height: 70
+  banner_mask_alpha: 0.2
   subtitle:
   tagcloud:
     min_font: 15
@@ -794,8 +794,8 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /img/default.png
-  banner_img_height: 60
+  banner_img: /img/soldier-banner.png
+  banner_img_height: 70
   banner_mask_alpha: 0.3
   subtitle:  # 打字机内容
   avatar: /img/avatar.png
@@ -817,9 +817,9 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: /img/default.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img: /img/shooting-star-banner.jpg
+  banner_img_height: 75
+  banner_mask_alpha: 0.2
 
 
 #---------------------------
@@ -828,8 +828,8 @@ page:
 #---------------------------
 page404:
   enable: true
-  banner_img: /img/default.png
-  banner_img_height: 85
+  banner_img: /img/stay-foolish-banner.png
+  banner_img_height: 75
   banner_mask_alpha: 0.3
   subtitle: "Page not found"
 
@@ -840,9 +840,9 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: /img/default.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img: /img/shooting-star-banner.jpg
+  banner_img_height: 75
+  banner_mask_alpha: 0.2
   subtitle:
   # 友链的成员项
   # Member item of page
