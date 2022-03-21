@@ -136,8 +136,6 @@ bash可以说是应用最广泛的Shell程序，是绝大部分Linux发行版的
 
 zsh对Bourne shell做出了大量改进，同时加入了bash、ksh及tcsh的某些功能。macOS Catalina，默认Shell以zsh取代。
 
-个人觉得zsh最直观的功能增强就是命令行补全功能，
-
 
 
 个人感觉：**zsh总体上来说，比bash更“时髦”一些**，一个名为“Oh-My-Zsh”的社区，一直在维护、收集zsh可用的各类插件、主题配置，很多特性可以通过安装是“Oh-My-Zsh”扩展工具集，进行体验和使用。
