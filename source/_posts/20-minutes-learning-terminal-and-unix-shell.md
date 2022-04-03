@@ -33,8 +33,6 @@ tags:
 
 **整篇文章包含两部分，这是下半部分**，主要介绍**什么是Terminal**、**什么是Shell**、以及**一些好用的Shell命令**和**Terminal快捷键**。
 
-全文1.2w字，大部分都是我个人这些年使用类Unix系统的理解和总结，适合开发、测试同学阅读。
-
 > 上半部分参见：[20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿 ](https://wuruofan.com/2022/03/09/20-minutes-learning-unix-system-and-its-philosophy/)
 
 <p>
