@@ -6,6 +6,8 @@ date: 2022-09-01 19:23:36
 
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
 
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+
 categories:
 
   - 软件工具
