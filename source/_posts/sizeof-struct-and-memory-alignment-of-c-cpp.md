@@ -168,7 +168,7 @@ static_assert(sizeof(LayoutObject) == sizeof(SameSizeAsLayoutObject),
 
 可能一下子读不懂，没关系。简单来说，**一个变量在内存中的地址其实适合这个变量的长度有关**。
 
-如果变量a是n字节内存对齐的，那么，**a在内存中的地址一定是n的整数倍**。假设变量a在内存中的地址为`addr(a)`，那么，**`addr(a) % n`的值应该为0**。
+如果变量a是n字节内存对齐的，那么，**a在内存中的地址一定是n的整数倍**。假设变量a在内存中的地址为`addr(a)`，那么，`addr(a) % n`的值应该为0。
 
 莫慌，大部分情况下`n`的值和`sizeof(a)`一致。
 
@@ -248,7 +248,7 @@ struct A {
 
 这张图画的比较清楚，摘自http://www.songho.ca/misc/alignment/dataalign.html
 
-![Accessing Misaligned data](http://www.songho.ca/misc/alignment/files/align02.jpg)
+![Accessing Misaligned data](https://raw.githubusercontent.com/wuruofan/image_repo/d0a4237210d9110b06cc02b5ec014b3ba24db2b4/img/cpu-access-misaligned-data.jpeg)
 
 
 
