@@ -2,9 +2,9 @@ title: 极速浏览器｜2022年浏览器开发总结
 
 date: 2023-01-12 20:20:00
 
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg
+index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
 
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg
+banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
 
 categories:
 
