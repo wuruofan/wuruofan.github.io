@@ -5,8 +5,6 @@ date: 2023-02-01 20:20:00
 
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/coordinator_layout_webkul.png
 
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/coordinator_layout_webkul.png
-
 categories:
 
   - 技术总结
