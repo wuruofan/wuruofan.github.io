@@ -1,5 +1,4 @@
 ---
-
 title: Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏
 
 date: 2023-02-01 20:20:00
@@ -20,6 +19,7 @@ tags:
   - CoordinatorLayout
   - AppBarLayout
   - CollapsingToolbarLayout
+
 
 ---
 
@@ -169,7 +169,77 @@ tags:
 
 
 
-### 注意
+### 设置监听事件
+
+
+
+由于这里需要在工具栏完全折叠的时候在标题展示作者名字和关注按钮，还需要在代码里设置监听事件。
+
+
+
+```java
+// 设置监听
+mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+  @Override
+  public void onStateChanged(AppBarLayout appBarLayout, State state) {
+    if (state == State.COLLAPSED) {
+      showTitleBarUserInfo(true);
+    } else {
+      showTitleBarUserInfo(false);
+    }
+  }
+});
+
+// 监听实现
+public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
+
+  public enum State {
+    EXPANDED,
+    COLLAPSED,
+    IDLE
+  }
+
+  private State mCurrentState = State.IDLE;
+
+ /**
+  * Called when the {@link AppBarLayout}'s layout offset has been changed. This allows
+  * child views to implement custom behavior based on the offset (for instance pinning a
+  * view at a certain y value).
+  *
+  * @param appBarLayout the {@link AppBarLayout} which offset has changed
+  * @param verticalOffset the vertical offset for the parent {@link AppBarLayout}, in px
+  */
+  @Override
+  public final void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+    if (verticalOffset == 0) {
+      if (mCurrentState != State.EXPANDED) {
+        onStateChanged(appBarLayout, State.EXPANDED);
+      }
+      mCurrentState = State.EXPANDED;
+    } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+      if (mCurrentState != State.COLLAPSED) {
+        onStateChanged(appBarLayout, State.COLLAPSED);
+      }
+      mCurrentState = State.COLLAPSED;
+    } else {
+      if (mCurrentState != State.IDLE) {
+        onStateChanged(appBarLayout, State.IDLE);
+      }
+      mCurrentState = State.IDLE;
+    }
+  }
+
+  public abstract void onStateChanged(AppBarLayout appBarLayout, State state);
+}
+```
+
+
+
+这里监听的其实是AppBarLayout的`onOffsetChanged`事件，垂直偏移量`verticalOffset`改变时就会回调这个方法，当AppBarLayout展开时`verticalOffset`的值为0，折叠过程中`verticalOffset`为一个**负值**，其绝对值小于`appBarLayout.getTotalScrollRange()`。
+
+
+
+### 其他注意
 
 
 
@@ -301,9 +371,11 @@ protected void onCreate(@Nullable Bundle savedInstanceState) {
 <p>
 
 
+
 ---
 
 <p>
+
 
 
 
