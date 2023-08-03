@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java枚举类型的问题枚举类型，理解起来还是比较容易的，通常用于维护有限个的常量元素，当一个变量的类型有几种可能的情况时，我们就用枚举类型将这些可能值“枚举”出来。 枚举类型，在C&#x2F;C++中比较单纯，就是代表了一个整型值；而Java中，枚举类型是一个类，支持多态和各种扩展方法，有很多玩法和奇怪的实现，比如，用枚举类型实现的工厂模式等等。 Java中枚举类型支持的各种扩展，带来的问题就是内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android｜使用IntDef注解代替枚举类">
+<meta property="og:url" content="https://wuruofan.com/2022/02/19/using-intdef-annotation-instead-of-enum-for-android/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="Java枚举类型的问题枚举类型，理解起来还是比较容易的，通常用于维护有限个的常量元素，当一个变量的类型有几种可能的情况时，我们就用枚举类型将这些可能值“枚举”出来。 枚举类型，在C&#x2F;C++中比较单纯，就是代表了一个整型值；而Java中，枚举类型是一个类，支持多态和各种扩展方法，有很多玩法和奇怪的实现，比如，用枚举类型实现的工厂模式等等。 Java中枚举类型支持的各种扩展，带来的问题就是内">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/android-robot-logo.jpg">
+<meta property="article:published_time" content="2022-02-19T23:30:00.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.346Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="技术总结">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Android开发">
+<meta property="article:tag" content="注解">
+<meta property="article:tag" content="Intdef">
+<meta property="article:tag" content="枚举类">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/android-robot-logo.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Android｜使用IntDef注解代替枚举类 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/valley-banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android｜使用IntDef注解代替枚举类"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-19 23:30" pubdate>
+          2022年2月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Android｜使用IntDef注解代替枚举类</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Java枚举类型的问题"><a href="#Java枚举类型的问题" class="headerlink" title="Java枚举类型的问题"></a>Java枚举类型的问题</h2><p>枚举类型，理解起来还是比较容易的，通常用于维护有限个的常量元素，当一个变量的类型有几种可能的情况时，我们就用<strong>枚举类型</strong>将这些可能值“枚举”出来。</p>
+<p>枚举类型，在C&#x2F;C++中比较单纯，就是代表了一个整型值；而Java中，枚举类型是一个类，支持多态和各种扩展方法，有很多玩法和奇怪的实现，比如，用枚举类型实现的工厂模式等等。</p>
+<p>Java中枚举类型支持的各种扩展，<strong>带来的问题就是内存占用，其代码实现过于繁重。</strong></p>
+<p>假如我只有一个维护三个常量元素的需求，如EnumTest.java中代码所示，我只需要三个常量MODE_A&#x2F;B&#x2F;C。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// EnumTest.java</span><br><span class="hljs-keyword">package</span> com.rfw.androiddemo;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Created by rf.w on 2022/2/15.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">EnumTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">EnumMode</span> &#123;<br>        MODE_A,<br>        MODE_B,<br>        MODE_C<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>我们使用<code>java2smali</code>插件可以将此文件转换成对应的smali文件，这里会转换成两个文件：EnumTest.smali和EnumTest$EnumMode.smali，因为这里的<code>EnumMode</code>会被当作是内部类。</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs smali"><span class="hljs-comment"># EnumTest$EnumMode.smali部分内容</span><br><span class="hljs-comment"># ...</span><br><br><span class="hljs-keyword">.annotation</span><span class="hljs-keyword"> system</span> <span class="hljs-class">Ldalvik/annotation/Signature;</span><br>    value = &#123;<br>        <span class="hljs-string">&quot;Ljava/lang/Enum&quot;</span>,<br>        <span class="hljs-string">&quot;&lt;&quot;</span>,<br>        <span class="hljs-string">&quot;Lcom/rfw/androiddemo/EnumTest$EnumMode;&quot;</span>,<br>        <span class="hljs-string">&quot;&gt;;&quot;</span><br>    &#125;<span class="hljs-keyword"></span><br><span class="hljs-keyword">.end annotation</span><br><br><br><span class="hljs-comment"># static fields</span><br><span class="hljs-keyword">.field</span><span class="hljs-keyword"> private</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> final</span><span class="hljs-keyword"> synthetic</span> $VALUES:[<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br><span class="hljs-keyword">.field</span><span class="hljs-keyword"> public</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> final</span> enum MODE_A:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br><span class="hljs-keyword">.field</span><span class="hljs-keyword"> public</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> final</span> enum MODE_B:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br><span class="hljs-keyword">.field</span><span class="hljs-keyword"> public</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> final</span> enum MODE_C:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br><span class="hljs-comment"># ...</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>通过反编译后的smali代码可以看到，<code>EnumMode</code>类生成的签名类型其实是<code>java.lang.Enum&lt;EnumTest.EnumMode&gt;</code>；枚举类型中的每个变量，都会生成一个该类型的静态变量。</p>
+<p>在<code>EnumTest.EnumMode</code>的静态代码块中会将变量名<code>MODE_A</code>和对应值，作为参数依次调用<code>java.lang.Enum</code>的构造函数；最后，构造了一个数组<code>VALUES</code>，存储这三个静态变量。</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs smali"><span class="hljs-comment"># EnumTest.EnumMode的静态代码块</span><br><span class="hljs-comment"># direct methods</span><br><span class="hljs-keyword">.method</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> constructor</span> &lt;clinit&gt;()V<br><span class="hljs-keyword">    .registers</span> 5<br><br><span class="hljs-keyword">    .prologue</span><br>   <span class="hljs-built_in"> const/4 </span>v4, 0x2<br><br>   <span class="hljs-built_in"> const/4 </span>v3, 0x1<br><br>   <span class="hljs-built_in"> const/4 </span>v2, 0x0<br><br>		<span class="hljs-comment"># 实例化MODE_A</span><br><span class="hljs-keyword">    .line</span> 8<br>   <span class="hljs-built_in"> new-instance </span>v0, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>   <span class="hljs-built_in"> const-string </span>v1, <span class="hljs-string">&quot;MODE_A&quot;</span><br><br>   <span class="hljs-built_in"> invoke-direct </span>&#123;v0, v1, v2&#125;, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span>-&gt;&lt;init&gt;(<span class="hljs-class">Ljava/lang/String;</span>I)V<br><br>   <span class="hljs-built_in"> sput-object </span>v0, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span>-&gt;MODE_A:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>		<span class="hljs-comment"># 省略MODE_B/C的实例构造 ...</span><br><br>		<span class="hljs-comment"># 构造了一个数组存储三个实例</span><br>   <span class="hljs-built_in"> const/4 </span>v0, 0x3<br><br>   <span class="hljs-built_in"> new-array </span>v0, v0, [<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>   <span class="hljs-built_in"> sget-object </span>v1, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span>-&gt;MODE_A:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>   <span class="hljs-built_in"> aput-object </span>v1, v0, v2<br><br>   <span class="hljs-built_in"> sget-object </span>v1, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span>-&gt;MODE_B:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>   <span class="hljs-built_in"> aput-object </span>v1, v0, v3<br><br>   <span class="hljs-built_in"> sget-object </span>v1, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span>-&gt;MODE_C:<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>   <span class="hljs-built_in"> aput-object </span>v1, v0, v4<br><br>   <span class="hljs-built_in"> sput-object </span>v0, <span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span>-&gt;$VALUES:[<span class="hljs-class">Lcom/rfw/androiddemo/EnumTest$EnumMode;</span><br><br>   <span class="hljs-built_in"> return-void</span><br><span class="hljs-built_in"></span><span class="hljs-keyword">.end method</span><br><br><span class="hljs-comment"># 省略构造函数、valueOf与values方法...</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>虽然枚举类型具有很多好处，但在这个需求场景下，显然Java枚举类型实现的代价有点大了。</p>
+<p>这里完全可以用三个静态整型值加边界值判断进行轻量级实现，但是恶心之处在于，所有使用到这三个值的地方，我可能都需要进行异常值判断，来保证程序的鲁棒性。</p>
+<h2 id="IntDef注解"><a href="#IntDef注解" class="headerlink" title="IntDef注解"></a>IntDef注解</h2><p>在这种情况下，Android提供的<code>IntDef</code>注解可以很好的解决枚举类型内存占用问题，可以说是一种更轻量级的“枚举功能”的实现。</p>
+<p>官方文档地址：<br><a target="_blank" rel="noopener" href="https://developer.android.com/reference/androidx/annotation/IntDef">https://developer.android.com/reference/androidx/annotation/IntDef</a></p>
+<p>其定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Retention(value = SOURCE)</span>  <span class="hljs-meta">@Target(value = )</span> annotation IntDef<br></code></pre></td></tr></table></figure>
+
+
+
+<p>官方文档对IntDef注解的说明如下：</p>
+<blockquote>
+<p>“Denotes that the annotated element of integer type, represents a logical type and that its value should be one of the explicitly named constants. If the IntDef#flag() attribute is set to true, multiple constants can be combined.”</p>
+</blockquote>
+<p>翻译过来就是：</p>
+<blockquote>
+<p>“被IntDef注解修饰的整型表示一个逻辑上的类型，其值需是一系列定义的常量之一。如果IntDef#flag()属性设置为true，那么这些常量可以组合在一起使用。”</p>
+</blockquote>
+<h2 id="IntDef使用方法"><a href="#IntDef使用方法" class="headerlink" title="IntDef使用方法"></a>IntDef使用方法</h2><p>我们可以利用<code>IntDef</code>实现一个注解<code>Mode</code>，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// IntDefTest.java</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">IntDefTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MODE_A</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MODE_B</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MODE_C</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br><br>    <span class="hljs-meta">@IntDef(&#123;MODE_A, MODE_B, MODE_C&#125;)</span> <span class="hljs-comment">// Mode注解定义取值范围</span><br>    <span class="hljs-meta">@Retention(RetentionPolicy.SOURCE)</span> <span class="hljs-comment">// 声明Mode保留策略是源码级别</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Mode &#123;&#125;<br><br>    <span class="hljs-meta">@Mode</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">sMode</span> <span class="hljs-operator">=</span> MODE_A;<br><br>    <span class="hljs-meta">@Mode</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMode</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> sMode;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setMode</span><span class="hljs-params">(<span class="hljs-meta">@Mode</span> <span class="hljs-type">int</span> mode)</span> &#123;<br>        sMode = mode;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>这里我们先声明了三个静态int常量，然后利用<code>IntDef</code>声明我们的<code>Mode</code>注解取值范围为<code>MODE_A</code>、<code>MODE_B</code>、<code>MODE_C</code>，以及<code>Retention</code>保留策略为只保留源码中、编译时删除。</p>
+<p>在<code>setMode()</code>方法的参数中，我们用<code>@Mode</code>注解修饰参数，这样，在我们的正常编码过程中，一旦出现传入参数并不是<code>MODE_A</code>、<code>MODE_B</code>、<code>MODE_C</code>三个值其中之一的情况，Android Studio就会提示你，参数有问题以及正确的取值范围是什么。</p>
+<p>另外，即使这里传入的参数是1，即<code>MODE_B</code>的值，Android Studio也会提示参数错误的。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/20220219221905.png" srcset="/img/loading.gif" lazyload alt="@Indef 传入参数"></p>
+<p>这样便用最简单的方法，满足了我们对枚举类型最基本的功能诉求。</p>
+<p>最后，<strong>值得注意的是，虽然这里IDE会提示参数错误，但是并不会影响代码的编译过程，还是可以编译成功的！</strong></p>
+<h2 id="IntDef的flag属性"><a href="#IntDef的flag属性" class="headerlink" title="IntDef的flag属性"></a>IntDef的flag属性</h2><p>IntDef注解还有一个flag属性也很有用：当flag属性设置为true时，IntDef定义的值可以当作标志位，用<code>|</code>运算符组合使用。</p>
+<p>修改之前<code>@Mode</code>注解的定义和各个模式的值如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MODE_A</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MODE_B</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">1</span>;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MODE_C</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>;<br><br><span class="hljs-meta">@IntDef(flag = true, value = &#123;MODE_A, MODE_B, MODE_C&#125;)</span> <span class="hljs-comment">// Mode注解定义取值范围，设置flag属性为true</span><br><span class="hljs-meta">@Retention(RetentionPolicy.SOURCE)</span> <span class="hljs-comment">// Mode注解保留策略是源码级别</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Mode &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>这时，我们在调用<code>setMode()</code>的地方，便可以支持如下方式使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">IntDefTest.setMode(IntDefTest.MODE_A | IntDefTest.MODE_C);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>类似<code>IntDef</code>的还有<code>LongDef</code>、<code>StringDef</code>，使用的方法基本一致，其中<code>StringDef</code>不支持flag属性。</p>
+<p>Android已经为我们提供了这么有用的注解，还不赶快用起来？</p>
+<hr>
+<p>
+
+
+<p>以上，欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" class="category-chain-item">技术总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">#技术总结</a>
+      
+        <a href="/tags/Java/">#Java</a>
+      
+        <a href="/tags/Android%E5%BC%80%E5%8F%91/">#Android开发</a>
+      
+        <a href="/tags/%E6%B3%A8%E8%A7%A3/">#注解</a>
+      
+        <a href="/tags/Intdef/">#Intdef</a>
+      
+        <a href="/tags/%E6%9E%9A%E4%B8%BE%E7%B1%BB/">#枚举类</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android｜使用IntDef注解代替枚举类</div>
+      <div>https://wuruofan.com/2022/02/19/using-intdef-annotation-instead-of-enum-for-android/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/09/20-minutes-learning-unix-system-and-its-philosophy/" title="20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/13/how-to-draw-a-line-with-any-start-and-end-point-by-omnigraffle/" title="软件技巧｜OmniGraffle绘制任意起止点直线">
+                        <span class="hidden-mobile">软件技巧｜OmniGraffle绘制任意起止点直线</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,766 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Hi，好久不见，最近有些忙，忙着项目，还要忙着准备考试，然后又赶上了二阳，实在是头秃+要命，好在忙完这个阶段了，明后两天出成绩，希望能顺利通过！我是真的背不动书了😭！ 前段时间在看chatGPT相关的项目，很多都用的TS，包括前两周参加一个培训，应用开发使用的也是类似TS的语言，由于公司网络环境问题，github访问并不是很顺畅，总是遇到无法连接的情况，记录一下，方便遇到类似情况的朋友。 nvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决nvm安装脚本无法连接问题">
+<meta property="og:url" content="https://wuruofan.com/2023/06/05/using-mirror-repo-to-resolve-connection-refused-error-during-nvm-install/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="Hi，好久不见，最近有些忙，忙着项目，还要忙着准备考试，然后又赶上了二阳，实在是头秃+要命，好在忙完这个阶段了，明后两天出成绩，希望能顺利通过！我是真的背不动书了😭！ 前段时间在看chatGPT相关的项目，很多都用的TS，包括前两周参加一个培训，应用开发使用的也是类似TS的语言，由于公司网络环境问题，github访问并不是很顺畅，总是遇到无法连接的情况，记录一下，方便遇到类似情况的朋友。 nvm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png">
+<meta property="article:published_time" content="2023-06-05T19:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.346Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="技术总结">
+<meta property="article:tag" content="nvm">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="镜像仓库">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>解决nvm安装脚本无法连接问题 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="解决nvm安装脚本无法连接问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-05 19:00" pubdate>
+          2023年6月5日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">解决nvm安装脚本无法连接问题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Hi，好久不见，最近有些忙，忙着项目，还要忙着准备考试，然后又赶上了二阳，实在是头秃+要命，好在忙完这个阶段了，明后两天出成绩，希望能顺利通过！<del>我是真的背不动书了😭！</del></p>
+<p>前段时间在看chatGPT相关的项目，很多都用的TS，包括前两周参加一个培训，应用开发使用的也是类似TS的语言，由于公司网络环境问题，github访问并不是很顺畅，总是遇到无法连接的情况，记录一下，方便遇到类似情况的朋友。</p>
+<h2 id="nvm是什么？"><a href="#nvm是什么？" class="headerlink" title="nvm是什么？"></a>nvm是什么？</h2><p>nvm是Node.js版本管理工具（Node Version Manager）的简称。它可以帮助用户在同一台机器上安装、管理和切换不同的Node.js版本，而无需手动安装每个版本或卸载旧版本。这对于需要同时处理多个Node.js项目的开发人员来说非常有用。nvm支持在Linux和macOS等操作系统上使用，并且可以通过命令行轻松安装和配置。</p>
+<h2 id="nvm安装方法"><a href="#nvm安装方法" class="headerlink" title="nvm安装方法"></a>nvm安装方法</h2><p><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">nvm-sh&#x2F;nvm: Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions (github.com)</a></p>
+<p>官方给出了脚本直接安装的命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash<br></code></pre></td></tr></table></figure>
+
+<p>这里是用过 <code>curl</code>命令去下载 <code>install.sh</code>脚本，<code>-o-</code>表示输出到标准输出（这里 <code>-o</code>参数可以输出到指定文件，后面的 <code>-</code>表示标准输出。），然后使用 <code>bash</code>执行。</p>
+<p><code>install.sh</code>脚本的最后，会尝试将启动命令加入合适的profile文件中去（如 <code>~/.bash_profile</code><br>、<code>~/.zshrc</code>、<code>~/.profile</code>、<code>~/.bashrc</code>），假如失败了，可以能需要自己将下面的命令加入自己的shell启动脚本中去。，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> NVM_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$([ -z <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;XDG_CONFIG_HOME-&#125;</span>&quot;</span> ] &amp;&amp; printf %s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;HOME&#125;</span>/.nvm&quot;</span> || printf %s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;XDG_CONFIG_HOME&#125;</span>/nvm&quot;</span>)</span>&quot;</span><br>[ -s <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_DIR</span>/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_DIR</span>/nvm.sh&quot;</span> <span class="hljs-comment"># This loads nvm</span><br></code></pre></td></tr></table></figure>
+
+<p>正常情况，按照上面的操作就可以了，但是国内有些网络可能会出现无法访问github的情况，提示下面的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl: (7) Failed to connect to [raw.githubusercontent.com](http://raw.githubusercontent.com/ <span class="hljs-string">&quot;raw.githubusercontent.com&quot;</span>) port 443: Connection refused<br></code></pre></td></tr></table></figure>
+
+<h2 id="网络错误：Connection-refused"><a href="#网络错误：Connection-refused" class="headerlink" title="网络错误：Connection refused"></a>网络错误：Connection refused</h2><p>网络上给出的都是改hosts的方式直接访问，但是有些情况并不好使。这里给出另一种思路，使用国内镜像源替换。</p>
+<p>前面提到默认的安装方法是去github上下载一个安装脚本，这个脚本其实简单说做了两件事：</p>
+<ol>
+<li>克隆nvm仓库</li>
+<li>将启动命令写入profile文件</li>
+</ol>
+<p>这里网络出错其实是第一步克隆nvm仓库时出了问题，改hosts方法也是解决域名无法解析的错误，这里可以尝试使用nvm国内镜像源的方式处理，方法如下：</p>
+<h3 id="1-仅下载install-sh脚本"><a href="#1-仅下载install-sh脚本" class="headerlink" title="1.仅下载install.sh脚本"></a>1.仅下载install.sh脚本</h3><p>在浏览器里访问官网命令中的网址（<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh">https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh</a>），复制全部内容并保存到文件中。</p>
+<h3 id="2-编辑脚本、替换仓库地址"><a href="#2-编辑脚本、替换仓库地址" class="headerlink" title="2.编辑脚本、替换仓库地址"></a>2.编辑脚本、替换仓库地址</h3><p>找到如下行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;_<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> = <span class="hljs-string">&quot;_git&quot;</span> ] || [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>  NVM_SOURCE_URL=<span class="hljs-string">&quot;https://github.com/<span class="hljs-variable">$&#123;NVM_GITHUB_REPO&#125;</span>.git&quot;</span><br><span class="hljs-keyword">else</span><br></code></pre></td></tr></table></figure>
+
+<p>替换仓库地址后如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;_<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> = <span class="hljs-string">&quot;_git&quot;</span> ] || [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>  NVM_SOURCE_URL=<span class="hljs-string">&quot;https://gitee.com/mirrors/nvm.git&quot;</span><br><span class="hljs-keyword">else</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-保存并执行文件"><a href="#3-保存并执行文件" class="headerlink" title="3.保存并执行文件"></a>3.保存并执行文件</h3><p>命令行执行修改后的脚本，如：<code>bash install.sh</code>，执行完成后重启终端即可使用nvm命令。</p>
+<hr>
+<p>title: nodejs｜解决nvm安装脚本无法连接问题<br>date: 2023-06-05 19:00:00<br>index_img: <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png">https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png</a><br>banner_img: <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png">https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png</a><br>categories:</p>
+<ul>
+<li>技术总结<br>tags:</li>
+<li>技术总结</li>
+<li>nvm</li>
+<li>nodejs</li>
+<li>镜像仓库</li>
+</ul>
+<hr>
+<p>Hi，好久不见，最近有些忙，忙着项目，还要忙着准备考试，然后又赶上了二阳，实在是头秃+要命，好在忙完这个阶段了，明后两天出成绩，希望能顺利通过！<del>我是真的背不动书了😭！</del></p>
+<p>前段时间在看chatGPT相关的项目，很多都用的TS，包括前两周参加一个培训，应用开发使用的也是类似TS的语言，由于公司网络环境问题，github访问并不是很顺畅，总是遇到无法连接的情况，记录一下，方便遇到类似情况的朋友。</p>
+<h2 id="nvm是什么？-1"><a href="#nvm是什么？-1" class="headerlink" title="nvm是什么？"></a>nvm是什么？</h2><p>nvm是Node.js版本管理工具（Node Version Manager）的简称。它可以帮助用户在同一台机器上安装、管理和切换不同的Node.js版本，而无需手动安装每个版本或卸载旧版本。这对于需要同时处理多个Node.js项目的开发人员来说非常有用。nvm支持在Linux和macOS等操作系统上使用，并且可以通过命令行轻松安装和配置。</p>
+<h2 id="nvm安装方法-1"><a href="#nvm安装方法-1" class="headerlink" title="nvm安装方法"></a>nvm安装方法</h2><p><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">nvm-sh&#x2F;nvm: Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions (github.com)</a></p>
+<p>官方给出了脚本直接安装的命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash<br></code></pre></td></tr></table></figure>
+
+<p>这里是用过 <code>curl</code>命令去下载 <code>install.sh</code>脚本，<code>-o-</code>表示输出到标准输出（这里 <code>-o</code>参数可以输出到指定文件，后面的 <code>-</code>表示标准输出。），然后使用 <code>bash</code>执行。</p>
+<p><code>install.sh</code>脚本的最后，会尝试将启动命令加入合适的profile文件中去（如 <code>~/.bash_profile</code><br>、<code>~/.zshrc</code>、<code>~/.profile</code>、<code>~/.bashrc</code>），假如失败了，可以能需要自己将下面的命令加入自己的shell启动脚本中去。，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> NVM_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$([ -z <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;XDG_CONFIG_HOME-&#125;</span>&quot;</span> ] &amp;&amp; printf %s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;HOME&#125;</span>/.nvm&quot;</span> || printf %s <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;XDG_CONFIG_HOME&#125;</span>/nvm&quot;</span>)</span>&quot;</span><br>[ -s <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_DIR</span>/nvm.sh&quot;</span> ] &amp;&amp; \. <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_DIR</span>/nvm.sh&quot;</span> <span class="hljs-comment"># This loads nvm</span><br></code></pre></td></tr></table></figure>
+
+<p>正常情况，按照上面的操作就可以了，但是国内有些网络可能会出现无法访问github的情况，提示下面的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl: (7) Failed to connect to [raw.githubusercontent.com](http://raw.githubusercontent.com/ <span class="hljs-string">&quot;raw.githubusercontent.com&quot;</span>) port 443: Connection refused<br></code></pre></td></tr></table></figure>
+
+<h2 id="网络错误：Connection-refused-1"><a href="#网络错误：Connection-refused-1" class="headerlink" title="网络错误：Connection refused"></a>网络错误：Connection refused</h2><p>网络上给出的都是改hosts的方式直接访问，但是有些情况并不好使。这里给出另一种思路，使用国内镜像源替换。</p>
+<p>前面提到默认的安装方法是去github上下载一个安装脚本，这个脚本其实简单说做了两件事：</p>
+<ol>
+<li>克隆nvm仓库</li>
+<li>将启动命令写入profile文件</li>
+</ol>
+<p>这里网络出错其实是第一步克隆nvm仓库时出了问题，改hosts方法也是解决域名无法解析的错误，这里可以尝试使用nvm国内镜像源的方式处理，方法如下：</p>
+<h3 id="1-仅下载install-sh脚本-1"><a href="#1-仅下载install-sh脚本-1" class="headerlink" title="1.仅下载install.sh脚本"></a>1.仅下载install.sh脚本</h3><p>在浏览器里访问官网命令中的网址（<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh">https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh</a>），复制全部内容并保存到文件中。</p>
+<h3 id="2-编辑脚本、替换仓库地址-1"><a href="#2-编辑脚本、替换仓库地址-1" class="headerlink" title="2.编辑脚本、替换仓库地址"></a>2.编辑脚本、替换仓库地址</h3><p>找到如下行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;_<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> = <span class="hljs-string">&quot;_git&quot;</span> ] || [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>  NVM_SOURCE_URL=<span class="hljs-string">&quot;https://github.com/<span class="hljs-variable">$&#123;NVM_GITHUB_REPO&#125;</span>.git&quot;</span><br><span class="hljs-keyword">else</span><br></code></pre></td></tr></table></figure>
+
+<p>替换仓库地址后如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;_<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> = <span class="hljs-string">&quot;_git&quot;</span> ] || [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$NVM_METHOD</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>  NVM_SOURCE_URL=<span class="hljs-string">&quot;https://gitee.com/mirrors/nvm.git&quot;</span><br><span class="hljs-keyword">else</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-保存并执行文件-1"><a href="#3-保存并执行文件-1" class="headerlink" title="3.保存并执行文件"></a>3.保存并执行文件</h3><p>命令行执行修改后的脚本，如：<code>bash install.sh</code>，执行完成后重启终端即可使用nvm命令。</p>
+<hr>
+<p>
+
+<p>以上，欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" class="category-chain-item">技术总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">#技术总结</a>
+      
+        <a href="/tags/nvm/">#nvm</a>
+      
+        <a href="/tags/nodejs/">#nodejs</a>
+      
+        <a href="/tags/%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/">#镜像仓库</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>解决nvm安装脚本无法连接问题</div>
+      <div>https://wuruofan.com/2023/06/05/using-mirror-repo-to-resolve-connection-refused-error-during-nvm-install/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/28/raycast-a-productive-tool-on-mac-which-beyond-the-alternative-of-alfred-and-spotlight/" title="🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋">
+                        <span class="hidden-mobile">🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="脚本仓库文章涉及脚本为JEB2DeobscureClass.py，原版仓库地址：S3cuRiTy-Er1C&#x2F;JebScripts，修改版地址：wuruofan&#x2F;JebScripts 实现原理通常smali文件中的source字段用来说明这个smali文件对应的java文件是什么。 很多时候，为了便于定位崩溃问题，有些厂商在编译完成app release包时，仅做了代码混淆，并未">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JEB2Deobsecure反混淆脚本修改记录">
+<meta property="og:url" content="https://wuruofan.com/2021/02/01/jeb2deobsureclass-deobfuscation-script-modification-record/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="脚本仓库文章涉及脚本为JEB2DeobscureClass.py，原版仓库地址：S3cuRiTy-Er1C&#x2F;JebScripts，修改版地址：wuruofan&#x2F;JebScripts 实现原理通常smali文件中的source字段用来说明这个smali文件对应的java文件是什么。 很多时候，为了便于定位崩溃问题，有些厂商在编译完成app release包时，仅做了代码混淆，并未">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/01/4A72VmzsotefwcK.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/01/C3oizHjJrTPpx4y.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/01/VUgrJ3pT8cfZsAl.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/31/mWbk9YwyBeVdlZQ.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/01/fKUZn6kRFbd1O8S.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/01/bOuwMkZrQvWRSIp.png">
+<meta property="article:published_time" content="2021-02-01T18:30:44.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.346Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="JEB2">
+<meta property="article:tag" content="JEB2DeobscureClass">
+<meta property="article:tag" content="Smali">
+<meta property="article:tag" content="Deobfuscate">
+<meta property="article:tag" content="反编译">
+<meta property="article:tag" content="反混淆">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/01/4A72VmzsotefwcK.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JEB2Deobsecure反混淆脚本修改记录 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/valley-banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JEB2Deobsecure反混淆脚本修改记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-02-01 18:30" pubdate>
+          2021年2月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JEB2Deobsecure反混淆脚本修改记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="脚本仓库"><a href="#脚本仓库" class="headerlink" title="脚本仓库"></a>脚本仓库</h2><p>文章涉及脚本为<code>JEB2DeobscureClass.py</code>，原版仓库地址：<a target="_blank" rel="noopener" href="https://github.com/S3cuRiTy-Er1C/JebScripts">S3cuRiTy-Er1C&#x2F;JebScripts</a>，修改版地址：<a target="_blank" rel="noopener" href="https://github.com/wuruofan/JebScripts">wuruofan&#x2F;JebScripts</a></p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>通常smali文件中的source字段用来说明这个smali文件对应的java文件是什么。</p>
+<p>很多时候，为了便于定位崩溃问题，有些厂商在编译完成app release包时，仅做了代码混淆，并未去除smali文件的source字段。</p>
+<p><img src="https://i.loli.net/2021/02/01/4A72VmzsotefwcK.png" srcset="/img/loading.gif" lazyload alt="smali文件中source字段"></p>
+<p><code>JEB2DeobscureClass.py</code>脚本的工作原理就是去取smali文件中source字段值，然后将类名重命名为该值。</p>
+<h2 id="现有问题"><a href="#现有问题" class="headerlink" title="现有问题"></a>现有问题</h2><p>原脚本在某些情况下运行的很糟糕：</p>
+<ol>
+<li><p>混淆时未去除smali中source字段，而是统一修改成另外值时：即修改成非<code>*.java</code></p>
+</li>
+<li><p>修改成同名<code>*.java</code>：即多个smali对应一个Java文件</p>
+</li>
+</ol>
+<p><strong>第一种情况</strong>会导致逆向包的所有类都被重命名为同一个奇怪的字符，哪怕是原来没有混淆的Activity名称也会被重命名，失去可读性。</p>
+<p><strong>第二种情况</strong>会导致JEB对class解析出错，例如：<code>La/b/c/d.smali</code>和<code>La/b/c/e.smali</code>的<code>source</code>都是<code>ABC.java</code>，那么重命名完<code>a.b.c</code>下就会有两个<code>ABC</code>类，左侧大纲里视图里可以看到这两个同名类，但是点击第二个ABC类或者成员、方法的时候，JEB默认仍解析成第一个ABC类，没办法准确的定位到代码。</p>
+<p>其中，第二个现象是逆向小米文件管理器时发现，同一个目录下，几个类都有相同的<code>.source &quot;StorageVolumeUtil.java&quot;</code>，如下图所示。导致JEB反编译的时候无法正确的定位到类，比如我想访问<code>O</code>，JEB会取第一个<code>StorageVolumeUtil</code>类也就是<code>L</code>，就找不到方法了！</p>
+<p><img src="https://i.loli.net/2021/02/01/C3oizHjJrTPpx4y.png" srcset="/img/loading.gif" lazyload alt="4个类的source字段相同"></p>
+<p><img src="https://i.loli.net/2021/02/01/VUgrJ3pT8cfZsAl.png" srcset="/img/loading.gif" lazyload alt="N个类的source字段相同"></p>
+<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><h3 id="第一种情况"><a href="#第一种情况" class="headerlink" title="第一种情况"></a>第一种情况</h3><p>修改了原脚本对source中字符串的判断，获取一个类的source字符串之后，判断不包含<code>.java</code>就不重命名，跳过此类。</p>
+<h3 id="第二种情况"><a href="#第二种情况" class="headerlink" title="第二种情况"></a>第二种情况</h3><p>将<strong>source相同</strong> 且 <strong>同一个包目录下</strong> 的类重命名成不同的名字。</p>
+<ol>
+<li>遍历所有类，将发现的source字段保存成字典映射，对应一个嵌套字典，外层字典的键Key为待重命名成的类名，即<code>source</code>字段或者source字段加一个后缀组成的字符串。</li>
+<li>内层嵌套字典的键Key为当前类地址的父路径，即所在模块名称，内层字典的值为列表，储存JEB重命名操作所需的<code>IDexUnit</code>和<code>IDexClass</code>对象，即<code>&#123; source, &#123; parent_pkg_name, [unit, class] &#125; &#125;</code>。</li>
+<li>一旦发现已记录的source字段，就字符串自增为<code>source_N</code>判断下一个，直到找到不存在的source，并加入字典记录下来。</li>
+<li>遍历字典调用JEB重命名接口。</li>
+</ol>
+<h2 id="修改结果"><a href="#修改结果" class="headerlink" title="修改结果"></a>修改结果</h2><p>可以看到小米文件管理器的<code>FileInformationFactory</code>有22个同名类，现在JEB可以双击正确的跳转显示了，其实有一部分是匿名内部类，可以再优化一下。</p>
+<p><img src="https://i.loli.net/2021/01/31/mWbk9YwyBeVdlZQ.png" srcset="/img/loading.gif" lazyload alt="22个同名类"></p>
+<p><img src="https://i.loli.net/2021/02/01/fKUZn6kRFbd1O8S.png" srcset="/img/loading.gif" lazyload alt="脚本运行日志"></p>
+<h2 id="进一步优化"><a href="#进一步优化" class="headerlink" title="进一步优化"></a>进一步优化</h2><p>存在这么多同名source，除去混淆引入，其实还有个另外的可能，就是小米文件管理器使用了太多的匿名内部类。</p>
+<p><img src="https://i.loli.net/2021/02/01/bOuwMkZrQvWRSIp.png" srcset="/img/loading.gif" lazyload alt="匿名内部类"></p>
+<p>可以看到有些类中<code>annotation</code>注解字段有说明自己是<code>name = null</code>的<code>InnerClass</code>，也指出自己的<code>EnclosingClass</code>是哪个类了。只是修改反混淆脚本解析时，发现当前是<code>InnerClass</code>时但是获取<code>EnclosingClass</code>的名称和已有已存在匿名类个数有点麻烦。</p>
+<p>下一次优化再处理。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-263011.htm">JEB脚本(一)(指令解析 反编译 抽象语法树) </a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-263012.htm">JEB脚本(二)(交叉引用 调用图)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.pnfsoftware.com/jeb/apidoc/reference/packages.html">JEB2 API文档</a></p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" class="category-chain-item">技术总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JEB2/">#JEB2</a>
+      
+        <a href="/tags/JEB2DeobscureClass/">#JEB2DeobscureClass</a>
+      
+        <a href="/tags/Smali/">#Smali</a>
+      
+        <a href="/tags/Deobfuscate/">#Deobfuscate</a>
+      
+        <a href="/tags/%E5%8F%8D%E7%BC%96%E8%AF%91/">#反编译</a>
+      
+        <a href="/tags/%E5%8F%8D%E6%B7%B7%E6%B7%86/">#反混淆</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JEB2Deobsecure反混淆脚本修改记录</div>
+      <div>https://wuruofan.com/2021/02/01/jeb2deobsureclass-deobfuscation-script-modification-record/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年2月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/01/working-guide-on-win-10-of-linux-macos-programmers/" title="MacOS/Linux程序员Win10平台生存指北">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MacOS/Linux程序员Win10平台生存指北</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/22/how-to-call-another-constructor-in-cpp/" title="C++如何在类的构造函数中调用另一个构造函数">
+                        <span class="hidden-mobile">C++如何在类的构造函数中调用另一个构造函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

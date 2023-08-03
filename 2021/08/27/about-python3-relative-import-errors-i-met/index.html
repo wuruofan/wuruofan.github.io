@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前情最近在优化原项目一部分Python代码，遇到了代码重复拷贝的问题，一个方法拷贝了n多份，这个“坏味道”当然忍不了，准备将方法写到utils.py里，由于Python3已经支持相对路径导入了，utils放到当前包的common目录，用到此方法的代码导入utils使用即可。so easy！ 后来？后来我就掉进坑里。 我以为的相对路径导入并不是真实的相对路径导入。 Python导入包或方法假设我们的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【避坑指北】Python3相对路径导入方法">
+<meta property="og:url" content="https://wuruofan.com/2021/08/27/about-python3-relative-import-errors-i-met/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="前情最近在优化原项目一部分Python代码，遇到了代码重复拷贝的问题，一个方法拷贝了n多份，这个“坏味道”当然忍不了，准备将方法写到utils.py里，由于Python3已经支持相对路径导入了，utils放到当前包的common目录，用到此方法的代码导入utils使用即可。so easy！ 后来？后来我就掉进坑里。 我以为的相对路径导入并不是真实的相对路径导入。 Python导入包或方法假设我们的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Python.jpeg">
+<meta property="article:published_time" content="2021-08-27T20:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.342Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="避坑指北">
+<meta property="article:tag" content="遇坑总结">
+<meta property="article:tag" content="相对路径">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="包导入">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Python.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【避坑指北】Python3相对路径导入方法 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Python.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【避坑指北】Python3相对路径导入方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-08-27 20:00" pubdate>
+          2021年8月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【避坑指北】Python3相对路径导入方法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h2><p>最近在优化原项目一部分Python代码，遇到了代码重复拷贝的问题，一个方法拷贝了n多份，这个“坏味道”当然忍不了，准备将方法写到utils.py里，由于Python3已经支持相对路径导入了，utils放到当前包的common目录，用到此方法的代码导入utils使用即可。so easy！</p>
+<p>后来？后来我就掉进坑里。</p>
+<p>我以为的相对路径导入并不是真实的相对路径导入。</p>
+<h2 id="Python导入包或方法"><a href="#Python导入包或方法" class="headerlink" title="Python导入包或方法"></a>Python导入包或方法</h2><p>假设我们的工程项目是这样的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">.<br>├── a<br>│   └── callee.py<br>├── b<br>│   └── caller.py<br>├── c<br>│   └── hello.py<br>└── main.py<br></code></pre></td></tr></table></figure>
+
+<h3 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h3><p><code>hello.py</code>中实现了一个打印“say hi~”方法<code>hi()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># c/hello.py</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">hi</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;say hi~&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<p>现在想要在<code>main.py</code>中调用，那我们只需要加入一行<code>from c.hello import hi</code>，然后直接调用<code>hi()</code>即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># main.py</span><br><span class="hljs-keyword">from</span> c.hello <span class="hljs-keyword">import</span> hi<br><br>hi()<br></code></pre></td></tr></table></figure>
+
+<p>我们运行<code>python3 main.py</code>，正常输出“say hi~”。</p>
+<p>python和Java一样都是用目录管理包的，运行时会从当前路径（<code>main.py</code>所在目录）开始查找匹配的包名对应的<code>c/hello.py</code>文件，然后找到其中名为<code>hi</code>的方法，并调用。</p>
+<h3 id="import默认搜索顺序"><a href="#import默认搜索顺序" class="headerlink" title="import默认搜索顺序"></a>import默认搜索顺序</h3><p>默认情况下，python的<code>import</code>关键字会选择优先查找python的内建模块，若没找到，则会去<code>sys.path</code>保存的路径列表中寻找。</p>
+<p><code>sys.path</code>保存的路径列表包括几个部分：</p>
+<ol>
+<li>当前脚本所在目录</li>
+<li>环境变量<code>$PYTHONPATH</code>设置的目录</li>
+<li>python标准库的目录</li>
+<li>任何能够找到的.pth文件的内容</li>
+<li>第三方扩展的site-package目录，也就是pip安装第三方包的路径</li>
+</ol>
+<h3 id="相对路径导入的那些坑"><a href="#相对路径导入的那些坑" class="headerlink" title="相对路径导入的那些坑"></a>相对路径导入的那些坑</h3><p>现在有一个需求就是<code>b</code>目录下的<code>caller.py</code>希望执行<code>a</code>目录<code>callee.py</code>中的方法<code>caller_test()</code>方法，这个方法可以对应出调用者的信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># a/callee.py</span><br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">caller_test</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;打印调用者信息&quot;&quot;&quot;</span><br>    back_frame = sys._getframe().f_back<br><br>    <span class="hljs-keyword">if</span> back_frame <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;back_frame is None, no py caller!&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        back_filename = os.path.basename(back_frame.f_code.co_filename)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;caller: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(back_filename.split(<span class="hljs-string">&#x27;.&#x27;</span>)[<span class="hljs-number">0</span>]))<br></code></pre></td></tr></table></figure>
+
+
+
+<p>python3已经可以支持相对路径导入包了，简单写一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># b/caller.py</span><br><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">from</span> ..a <span class="hljs-keyword">import</span> callee<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">call</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;------ caller.py ------&#x27;</span>)<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;name: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(__name__))<br>	callee.caller_test()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	call()<br></code></pre></td></tr></table></figure>
+
+<p>这里可以看到<code>a</code>包名前额外多了两个点<code>..</code>，按照python手册中关于相对导入的介绍：两个点<code>..</code>表示从当前目录的父目录开始查找<code>a/callee.py</code>文件，一个点<code>.</code>表示当前目录，那么如果我想找父目录的父目录中的包呢？那就用三个点<code>...</code>，通常用到三个点的情况并不多。</p>
+<p>看上去毫无问题，正常极了，一运行就傻眼了。</p>
+<h4 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h4><p>执行<code>./b/caller.py</code>，提示错误：<code>ImportError: attempted relative import with no known parent package</code>。</p>
+<p>尝试在import前一行加入打印<code>__name__</code>、<code>__package__</code>、<code>sys.path</code>，结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">name: __main__<br>package: None<br>sys.path: [<span class="hljs-string">&#x27;/home/rfw/test/b&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python38.zip&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3.8&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3.8/lib-dynload&#x27;</span>, <span class="hljs-string">&#x27;/home/rfw/.local/lib/python3.8/site-packages&#x27;</span>, <span class="hljs-string">&#x27;/usr/local/lib/python3.8/dist-packages&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3/dist-packages&#x27;</span>]<br></code></pre></td></tr></table></figure>
+
+<p>很奇怪，看到<code>sys.path</code>中当前路径是b目录所在路径，按照相对导入的逻辑，<code>..a</code>就应该进入了<code>test/a</code>目录才对！</p>
+<h4 id="错误2"><a href="#错误2" class="headerlink" title="错误2"></a>错误2</h4><p>StackOverflow上查了下，可以使用<code>python -m b.caller</code>以模块的方式运行，将包信息告诉python解释器。</p>
+<p>尝试了下，这次错误提示变了，<code>ValueError: attempted relative import beyond top-level package</code>，提示是说相对导入找到的路径已经超过最顶级的了。</p>
+<p>此时再次打印，错误日志如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">name: __main__<br>package: b<br>sys.path: [<span class="hljs-string">&#x27;/home/rfw/test&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python38.zip&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3.8&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3.8/lib-dynload&#x27;</span>, <span class="hljs-string">&#x27;/home/rfw/.local/lib/python3.8/site-packages&#x27;</span>, <span class="hljs-string">&#x27;/usr/local/lib/python3.8/dist-packages&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3/dist-packages&#x27;</span>]<br></code></pre></td></tr></table></figure>
+
+<p>这时，和上一次打印不一样的地方在与<code>__package__</code>的值为<code>b</code>，当前运行路径为<code>test</code>目录。</p>
+<p>由于显示当前目录是<code>test</code>，因此，尝试把导入改成<code>from a.callee import caller_test</code>，运行正常！打印如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">name: __main__<br>package: b<br>sys.path: [<span class="hljs-string">&#x27;/home/rfw/test&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python38.zip&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3.8&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3.8/lib-dynload&#x27;</span>, <span class="hljs-string">&#x27;/home/rfw/.local/lib/python3.8/site-packages&#x27;</span>, <span class="hljs-string">&#x27;/usr/local/lib/python3.8/dist-packages&#x27;</span>, <span class="hljs-string">&#x27;/usr/lib/python3/dist-packages&#x27;</span>]<br><span class="hljs-built_in">caller</span>: <span class="hljs-built_in">caller</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>但是这就不是相对导入了啊。百思不得其解。</p>
+<h4 id="真相只有一个"><a href="#真相只有一个" class="headerlink" title="真相只有一个"></a>真相只有一个</h4><p>查了下python官方文档关于相对导入的说明（<a target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0328/">https://www.python.org/dev/peps/pep-0328/</a> ），恍然大明白。</p>
+<blockquote>
+<p>Relative imports use a module’s <code>__name__</code> attribute to determine that module’s position in the package hierarchy. If the module’s name does not contain any package information (e.g. it is set to ‘<code>__main__</code>‘) then relative imports are resolved as if the module were a top level module, regardless of where the module is actually located on the file system.</p>
+</blockquote>
+<p>翻译过来就是：</p>
+<blockquote>
+<ol>
+<li><p>相对导入依赖于一个模块的<code>__name__</code>属性，根据这个属性去决定该模块在整个包中的层级结构。</p>
+</li>
+<li><p>当一个模块的<code>__name__</code>属性不包含任何包信息时，如直接运行py脚本时，<code>__name__</code>会被设置成<code>__main__</code>，这时，不管这个文件位于包目录的哪个位置，相对导入机制会把当前脚本视为顶级模块。</p>
+</li>
+</ol>
+</blockquote>
+<p>这就意味着，<strong>只要是我从终端运行python脚本，都会遇到<code>__name__</code>为<code>__main__</code>的问题，当前被运行的python脚本永远无法使用相对导入</strong>。</p>
+<p>现在在根目录下修改<code>main.py</code>，并在<code>b/b1</code>目录下创建<code>caller_proxy.py</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">.<br>├── a<br>│   └── callee.py<br>├── b<br>│   ├── b1<br>│   │   └── caller_proxy.py<br>│   └── caller.py<br>├── c<br>│   └── hello.py<br>└── main.py<br><br></code></pre></td></tr></table></figure>
+
+<p><code>main.py</code>的内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">from</span> c.hello <span class="hljs-keyword">import</span> hi<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;__name__: &#123;&#125;, __package__: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(__name__, __package__))<br><br><span class="hljs-keyword">from</span> b.b1 <span class="hljs-keyword">import</span> caller_proxy<br><br>caller_proxy.proxy()<br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>caller_proxy.py</code>的内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">from</span> .. <span class="hljs-keyword">import</span> caller <span class="hljs-comment"># 相对导入</span><br><br><span class="hljs-built_in">print</span>(__package__)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">proxy</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;------ caller_proxy.py ------&quot;</span>)<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;name: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(__name__))<br>	caller.call()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>该文件使用了相对导入，现在运行<code>./main.py</code>，结果如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">__name__: __main__, __package__: <span class="hljs-literal">None</span><br>say hi~<br>------ caller_proxy.py ------<br>name: b.b1.caller_proxy<br>------ caller.py ------<br>name: b.caller<br>caller: caller<br></code></pre></td></tr></table></figure>
+
+
+
+<p>这时，<code>caller_proxy.py</code>执行时的<code>__name__</code>值是正常的包名结构<code>b.b1.caller_proxy</code>，因此可以使用相对导入<code>..</code>找到<code>b.caller</code>。</p>
+<p>而<code>caller.py</code>执行时的包名结构是<code>b.caller</code>，因此，相对导入只能找到<code>b</code>包下的文件，所以，只能使用<code>from a.callee import caller_test</code>。</p>
+<h3 id="通常应该怎么做"><a href="#通常应该怎么做" class="headerlink" title="通常应该怎么做"></a>通常应该怎么做</h3><p>为了避免一些奇奇怪怪的问题，还是比较推荐在<code>sys.path</code>数组追加要导入包绝对路径的方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> inspect<br>sys.path.append(os.path.realpath(os.path.join(os.path.dirname(inspect.getfile(inspect.currentframe())), <span class="hljs-string">&#x27;../common&#x27;</span>)))<br><br><span class="hljs-keyword">from</span> utils <span class="hljs-keyword">import</span> xxx_func<br></code></pre></td></tr></table></figure>
+
+
+
+<p>以之前的<code>caller.py</code>为例，想要调用<code>a/callee.py</code>，可以写成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">import</span> inspect<br>sys.path.append(os.path.realpath(os.path.join(os.path.dirname(inspect.getfile(inspect.currentframe())), <span class="hljs-string">&#x27;../a&#x27;</span>)))<br><br><span class="hljs-keyword">from</span> callee <span class="hljs-keyword">import</span> caller_test<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">call</span>():<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;------ caller.py ------&#x27;</span>)<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;name: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(__name__))<br><br>	caller_test()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	call()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>这样就不用care是直接运行，还是用<code>-m</code>参数以模块去运行了，直接运行<code>./b/caller.py</code>，输出结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ./b/caller.py<br>------ caller.py ------<br>name: __main__<br><span class="hljs-built_in">caller</span>: <span class="hljs-built_in">caller</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>
+
+<p>以上，就是之前处理Python import导入包时遇到的坑，简单记录。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%81%BF%E5%9D%91%E6%8C%87%E5%8C%97/" class="category-chain-item">避坑指北</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%81%BF%E5%9D%91%E6%8C%87%E5%8C%97/">#避坑指北</a>
+      
+        <a href="/tags/%E9%81%87%E5%9D%91%E6%80%BB%E7%BB%93/">#遇坑总结</a>
+      
+        <a href="/tags/%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/">#相对路径</a>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/%E5%8C%85%E5%AF%BC%E5%85%A5/">#包导入</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【避坑指北】Python3相对路径导入方法</div>
+      <div>https://wuruofan.com/2021/08/27/about-python3-relative-import-errors-i-met/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年8月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/01/10-minutes-learning-mental-model-read-notes-9/" title="10分钟学点《思维模型》9：激发创意 &amp; 第一性原理">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">10分钟学点《思维模型》9：激发创意 &amp; 第一性原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/24/10-minutes-learning-mental-model-read-notes-8/" title="10分钟学点《思维模型》8：寻找根本原因（五问法&amp;鱼骨图）">
+                        <span class="hidden-mobile">10分钟学点《思维模型》8：寻找根本原因（五问法&amp;鱼骨图）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

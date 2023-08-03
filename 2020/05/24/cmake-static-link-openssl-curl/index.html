@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="动态链接OpenSSL和CurlCMake本身提供了对OpenSSL&#x2F;Curl这种大户人家的库的支持，通过find_package命令查找系统安装的OpenSSL&#x2F;Curl库的路径，动态链接的方式如下即可。 12345678910111213141516171819# opensslfind_package(OpenSSL REQUIRED)if(OPENSSL_FOUND)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMake静态链接openssl和curl">
+<meta property="og:url" content="https://wuruofan.com/2020/05/24/cmake-static-link-openssl-curl/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="动态链接OpenSSL和CurlCMake本身提供了对OpenSSL&#x2F;Curl这种大户人家的库的支持，通过find_package命令查找系统安装的OpenSSL&#x2F;Curl库的路径，动态链接的方式如下即可。 12345678910111213141516171819# opensslfind_package(OpenSSL REQUIRED)if(OPENSSL_FOUND)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/01/12/QG9UsBf8z2KwXCy.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/12/8cLbqlVF9KtO3Id.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/12/KvXwOpUIhuisnB2.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/12/pDq2LZ6BxcbyS9G.png">
+<meta property="og:image" content="https://i.loli.net/2021/01/12/X3LC9ZfTOvuAPbd.png">
+<meta property="article:published_time" content="2020-05-24T12:19:28.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.342Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="CMake">
+<meta property="article:tag" content="curl">
+<meta property="article:tag" content="openssl">
+<meta property="article:tag" content="static link">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/01/12/QG9UsBf8z2KwXCy.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>CMake静态链接openssl和curl - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/valley-banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CMake静态链接openssl和curl"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-05-24 12:19" pubdate>
+          2020年5月24日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          58 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CMake静态链接openssl和curl</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="动态链接OpenSSL和Curl"><a href="#动态链接OpenSSL和Curl" class="headerlink" title="动态链接OpenSSL和Curl"></a>动态链接OpenSSL和Curl</h3><p>CMake本身提供了对OpenSSL&#x2F;Curl这种大户人家的库的支持，通过<code>find_package</code>命令查找系统安装的OpenSSL&#x2F;Curl库的路径，动态链接的方式如下即可。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># openssl</span><br><span class="hljs-keyword">find_package</span>(OpenSSL REQUIRED)<br><span class="hljs-keyword">if</span>(OPENSSL_FOUND)<br>  <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;OPENSSL_INCLUDE_DIRS&#125;</span>)<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;OpenSSL Found!&quot;</span>)<br><span class="hljs-keyword">endif</span>()<br><br><span class="hljs-comment"># curl</span><br><span class="hljs-keyword">find_package</span>(CURL REQUIRED)<br><br><span class="hljs-keyword">if</span>(CURL_FOUND)<br>  <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;CURL_INCLUDE_DIR&#125;</span>)<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Curl Found: $&#123;CURL_VERSION_STRING&#125; $&#123;CURL_LIBRARIES&#125; $&#123;CURL_LINK_LIBRARIES&#125;!&quot;</span>)<br><span class="hljs-keyword">else</span>(CURL_FOUND)<br>  <span class="hljs-keyword">message</span>(FATAL_ERROR <span class="hljs-string">&quot;Could not find the CURL library and development files.&quot;</span>)<br><span class="hljs-keyword">endif</span>()<br><br><span class="hljs-keyword">target_link_libraries</span>(target_program <span class="hljs-variable">$&#123;CURL_LIBRARIES&#125;</span>)<br><span class="hljs-keyword">target_link_libraries</span>(target_program OpenSSL::Crypto OpenSSL::SSL)<br></code></pre></td></tr></table></figure>
+
+<p>由于项目需求需要改成静态链接，其实没太大必要，把需要的动态库一起打包到安装软件，然后指定rpath应该就可以了。</p>
+<p>但是甲方爸爸说了算了啊。🤷‍♂️</p>
+<h4 id="静态链接配置"><a href="#静态链接配置" class="headerlink" title="静态链接配置"></a>静态链接配置</h4><p>Linux发行版仓库安装的OpenSSL和Curl都包含了静态和动态库，但是CMake这两个各自启用静态编译的方法不太一样。</p>
+<p>OpenSSL添加<code>set(OPENSSL_USE_STATIC_LIBS TRUE)</code>即可，make时可以看到已经找到静态库。</p>
+<p>Curl则需要在include头文件之前添加<code>add_definitions(-DCURL_STATICLIB)</code></p>
+<blockquote>
+<p>参考：</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/55165172/static-linking-of-openssl-crypto-in-cmake">Static linking of OpenSSL Crypto in CMake
+</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/49778607/c-cmake-compiling-program-with-libcurl">C - Cmake compiling program with libcurl</a></p>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># openssl using static library</span><br><span class="hljs-keyword">set</span>(OPENSSL_USE_STATIC_LIBS <span class="hljs-keyword">TRUE</span>)<br><br><span class="hljs-comment"># curl using static library</span><br><span class="hljs-keyword">add_definitions</span>(-DCURL_STATICLIB)<br></code></pre></td></tr></table></figure>
+
+<p>但是事实上编译过程中发现Curl好像还是动态链接的，编译完成的使用<code>ldd -r target_program</code>，发现还有<code>libcurl.so.4</code>之类字样，似乎没有找到静态库。</p>
+<p>强行指定绝对路径链接<code>libcurl.a</code>的话会爆出找不到定义的错误，因为curl依赖的库也得静态链接才可以，这也说明前面的设置并没有成功静态链接。</p>
+<p><img src="https://i.loli.net/2021/01/12/QG9UsBf8z2KwXCy.png" srcset="/img/loading.gif" lazyload alt="4A47B7DF-6D1C-48FA-9634-1F8FAE521EE1"></p>
+<p><code>ls</code>查看Curl库所在位置可以看到动态库静态库同时都存在，应该还是配置问题。中间绕了些弯弯发现了<code>$&#123;CMAKE_FIND_LIBRARY_SUFFIXES&#125;</code>选项，本意是设置<code>find_library</code>命令查找库时后缀名的优先级，事实上<code>find_package</code>内部实现就是前者，一开始配置错误，死活没找到静态<code>.a</code>库，在Linux下默认查找顺序是<code>.so;.a</code>，改成如下即可找到并链接静态Curl。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">SET</span>(CMAKE_FIND_LIBRARY_SUFFIXES .lib .a <span class="hljs-variable">$&#123;CMAKE_FIND_LIBRARY_SUFFIXES&#125;</span>)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/28194215/default-values-for-cmake-find-library-prefixes-cmake-find-library-suffixes">Default values for CMAKE_FIND_LIBRARY_PREFIXES&#x2F;CMAKE_FIND_LIBRARY_SUFFIXES</a> </p>
+</blockquote>
+<p>使用<code>curl-config --static-libs</code>可以看到所依赖的其他库有哪些。</p>
+<p><img src="https://i.loli.net/2021/01/12/8cLbqlVF9KtO3Id.png" srcset="/img/loading.gif" lazyload alt="A6B38899-B756-4D92-B19B-79D04B862164"></p>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/36732111/how-to-get-rid-of-libcurl-linking-error">How to get rid of libcurl linking error?</a></p>
+</blockquote>
+<h4 id="源码编译Curl静态库"><a href="#源码编译Curl静态库" class="headerlink" title="源码编译Curl静态库"></a>源码编译Curl静态库</h4><p>可以发现，Linux发行版仓库中的Curl依赖的其他乱七八糟库过多，不得已还得自己编译，不开启不需要的功能。<a target="_blank" rel="noopener" href="https://curl.haxx.se/">Curl官网</a>下载最新7.70版本源码，执行<code>./configure --with-ssl --disable-shared</code>之后可以看到配置开启的功能如下。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">Host setup:</span>       <span class="hljs-string">x86_64-pc-linux-gnu</span><br><span class="hljs-attr">Install prefix:</span>   <span class="hljs-string">/usr/local</span><br><span class="hljs-attr">Compiler:</span>         <span class="hljs-string">gcc</span><br> <span class="hljs-attr">CFLAGS:</span>          <span class="hljs-string">-Werror-implicit-function-declaration</span> <span class="hljs-string">-O2</span> <span class="hljs-string">-Wno-system-headers</span> <span class="hljs-string">-pthread</span><br> <span class="hljs-attr">CPPFLAGS:</span>        <br> <span class="hljs-attr">LDFLAGS:</span>         <br> <span class="hljs-attr">LIBS:</span>            <span class="hljs-string">-lssl</span> <span class="hljs-string">-lcrypto</span> <span class="hljs-string">-lssl</span> <span class="hljs-string">-lcrypto</span> <span class="hljs-string">-lz</span><br><br><span class="hljs-attr">curl version:</span>     <span class="hljs-number">7.70</span><span class="hljs-number">.0</span><br><span class="hljs-attr">SSL:</span>              <span class="hljs-string">enabled</span> <span class="hljs-string">(OpenSSL)</span><br><span class="hljs-attr">SSH:</span>              <span class="hljs-literal">no</span>      <span class="hljs-string">(--with-&#123;libssh,libssh2&#125;)</span><br><span class="hljs-attr">zlib:</span>             <span class="hljs-string">enabled</span><br><span class="hljs-attr">brotli:</span>           <span class="hljs-literal">no</span>      <span class="hljs-string">(--with-brotli)</span><br><span class="hljs-attr">GSS-API:</span>          <span class="hljs-literal">no</span>      <span class="hljs-string">(--with-gssapi)</span><br><span class="hljs-attr">TLS-SRP:</span>          <span class="hljs-string">enabled</span><br><span class="hljs-attr">resolver:</span>         <span class="hljs-string">POSIX</span> <span class="hljs-string">threaded</span><br><span class="hljs-attr">IPv6:</span>             <span class="hljs-string">enabled</span><br><span class="hljs-attr">Unix sockets:</span>     <span class="hljs-string">enabled</span><br><span class="hljs-attr">IDN:</span>              <span class="hljs-literal">no</span>      <span class="hljs-string">(--with-&#123;libidn2,winidn&#125;)</span><br><span class="hljs-attr">Build libcurl:</span>    <span class="hljs-string">Shared=no,</span> <span class="hljs-string">Static=yes</span><br><span class="hljs-attr">Built-in manual:</span>  <span class="hljs-string">enabled</span><br><span class="hljs-string">--libcurl</span> <span class="hljs-attr">option:</span> <span class="hljs-string">enabled</span> <span class="hljs-string">(--disable-libcurl-option)</span><br><span class="hljs-attr">Verbose errors:</span>   <span class="hljs-string">enabled</span> <span class="hljs-string">(--disable-verbose)</span><br><span class="hljs-attr">Code coverage:</span>    <span class="hljs-string">disabled</span><br><span class="hljs-attr">SSPI:</span>             <span class="hljs-literal">no</span>      <span class="hljs-string">(--enable-sspi)</span><br><span class="hljs-attr">ca cert bundle:</span>   <span class="hljs-string">/etc/ssl/certs/ca-certificates.crt</span><br><span class="hljs-attr">ca cert path:</span>     <span class="hljs-literal">no</span><br><span class="hljs-attr">ca fallback:</span>      <span class="hljs-literal">no</span><br><span class="hljs-attr">LDAP:</span>             <span class="hljs-literal">no</span>      <span class="hljs-string">(--enable-ldap</span> <span class="hljs-string">/</span> <span class="hljs-string">--with-ldap-lib</span> <span class="hljs-string">/</span> <span class="hljs-string">--with-lber-lib)</span><br><span class="hljs-attr">LDAPS:</span>            <span class="hljs-literal">no</span>      <span class="hljs-string">(--enable-ldaps)</span><br><span class="hljs-attr">RTSP:</span>             <span class="hljs-string">enabled</span><br><span class="hljs-attr">RTMP:</span>             <span class="hljs-literal">no</span>      <span class="hljs-string">(--with-librtmp)</span><br><span class="hljs-attr">Metalink:</span>         <span class="hljs-literal">no</span>      <span class="hljs-string">(--with-libmetalink)</span><br><span class="hljs-attr">PSL:</span>              <span class="hljs-literal">no</span>      <span class="hljs-string">(libpsl</span> <span class="hljs-string">not</span> <span class="hljs-string">found)</span><br><span class="hljs-attr">Alt-svc:</span>          <span class="hljs-literal">no</span>      <span class="hljs-string">(--enable-alt-svc)</span><br><span class="hljs-attr">HTTP2:</span>            <span class="hljs-string">disabled</span> <span class="hljs-string">(--with-nghttp2)</span><br><span class="hljs-attr">HTTP3:</span>            <span class="hljs-string">disabled</span> <span class="hljs-string">(--with-ngtcp2,</span> <span class="hljs-string">--with-quiche)</span><br><span class="hljs-attr">ESNI:</span>             <span class="hljs-literal">no</span>      <span class="hljs-string">(--enable-esni)</span><br><span class="hljs-attr">Protocols:</span>        <span class="hljs-string">DICT</span> <span class="hljs-string">FILE</span> <span class="hljs-string">FTP</span> <span class="hljs-string">FTPS</span> <span class="hljs-string">GOPHER</span> <span class="hljs-string">HTTP</span> <span class="hljs-string">HTTPS</span> <span class="hljs-string">IMAP</span> <span class="hljs-string">IMAPS</span> <span class="hljs-string">POP3</span> <span class="hljs-string">POP3S</span> <span class="hljs-string">RTSP</span> <span class="hljs-string">SMB</span> <span class="hljs-string">SMBS</span> <span class="hljs-string">SMTP</span> <span class="hljs-string">SMTPS</span> <span class="hljs-string">TELNET</span> <span class="hljs-string">TFTP</span><br><span class="hljs-attr">Features:</span>         <span class="hljs-string">SSL</span> <span class="hljs-string">IPv6</span> <span class="hljs-string">UnixSockets</span> <span class="hljs-string">libz</span> <span class="hljs-string">AsynchDNS</span> <span class="hljs-string">NTLM</span> <span class="hljs-string">NTLM_WB</span> <span class="hljs-string">TLS-SRP</span> <span class="hljs-string">HTTPS-proxy</span><br></code></pre></td></tr></table></figure>
+
+<p>然后，由于我不需要安装，只执行<code>make</code>即可，生成文件路径为<code>./lib/.libs/libcurl.a</code>。我也不知道为什么在隐藏目录下。</p>
+<p>指定链接自己编译生成的<code>libcurl.a</code>可以发现需要的依赖库就少很多了。</p>
+<p><img src="https://i.loli.net/2021/01/12/KvXwOpUIhuisnB2.png" srcset="/img/loading.gif" lazyload alt="B730BA13-8019-4720-A087-8E2E83F1DCE3"></p>
+<p>但是仍然缺少<code>zlib</code>、<code>dl</code>和<code>pthread</code>的库支持。后两者都是基本库，添加下面一行即可。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">target_link_libraries</span>(target_program <span class="hljs-variable">$&#123;CMAKE_DL_LIBS&#125;</span> -lpthread)<br></code></pre></td></tr></table></figure>
+
+<h4 id="静态链接zlib"><a href="#静态链接zlib" class="headerlink" title="静态链接zlib"></a>静态链接zlib</h4><p>zlib是提供压缩算法的库，CMake其实也提供了zlib支持，简单如下即可。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">find_package</span>(ZLIB REQUIRED)<br><span class="hljs-keyword">if</span>(ZLIB_FOUND)<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Zlib Found!&quot;</span>)<br>  <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;ZLIB_INCLUDE_DIR&#125;</span>)<br><span class="hljs-keyword">endif</span>()<br><br><span class="hljs-keyword">target_link_libraries</span>(target_program <span class="hljs-variable">$&#123;ZLIB_LIBRARIES&#125;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>由于之前配置了<code>CMAKE_FIND_LIBRARY_SUFFIXES</code>，默认会找到<code>libz.a</code>。</p>
+<p>本来以为OK了，结果还是出了问题：Ubuntu软件仓库里的zlib不支持重定位！静态链接时提示如下错误：</p>
+<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nim">/usr/bin/ld: /usr/lib/x86_64-linux-gnu/libz.a(inflate.o): relocation <span class="hljs-type">R_X86_64_PC32</span> against symbol `inflateReset&#x27; can <span class="hljs-keyword">not</span> be used <span class="hljs-keyword">when</span> making a <span class="hljs-keyword">shared</span> <span class="hljs-keyword">object</span>; recompile <span class="hljs-keyword">with</span> -fPIC<br>/usr/bin/ld: final link failed: <span class="hljs-type">Bad</span> value<br></code></pre></td></tr></table></figure>
+
+<p>没办法还是需要源码编译zlib时开启<code>-fPIC</code>支持才可以，<a target="_blank" rel="noopener" href="https://zlib.net/">zlib官网</a>下载源码，源码目录下执行<code>CFLAGS=&quot;-O3 -fPIC&quot; ./configure &amp;&amp; make</code>即可，生成<code>libz.a</code>文件就在当前目录下，指定链接终于可以成功编译啦！</p>
+<h4 id="动态链接和静态链接生成库依赖对比"><a href="#动态链接和静态链接生成库依赖对比" class="headerlink" title="动态链接和静态链接生成库依赖对比"></a>动态链接和静态链接生成库依赖对比</h4><p>我们再使用<code>ldd -r target_program</code>对比一下动态链接和静态链接的库，可以发现静态链接后依赖的库要少很多。</p>
+<p><img src="https://i.loli.net/2021/01/12/pDq2LZ6BxcbyS9G.png" srcset="/img/loading.gif" lazyload alt="C9E063C4-7B08-42DC-A074-8B9663C9B2A8"></p>
+<center>⬆️动态链接</center>
+
+<p><img src="https://i.loli.net/2021/01/12/X3LC9ZfTOvuAPbd.png" srcset="/img/loading.gif" lazyload alt="2A5B9081-700D-4D3F-A00F-B27EB2395702"></p>
+<center>⬆️静态链接</center>
+
+
+<h4 id="最终版CMakelists-txt"><a href="#最终版CMakelists-txt" class="headerlink" title="最终版CMakelists.txt"></a>最终版CMakelists.txt</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">include</span>(CMakeDependentOption)<br><br><span class="hljs-comment"># static link curl &amp; openssl</span><br><span class="hljs-keyword">option</span>(LINK_CURL_OPENSSL_STATIC <span class="hljs-string">&quot;Using static curl &amp; openssl library&quot;</span> <span class="hljs-keyword">ON</span>)<br>cmake_dependent_option(CUSTOM_CURL_STATIC <span class="hljs-string">&quot;Using prebuilt static curl library&quot;</span> <span class="hljs-keyword">ON</span><br>        <span class="hljs-string">&quot;LINK_CURL_OPENSSL_STATIC&quot;</span> <span class="hljs-keyword">OFF</span>)<br>cmake_dependent_option(CUSTOM_ZLIB_STATIC <span class="hljs-string">&quot;Using prebuilt static zlib library&quot;</span> <span class="hljs-keyword">ON</span><br>        <span class="hljs-string">&quot;LINK_CURL_OPENSSL_STATIC&quot;</span> <span class="hljs-keyword">OFF</span>)<br><br><span class="hljs-keyword">if</span>(LINK_CURL_OPENSSL_STATIC)<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Using static curl &amp; openssl library!&quot;</span>)<br>  <span class="hljs-keyword">add_definitions</span>(-DCURL_STATICLIB)<br>  <span class="hljs-keyword">SET</span>(CMAKE_FIND_LIBRARY_SUFFIXES .lib .a <span class="hljs-variable">$&#123;CMAKE_FIND_LIBRARY_SUFFIXES&#125;</span>)<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;CMAKE_FIND_LIBRARY_SUFFIXES: &quot;</span> <span class="hljs-variable">$&#123;CMAKE_FIND_LIBRARY_SUFFIXES&#125;</span>)<br>  <span class="hljs-keyword">set</span>(OPENSSL_USE_STATIC_LIBS <span class="hljs-keyword">TRUE</span>)<br><span class="hljs-keyword">else</span>()<br><span class="hljs-comment">#  set(CUSTOM_CURL_STATIC OFF)</span><br><span class="hljs-comment">#  set(CUSTOM_ZLIB_STATIC OFF)</span><br><span class="hljs-keyword">endif</span>()<br><br><br><span class="hljs-comment"># openssl</span><br><span class="hljs-keyword">find_package</span>(OpenSSL REQUIRED)<br><span class="hljs-keyword">if</span>(OPENSSL_FOUND)<br>  <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;OPENSSL_INCLUDE_DIRS&#125;</span>)<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;OpenSSL Found!&quot;</span>)<br><span class="hljs-keyword">endif</span>()<br><br><span class="hljs-comment"># curl</span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">NOT</span> CUSTOM_CURL_STATIC)<br>  <span class="hljs-keyword">find_package</span>(CURL REQUIRED)<br><br>  <span class="hljs-keyword">if</span>(CURL_FOUND)<br>    <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;CURL_INCLUDE_DIR&#125;</span>)<br>    <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Curl Found: $&#123;CURL_VERSION_STRING&#125; $&#123;CURL_LIBRARIES&#125; $&#123;CURL_LINK_LIBRARIES&#125;!&quot;</span>)<br>    <span class="hljs-keyword">set</span>(curl_library <span class="hljs-variable">$&#123;CURL_LIBRARIES&#125;</span>)<br>  <span class="hljs-keyword">else</span>(CURL_FOUND)<br>    <span class="hljs-keyword">message</span>(FATAL_ERROR <span class="hljs-string">&quot;Could not find the CURL library and development files.&quot;</span>)<br>  <span class="hljs-keyword">endif</span>()<br><span class="hljs-keyword">else</span>()<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Using custom compiled static library: libcurl.a !&quot;</span>)<br>  <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;PREBUILTS_BASE_DIRECTORY&#125;</span>/<span class="hljs-variable">$&#123;PLATFORM_NAME&#125;</span>/<span class="hljs-keyword">include</span>/)<br>  <span class="hljs-keyword">set</span>(curl_library <span class="hljs-variable">$&#123;PREBUILTS_LIB_DERECTORY&#125;</span>/curl/libcurl.a)<br><span class="hljs-keyword">endif</span>()<br><br><span class="hljs-comment"># zlib</span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">NOT</span> CUSTOM_ZLIB_STATIC)<br>  <span class="hljs-keyword">find_package</span>(ZLIB REQUIRED)<br>  <span class="hljs-keyword">if</span>(ZLIB_FOUND)<br>    <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Zlib Found!&quot;</span>)<br>    <span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;ZLIB_INCLUDE_DIR&#125;</span>)<br>    <span class="hljs-keyword">set</span>(zlib_library <span class="hljs-variable">$&#123;ZLIB_LIBRARIES&#125;</span>)<br>  <span class="hljs-keyword">endif</span>()<br><span class="hljs-keyword">else</span>()<br>  <span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Using custom compiled static library: libz.a !&quot;</span>)<br>  <span class="hljs-keyword">set</span>(zlib_library <span class="hljs-variable">$&#123;PREBUILTS_LIB_DERECTORY&#125;</span>/zlib/libz.a)<br><span class="hljs-keyword">endif</span>()<br><br><span class="hljs-keyword">target_link_libraries</span>(target_program <span class="hljs-variable">$&#123;curl_library&#125;</span>)<br><span class="hljs-keyword">target_link_libraries</span>(target_program OpenSSL::Crypto OpenSSL::SSL)<br><br><span class="hljs-keyword">if</span>(LINK_CURL_OPENSSL_STATIC)<br>  <span class="hljs-keyword">target_link_libraries</span>(target_program <span class="hljs-variable">$&#123;zlib_library&#125;</span>)<br>  <span class="hljs-keyword">target_link_libraries</span>(target_program <span class="hljs-variable">$&#123;CMAKE_DL_LIBS&#125;</span> -lpthread)<br><span class="hljs-keyword">endif</span>()<br><br></code></pre></td></tr></table></figure>
+
+<p>上面的CMakelists提供了3个配置参数:</p>
+<ul>
+<li><p><code>LINK_CURL_OPENSSL_STATIC</code>：默认开启，静态链接Curl和OpenSSL。</p>
+</li>
+<li><p><code>CUSTOM_CURL_STATIC</code>：默认开启，使用工程目录下预编译的libcurl.a。</p>
+</li>
+<li><p><code>CUSTOM_ZLIB_STATIC</code>：默认开启，使用工程目录下预编译的libzlib.a。</p>
+</li>
+</ul>
+<p>正常<code>cmake .. &amp;&amp; make</code>，会静态链接Curl、OpenSSL、zlib，其中Curl和zlib使用预编译版本。使用<code>cmake -DCUSTOM_CURL_STATIC=OFF -DCUSTOM_ZLIB_STATIC=OFF .. &amp;&amp; make</code>来使用默认系统安装的静态版本。</p>
+<p>使用<code>cmake -DLINK_CURL_OPENSSL_STATIC=OFF .. &amp;&amp; make</code>，则会使用动态链接Curl和OpenSSL。</p>
+<center>--- END ---</center>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" class="category-chain-item">技术总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CMake/">#CMake</a>
+      
+        <a href="/tags/curl/">#curl</a>
+      
+        <a href="/tags/openssl/">#openssl</a>
+      
+        <a href="/tags/static-link/">#static link</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CMake静态链接openssl和curl</div>
+      <div>https://wuruofan.com/2020/05/24/cmake-static-link-openssl-curl/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年5月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/24/20-minutes-markdown-tutorial/" title="20分钟Markdown入门教程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">20分钟Markdown入门教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/11/cmake-learning-note/" title="CMake学习笔记">
+                        <span class="hidden-mobile">CMake学习笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

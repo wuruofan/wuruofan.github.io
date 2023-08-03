@@ -1,0 +1,800 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写前面的废话一转眼鸽了三个月了，没更新公众号，也没上酷安，就🐑了的时候休息了下，没有闲着，这半年的时间基本上都在死磕内核，真的感觉精力有限。 到了年底12月中的时候，被叫去支援其他迭代，这才有点时间和精力写点总结，看看22年干了些啥，捋一捋流水帐。 2022上半年一月~三月一月，主要是在适配Android12。给索尼手机做的浏览器需要适配Android12，借着这个机会把内核升级适配了。 这是第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="极速浏览器｜2022年浏览器开发总结">
+<meta property="og:url" content="https://wuruofan.com/2023/01/12/2022-lite-browser-developer-summary/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="写前面的废话一转眼鸽了三个月了，没更新公众号，也没上酷安，就🐑了的时候休息了下，没有闲着，这半年的时间基本上都在死磕内核，真的感觉精力有限。 到了年底12月中的时候，被叫去支援其他迭代，这才有点时间和精力写点总结，看看22年干了些啥，捋一捋流水帐。 2022上半年一月~三月一月，主要是在适配Android12。给索尼手机做的浏览器需要适配Android12，借着这个机会把内核升级适配了。 这是第">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png">
+<meta property="article:published_time" content="2023-01-12T20:20:00.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.342Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="年度总结">
+<meta property="article:tag" content="极速浏览器">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>极速浏览器｜2022年浏览器开发总结 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="极速浏览器｜2022年浏览器开发总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-01-12 20:20" pubdate>
+          2023年1月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">极速浏览器｜2022年浏览器开发总结</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="写前面的废话"><a href="#写前面的废话" class="headerlink" title="写前面的废话"></a>写前面的废话</h2><p>一转眼鸽了三个月了，没更新公众号，也没上酷安，就🐑了的时候休息了下，没有闲着，这半年的时间基本上都在死磕内核，真的感觉精力有限。</p>
+<p>到了年底12月中的时候，被叫去支援其他迭代，这才有点时间和精力写点总结，看看22年干了些啥，捋一捋流水帐。</p>
+<h2 id="2022上半年"><a href="#2022上半年" class="headerlink" title="2022上半年"></a>2022上半年</h2><h3 id="一月-三月"><a href="#一月-三月" class="headerlink" title="一月~三月"></a>一月~三月</h3><p><strong>一月</strong>，主要是在<strong>适配Android12</strong>。给索尼手机做的浏览器需要适配Android12，借着这个机会把内核升级适配了。</p>
+<p>这是第一次搞浏览器内核代码，完全是盲人过河，一开始连内核怎么工作的都不知道，只能一点点抠一点点研究，还好得到了一位朋友的指点，跌跌撞撞的也算成功完成了。</p>
+<p><strong>一月底二月初</strong>的时候，还修复了一个遗留很久的<strong>百度搜索视频页面无法点击返回退出的问题</strong>。</p>
+<p><strong>二月到三月</strong>，基本在做<strong>文件管理插件浏览器样式的适配和移植</strong>。</p>
+<p>文件管理插件是从清理大师里移植过来的，里面的最近文件功能是我21年做的，我知道有些人不太喜欢浏览器里的文件管理器，我也不喜欢，但是最近文件我个人觉得还是很好用的，找应用里下载的文件，每周用一次删一些文件，都还可以吧。</p>
+<p><strong>三月</strong>末尾，开始做<strong>新极速版2.0</strong>了。</p>
+<h3 id="四月"><a href="#四月" class="headerlink" title="四月"></a>四月</h3><p><strong>新极速版2.0</strong>算是上半年花费精力最多的事情吧，印象很深刻，在四月底快上线的时候正好赶上我的技术评级答辩，答辩的ppt都没怎么搞。</p>
+<p>因为始终觉得极速浏览器是我自己一直在用的，不想弄差了。接手到手机浏览器的代码也是巧合吧，也就比较上心。</p>
+<p>之前应该和大家有说过，旧极速版目前没人维护了，还是32位版本，重启新极速版2.0的时候，用的是360手机浏览器（绿e）的代码为基础，去除冗余模块及插件，进行改造的。</p>
+<p>新极速继承了旧极速版的用户各种用户配置数据，把原来旧极速有的功能大部分都移植过来了。支持了64位，支持了Android12，优化修改了部分模块功能。本来强迫症设置选项被产品移除了，后来我争取回来的。</p>
+<p>四月基本都在做数据继承、裁剪适配的工作，包括主程序、插件、云控的适配，还有绿e共存的兼容的问题，增加了底部小白条的适配，优化了启动速度。</p>
+<p>由于涉及到32位升级64位程序、而且新旧极速版压根就是两份不同代码，存在技术难度和机型适配问题，最终也算是克服了大部分问题吧，4月29号晚上比较晚的时候，新极速版<strong>2.0.0.100</strong>算是顺利上线了。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/ku-an-release-log.jpg" srcset="/img/loading.gif" lazyload alt="一些记录"></p>
+<h4 id="关于内测"><a href="#关于内测" class="headerlink" title="关于内测"></a>关于内测</h4><p>因为是自己用的浏览器，想和酷安的同学们分享下，没想到大家那么热情，想要最新的包。</p>
+<p>主要功能完成的差不多的时候，就去推动着运营去发内测包，battle了一段时间，终于算是发出来了，没有食言。</p>
+<p>正式内测的时候，有用户喜欢，也有用户不喜欢，那段时间我也在酷安收集了好多用户反馈，优化了一些进入主页卡慢、界面加载卡顿的问题，改了壁纸闪烁、搜索框位置变动的问题，还增加了底部小白条的适配，等等吧。</p>
+<p>那阵子基本只在群里发内测包，我有时也会偷偷公众号放一些链接。</p>
+<p>因为没办法，这是运营主管的事情，本身我推动就算是越俎代庖吧，另外，我理解的顾虑可能还是未稳定的包大面积铺开，会影响产品口碑的吧。</p>
+<h3 id="五月～七月初"><a href="#五月～七月初" class="headerlink" title="五月～七月初"></a>五月～七月初</h3><p>这段时间就是正常迭代，根据用户的反馈改些问题吧，大概发了6个版本<strong>2.0.1.200</strong>、<strong>2.0.2.100</strong>、<strong>2.0.2.300</strong>、<strong>2.0.2.200</strong>、<strong>2.1.0.100</strong>、<strong>2.1.0.200</strong>、<strong>2.1.0.300</strong>。</p>
+<p>就说下我做的一些工作吧：</p>
+<p><strong>五月</strong></p>
+<ul>
+<li>首页宫格图标优化刷新逻辑，解决一些机型的卡死问题。</li>
+<li>搜索页上划隐藏地址栏。</li>
+<li>搜索引擎的正则表达式优化。</li>
+<li>优化冷启动后主页宫格加载完成导致搜索框上移的问题。</li>
+<li>优化主页壁纸加载，初始化时加载自定义壁纸，避免冷启动先展示白屏再加载壁纸。</li>
+<li>底部菜单栏改为全部可编辑，强迫症增加禁用下载红点。</li>
+<li>解决用户反馈网页上输入文字软件盘遮挡的问题。</li>
+<li>新增了开发者设置页面，这时还只有日志保存功能。</li>
+</ul>
+<p><strong>六月</strong></p>
+<ul>
+<li><p>优化首页搜索框的位置和展示时间。</p>
+</li>
+<li><p>开发者设置里新增“<strong>底部菜单自定义顺序</strong>”导出功能，允许高级用户自己隐藏自己不希望看到的按钮。</p>
+</li>
+<li><p>适配平板平行视界：因为华为鸿蒙&#x2F;小米系统默认给我们的应用开启了平行视界还没法代码关闭，现象就是pad用户拿到手横屏的时候是个小竖屏，统一适配了下，强制横屏填充，设置页什么的就支持分屏，还有一些插件的适配。</p>
+</li>
+<li><p>暗黑模式改版，把原来发灰的暗黑模式背景改成了新的样式，统一替换了所有的资源，包括插件，花了挺长时间的。</p>
+</li>
+<li><p>开发者设置里给大家加了“<strong>强制跟随系统暗黑模式</strong>”，这个是周末自己研究了方案搞了一版，没有产品需求，就加在开发者设置里了。</p>
+</li>
+</ul>
+<h2 id="2022下半年"><a href="#2022下半年" class="headerlink" title="2022下半年"></a>2022下半年</h2><h3 id="新极速收尾"><a href="#新极速收尾" class="headerlink" title="新极速收尾"></a>新极速收尾</h3><p>我在新极速版的开发工作基本上到<strong>7月初</strong>就结束了，2.1.0.200版本之后基本就没在跟进了，七月和八月就是在<strong>开发者设置</strong>里加了些选项，这里感谢产品和测试的宽容，给我留了点自己的东西：</p>
+<ul>
+<li>新增了“<strong>调试内核webview主题颜色</strong>”功能。</li>
+<li>新增“<strong>移除搜索结果页面上的搜索框</strong>”功能：暂仅支持去除百度搜索页搜索框。</li>
+<li>新增：“<strong>重新释放浏览器内核</strong>”和“<strong>常驻开发者调试模式</strong>”。常驻开发者调试模式开启时，设置页面开启开发者设置入口，setWebContentsDebuggingEnabled设置为true。</li>
+<li><strong>彩蛋功能</strong>：开启常驻开发者模式有🤫🤫🤫功能开启。</li>
+<li>新增“<strong>另一种暗黑样式</strong>”，还是个demo功能，搞内核的时候发现的设置接口，后面没时间再去改了。</li>
+</ul>
+<p>总的来说，新极速版我自己是满意的，也是超出100%的投入的，我不再跟主程序开发的时候，线上崩溃率低于0.3％，ANR率低于0.7％，DAU数据也还算好吧。</p>
+<h3 id="内核开发"><a href="#内核开发" class="headerlink" title="内核开发"></a>内核开发</h3><p>在酷安收集用户反馈的时候，发现很多都是浏览器内核的问题，都是我暂时没法处理的，下半年的时间我就转去主做内核相关的开发了。</p>
+<p>说实在的，Chromium内核是我工作快10年来，接触过的最最复杂的系统，没有之一，之前我搞过很长的一段时间的Linux内核开发和Android操作系统开发，都没觉得这么吃力过。</p>
+<p>首先是代码量宏大，3000w行左右的代码，一个项目纯代码文件占用的空间5.2GB，本机从头编译一次要8～12个小时。🤦‍♂️</p>
+<p>先不说本身代码复杂度高，就单浏览器业务场景就很复杂，网页如何被解析被渲染后展示出来，我至今没法说清楚，之前专门做内核的开发全部离职了，也没有留下几页wiki，用盲人过河来形容真的不过分。</p>
+<p>还好有一位之前不是专门做内核的老同事给我讲了些大概的流程，才让我慢慢找到门路。</p>
+<h4 id="全能播放器优化"><a href="#全能播放器优化" class="headerlink" title="全能播放器优化"></a>全能播放器优化</h4><p>下半年我基本上都在做全能播放器的优化，处理用户反馈的各种播放器问题吧，改了很多，可能你们感知并不明显，但我也尽力了吧，可能还引入了一些bug和崩溃，实在抱歉。</p>
+<p>主要做的工作如下吧：</p>
+<ul>
+<li><p><strong>广告过滤数据统计</strong>。</p>
+</li>
+<li><p><strong>播放器倍速优化</strong>：支持更多的快进倍数，支持长按当前速度的2倍速快进；优化了从左划到右快进快退的灵敏度，总时长大概1分半左右，这样就可以一次划动跳过电视剧的片头</p>
+</li>
+<li><p><strong>播放器亮度调整优化</strong>：最低可以调整到0，修复获取系统亮度负值时屏幕很亮的问题。</p>
+</li>
+<li><p><strong>优化翻页距离</strong>：计算时去除顶部地址栏和底部工具栏高度，最终默认系数为0.85。</p>
+</li>
+<li><p><strong>播放器接管位置优化</strong>：包括飞极速、酷客影院、大师兄影视、茶杯狐、虎扑等页面，还有些不可描述的网页（<del>我经常上班需要调试这些你们爱看的网站，导致同事们看我的眼神都很怪</del>🤦‍♂️）。。</p>
+</li>
+<li><p>修复一些机制问题、销毁问题、自动播放导致的崩溃，等等等等吧，这些问题回想起来我都觉得头痛无比。</p>
+</li>
+<li><p>一些<strong>CVE漏洞修复</strong>的工作。</p>
+</li>
+</ul>
+<p>里面有一条<strong>播放器接管位置优化</strong>，就几个字，但是后面付出的艰辛真的巨大。</p>
+<p>以前的全能播放器接管方案上有缺陷，需要获取网页中播放器在网页上的位置，然后在单独绘制一个播放器在相同的位置盖住下面网页原生的播放器，用户划动屏幕时计算网页的滚动距离，然后让播放器界面一起移动。</p>
+<p>正常情况下，这种方案没问题，但是现在很多视频网站（盗版&#x2F;色情&#x2F;盗链），都是一个网页里套着另一个页面，而且开发者还会用各种方案隐藏网页的滚动距离，让用户看起来就是在一个网页里一样。像这种页面，上面的接管方案就失效了，因为这种情况下的滚动事件时获取不到的，这时你们看到的现象就是网页在滚动，但是播放器固定在那儿了。</p>
+<p>做了好些努力吧，加了两三种新机制去获取滚动事件，解决一些网站的接管位置问题，可能还不全，还存在很多问题，希望大家理解吧。</p>
+<p>数了下，下半年从7月中旬到12月中旬总共5个月的时间，内核代码提交了70多次，不包括升级版本号那些无效提交，相当于我每周要提交3.5次代码，也是超出我自己的预料了。</p>
+<h4 id="投屏功能"><a href="#投屏功能" class="headerlink" title="投屏功能"></a>投屏功能</h4><p>极速浏览器和绿e的投屏功能都下架了一段时间，反正事情也过去了，应该可以说了。</p>
+<p>原因是XX投屏SDK开始收费了，本身极速没有广告，只有一点点搜索渠道的钱，非常非常少，和SDK的价格一开始没谈拢，后来服务就被停了，隐藏了投屏入口。</p>
+<p>看到用户反馈比较多，大家还是想要这个功能，就又和投屏SDK谈了价格，这才上了线。</p>
+<h4 id="在做但没做完的"><a href="#在做但没做完的" class="headerlink" title="在做但没做完的"></a>在做但没做完的</h4><p>12月中旬，我在做<strong>电脑模式的优化</strong>工作，想加上一个<strong>网页自动缩放</strong>功能，去解决一些页面在电脑模式下显示异常的问题。</p>
+<p>方案差不多跑通了，可行的。正好赶上项目组又有调整了，耽搁了。</p>
+<p>我争取过完年，有时间把自动缩放的功能排上期，让大家尽快用上。</p>
+<p>还有之前修复一些播放器的bug，也没来得及上线，希望年前有机会再推一次，看看能不能发个内测。</p>
+<h3 id="墨鱼丸视频"><a href="#墨鱼丸视频" class="headerlink" title="墨鱼丸视频"></a>墨鱼丸视频</h3><p>12月中旬的时候，由于人手不足，我来支援墨鱼丸视频的开发，就是绿e第二页的视频，有点像抖音的那种形式。</p>
+<p>和服务端联调也是坎坎坷坷，一言难尽，总算这周一半夜里上了线。</p>
+<p>虽然天天也搞到快10点，但是明显感觉到和内核开发不一样，要简单。</p>
+<p>因为Android开发遇到的各种问题，网络上一搜，总有人会遇到类似的，而内核开发，完全就是自己在摸索，遇到问题，网上也找不到解决方案，只能自己苦苦思考、阅读代码。</p>
+<p>一天下来，虽然都累，但真的不一样，脑袋被掏空的累。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>那天项目组开总结会，看到了些数字，我自己也没想到：“2022年极速版全年发布28个版本”，新极速是4月底上线的，28个版本意味着几乎每周一个版本了。</p>
+<p>当然还有些数字是不尽如人意的，也就是年底有调整的原因。</p>
+<p>2023极速版且行且珍惜吧，希望大家继续支持极速浏览器！🙏</p>
+<hr>
+<p>
+
+
+
+
+
+<p>以上，欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="category-chain-item">年度总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">#年度总结</a>
+      
+        <a href="/tags/%E6%9E%81%E9%80%9F%E6%B5%8F%E8%A7%88%E5%99%A8/">#极速浏览器</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>极速浏览器｜2022年浏览器开发总结</div>
+      <div>https://wuruofan.com/2023/01/12/2022-lite-browser-developer-summary/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年1月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/01/using-coordinatorlayout-and-appbarlayout-to-realize-a-collapsing-toolbar/" title="Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/13/sizeof-struct-and-memory-alignment-of-c-cpp/" title="遇坑总结｜结构体大小与内存对齐问题">
+                        <span class="hidden-mobile">遇坑总结｜结构体大小与内存对齐问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

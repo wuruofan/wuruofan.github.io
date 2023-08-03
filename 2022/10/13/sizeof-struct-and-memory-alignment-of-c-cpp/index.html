@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="问题背景最近做Chromium内核播放器相关功能的优化，很久没写cpp代码了，的确有些忘了，遇到了结构体内存对齐引起的奇怪问题。 问题背景是这样的： 极速浏览器提供了全能播放器功能，可以接管网页上的视频播放，提供倍速、快进快退、投屏等等快捷功能。采用的思路是在WebView之上绘制播放器界面，位置的绘制是一开始网页加载时就完成了网页上video标签的位置解析，是不支持动态解析的。 因为有些网站自己">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遇坑总结｜结构体大小与内存对齐问题">
+<meta property="og:url" content="https://wuruofan.com/2022/10/13/sizeof-struct-and-memory-alignment-of-c-cpp/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="问题背景最近做Chromium内核播放器相关功能的优化，很久没写cpp代码了，的确有些忘了，遇到了结构体内存对齐引起的奇怪问题。 问题背景是这样的： 极速浏览器提供了全能播放器功能，可以接管网页上的视频播放，提供倍速、快进快退、投屏等等快捷功能。采用的思路是在WebView之上绘制播放器界面，位置的绘制是一开始网页加载时就完成了网页上video标签的位置解析，是不支持动态解析的。 因为有些网站自己">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg">
+<meta property="article:published_time" content="2022-10-13T19:23:36.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.346Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="极速浏览器">
+<meta property="article:tag" content="遇坑总结">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="内存对齐">
+<meta property="article:tag" content="Chromium内核">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>遇坑总结｜结构体大小与内存对齐问题 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="遇坑总结｜结构体大小与内存对齐问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-13 19:23" pubdate>
+          2022年10月13日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          39 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">遇坑总结｜结构体大小与内存对齐问题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>最近做Chromium内核播放器相关功能的优化，很久没写cpp代码了，的确有些忘了，遇到了结构体内存对齐引起的奇怪问题。</p>
+<p><strong>问题背景</strong>是这样的：</p>
+<p>极速浏览器提供了全能播放器功能，可以接管网页上的视频播放，提供倍速、快进快退、投屏等等快捷功能。采用的思路是在WebView之上绘制播放器界面，位置的绘制是一开始网页加载时就完成了网页上video标签的位置解析，是<strong>不支持动态解析</strong>的。</p>
+<p>因为有些网站自己实现的播放器滚动吸顶的功能，而这种吸顶其实就属于网页的js动态调整了video标签或者video标签父布局的属性。</p>
+<p>这种情况就GG了，就会出现播放器位置错位的问题。</p>
+<h2 id="问题出现"><a href="#问题出现" class="headerlink" title="问题出现"></a>问题出现</h2><p>我这次就是修改Chromium内核，支持video及其父布局属性变更的消息通知，简单说就是给父布局增加了一个指针成员变量，指向其包含的视频元素，出现属性变更时就通过视频元素通知到界面上绘制的播放器界面。</p>
+<p>问题就出在这里——“<strong>我给原布局成员增加了一个成员</strong>”。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">error: </span>static_assert failed due to requirement &#x27;sizeof(blink::LayoutObject) == sizeof(blink::SameSizeAsLayoutObject)&#x27; &quot;LayoutObject should stay small&quot;<br>static_assert(sizeof(LayoutObject) == sizeof(SameSizeAsLayoutObject),<br>^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>1 error generated.<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>源码里有这么一段代码，声明了一个结构体<code>struct SameSizeAsLayoutObject</code>，就是为了保证<code>LayoutObject</code>对象的大小始终很小。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">SameSizeAsLayoutObject</span> : ImageResourceObserver, DisplayItemClient &#123;<br>  <span class="hljs-comment">// Normally this field uses the gap between DisplayItemClient and</span><br>  <span class="hljs-comment">// LayoutObject&#x27;s other fields.</span><br>  <span class="hljs-type">uint8_t</span> paint_invalidation_reason_;<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> DCHECK_IS_ON()</span><br>  <span class="hljs-type">unsigned</span> debug_bitfields_;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>  <span class="hljs-type">unsigned</span> bitfields_;<br>  <span class="hljs-type">unsigned</span> bitfields2_;<br>  <span class="hljs-type">unsigned</span> bitfields3_;<br>  <span class="hljs-type">void</span>* pointers[<span class="hljs-number">4</span>];<br><span class="hljs-meta">#<span class="hljs-keyword">if</span> defined(USE_360HACK)</span><br>  <span class="hljs-type">void</span>* child_video_object_;  <span class="hljs-comment">// 保证下面的static_assert成立</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>  Member&lt;<span class="hljs-type">void</span>*&gt; members[<span class="hljs-number">1</span>];<br>  <span class="hljs-comment">// The following fields are in FragmentData.</span><br>  IntRect visual_rect_;<br>  PhysicalOffset paint_offset_;<br>  std::unique_ptr&lt;<span class="hljs-type">int</span>&gt; rare_data_;<br>&#125;;<br><br><span class="hljs-built_in">static_assert</span>(<span class="hljs-built_in">sizeof</span>(LayoutObject) == <span class="hljs-built_in">sizeof</span>(SameSizeAsLayoutObject),<br>              <span class="hljs-string">&quot;LayoutObject should stay small&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>当时我已经在<code>LayoutObject</code>对象中加入了一个<code>void* child_video_object_</code>成员，这里其实补上一个就好了，本来想着加在最后的，结果本着强迫症的原因就把新成员和之前的<code>void* pointers[4]</code>放在一起了！</p>
+<p>本地测试的时候没问题，一切正常，可是到线上编译release版内核的时候出现了问题！</p>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>一开始还以为是自己漏提交代码了，查了下不是的。当时就觉得很奇怪，本地一切正常啊，该加的成员两边都加了，还去找同事说来着，结果聊着聊着自己就发现不对了！</p>
+<p>因为本地测试的时候是编的32位Debug版，线上是64位Release版！这里就是一个静态断言，而<code>sizeof</code>运算符在编译时就会确定变量的大小，只有可能是32位和64位编译环境引起的对齐问题！</p>
+<p><code>void*</code>是个指针，是一个内存地址值，而内存地址的大小是和平台架构有关的！在32位平台上就是4个字节，64位上是8个字节！</p>
+<p><strong>C&#x2F;C++编译时会对<code>class</code>或<code>struct</code>类型进行内存对齐，成员变量的类型与顺序会影响<code>sizeof</code>最终值的大小。</strong></p>
+<p>本地编译没问题其实是碰巧，因为在<code>LayoutObject</code>中新添加成员的位置和<code>struct SameSizeAsLayoutObject</code>是不同的，但32位4个字节对齐碰巧相等了而已，在64位变成了8个字节导致了问题的出现！</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>知道了问题的原因，解决起来就很简单了。</p>
+<p><strong>在工程实践中，扩展一个类或者结构体时，新增加的成员最好放在最后</strong>，这样是最保险的，因为之前的类&#x2F;结构体大小都是计算好的，放在最后一定不会影响整体大小的计算。</p>
+<p><strong>那放在最前面可以么？</strong></p>
+<p>仅考虑<code>sizeof</code>的这一场景，其实是ok的。但是想了下，一旦项目里有那种将内存中结构体数据直接保存在本地磁盘的代码时，新旧版本的数据兼容可能会有点问题，反序列化转换时要小心。</p>
+<p>如果新增加的成员如果必须要放在中间，那就要考虑到内存对齐的问题，要自己计算好，放在相同的位置。</p>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>特意去翻了下《C++ Primer》一书，其中是没有讲内存对齐相关知识的，仔细一想也是，应该属于编译器考虑的范畴。下面是我一点点个人理解，可能有不太准确的地方。</p>
+<h3 id="什么是内存对齐"><a href="#什么是内存对齐" class="headerlink" title="什么是内存对齐"></a>什么是内存对齐</h3><p>提到内存对齐的时候，通常会说“<strong>n字节对齐</strong>”。引用wikipedia上的定义：</p>
+<blockquote>
+<p>内存地址a被称为n字节对齐，a是n的倍数（n应是2的幂），也可以理解为当被访问的数据长度为n 字节时，数据地址为n字节对齐。如果内存未对齐，称作misaligned。</p>
+</blockquote>
+<p>可能一下子读不懂，没关系。简单来说，<strong>一个变量在内存中的地址其实适合这个变量的长度有关</strong>。</p>
+<p>如果变量a是n字节内存对齐的，那么，<strong>a在内存中的地址一定是n的整数倍</strong>。假设变量a在内存中的地址为<code>addr(a)</code>，那么，<code>addr(a) % n</code>的值应该为0。</p>
+<p>莫慌，大部分情况下<code>n</code>的值和<code>sizeof(a)</code>一致。</p>
+<blockquote>
+<p>参考网址：<a target="_blank" rel="noopener" href="https://www.cs.umd.edu/~meesh/cmsc411/website/projects/outer/memory/align.htm">https://www.cs.umd.edu/~meesh/cmsc411/website/projects/outer/memory/align.htm</a></p>
+</blockquote>
+<p><strong>像类&#x2F;结构体这种聚合类型的数据结构，就要求其内部组成的成员元素是对齐的。</strong></p>
+<p>我们单独看结构体内部，第一个成员相对于结构体本身的偏移量是0，可以简单的先把第一个成员地址当作是0，<strong>其余成员的偏移量都应该其实际长度的整数倍</strong>，这样就中间就会空余出一部分内存，这就会造成结构体的内存占用大小，并不一定是所有成员占用的实际空间。</p>
+<p>结构体内部对齐后，所占用的空间才确定下来，这时还会针对结构体的大小进行一次对齐，保证结构体自身的内存地址也是对齐的。</p>
+<p>再举个例子，假设有这样一个结构体：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">A</span> &#123;<br>  <span class="hljs-type">char</span> a;<br>  <span class="hljs-type">short</span> b;<br>  <span class="hljs-type">short</span> c;<br>  <span class="hljs-type">int</span> d;<br>  <span class="hljs-type">double</span> e;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>在64位CPU架构上，<code>char</code>占用1个字节、<code>short</code>是2个字节，<code>int</code>是4个字节、<code>double</code>是8个字节。对齐后的内存空间占用应该如下，其中每一个格子代表一个字节大小：</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/struct-with-memory-alignment.png" srcset="/img/loading.gif" lazyload alt="struct-with-memory-alignment"></p>
+<h3 id="为什么要内存对齐"><a href="#为什么要内存对齐" class="headerlink" title="为什么要内存对齐"></a>为什么要内存对齐</h3><p>内存对齐其实是和计算机硬件设计有关系的。32位的CPU意味着拥有32根地址线，这32根地址线上的高低电平表示着0或者1，代表着一个32位的二进制数，运算器一次运算处理的数据宽度就是32，寄存器宽度也是32，等等。</p>
+<p>但我们的编程语言中有各种各样的基础类型，它们的占用空间是不一致的）。</p>
+<p>为了保证CPU运算的高效，通常都会对内存中的数据进行对齐处理，这样一次寻址可以保证读取到完整的数据。</p>
+<p>还是上面那个结构体，假设起始地址都是从0开始，如果没有内存对齐的话，它在内存中大概率是这个样子的。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/struct-without-memory-alignment.png" srcset="/img/loading.gif" lazyload alt="struct-without-memory-alignment"></p>
+<p>假如现在想读取<code>int d</code>的值，CPU第一次寻址得到的数据是[0, 7]，这时<code>d</code>只读了3个字节，再读一次，[8, 15]，才可以把<code>d</code>的全部字节读到。</p>
+<p>可是，如果CPU想使用<code>d</code>的值，还需要额外的移位操作才能把全部字节拼到一个寄存器中。</p>
+<p>这显然是效率低下，不能接受的。而对齐后的结构体，一次寻址就OK了。</p>
+<p>这张图画的比较清楚，摘自<a target="_blank" rel="noopener" href="http://www.songho.ca/misc/alignment/dataalign.html">http://www.songho.ca/misc/alignment/dataalign.html</a></p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/d0a4237210d9110b06cc02b5ec014b3ba24db2b4/img/cpu-access-misaligned-data.jpeg" srcset="/img/loading.gif" lazyload alt="Accessing Misaligned data"></p>
+<h3 id="需要特别注意的类型"><a href="#需要特别注意的类型" class="headerlink" title="需要特别注意的类型"></a>需要特别注意的类型</h3><p>这次问题出现的另一个原因还是CPU架构的变化，之前给钉钉做加密SDK的时候也有遇到过多架构的适配情况，那种情况更复杂，还要不仅要考虑32位和64位，甚至要考虑x86、arm和mips架构。</p>
+<p>前面提到n字节对齐时提到大部分场景n都和类型长度相同，下面列一下，n字节对齐和类型长度有区别，以及32位和64位CPU下有区别的情况，一般Android开发就够了。</p>
+<table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>32位长度</th>
+<th>32位n字节对齐</th>
+<th>64位长度</th>
+<th>64位n字节对齐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>long</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>8</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>指针</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td>8</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>参考网址：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AF%B9%E9%BD%90">https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AF%B9%E9%BD%90</a></p>
+</blockquote>
+<h2 id="如何自己实现sizeof"><a href="#如何自己实现sizeof" class="headerlink" title="如何自己实现sizeof"></a>如何自己实现<code>sizeof</code></h2><p>因为出问题是和<code>sizeof</code>有关，但其本身是个运算符，看不到源码，网络上有些自己用宏定义实现的方案，有些代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> my_sizeof(x) ((&amp;x + 1) - &amp;x)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>这样真的对么？</p>
+<p>其实是错误的，这个宏定义运算得到的值永远为1！</p>
+<p>这段代码中，<code>&amp;x</code>代表取x的地址，<strong>在C&#x2F;C++语言中地址&#x2F;指针的算术运算其实和指针指向的对象长度有关系</strong>！</p>
+<p><code>指针+1</code>并不是只是数值上加1，加上的是指针所指向的对象长度，相当于加上了一个<code>sizeof</code>。那这样说，不应该实现的没问题么？得到的应该是<code>sizeof</code>的值才对啊？</p>
+<p><strong>其实指针也是有类型的，准确的原因是，指向对象的类型是不同的。</strong></p>
+<p>假如这里的x是一个<code>double</code>类型，那么，<code>((&amp;x + 1) - &amp;x)</code>表达式中的<code>&amp;x+1</code>和<code>&amp;x</code>的类型其实是是<code>double*</code>，<strong>两个<code>double*</code>的指针之间的减法的值，其实是几个<code>double</code>类型的长度，而不是具体的字节数，有点和指针<code>+1</code>中的1有点类似。</strong></p>
+<p>修改一下上面的表达式，都强制转换位<code>char*</code>类型即可，因为<code>char</code>的长度是1个字节，这样就成功的转换成字节数了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> my_sizeof(x) ((char *)(&amp;x + 1) - (char *)&amp;x)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考网址：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14171117/implementation-of-sizeof-operator">https://stackoverflow.com/questions/14171117/implementation-of-sizeof-operator</a></p>
+</blockquote>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这就是一个最近的踩坑记录吧，顺便复习了下内存对齐的相关知识，还有些奇奇怪怪的和内存对齐相关、结构体大小相关的知识点没写，下次有空再写。</p>
+<p>
+
+
+
+<hr>
+<p>
+
+
+
+
+
+<p>以上，欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%81%87%E5%9D%91%E6%80%BB%E7%BB%93/" class="category-chain-item">遇坑总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9E%81%E9%80%9F%E6%B5%8F%E8%A7%88%E5%99%A8/">#极速浏览器</a>
+      
+        <a href="/tags/%E9%81%87%E5%9D%91%E6%80%BB%E7%BB%93/">#遇坑总结</a>
+      
+        <a href="/tags/C-C/">#C/C++</a>
+      
+        <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">#内存对齐</a>
+      
+        <a href="/tags/Chromium%E5%86%85%E6%A0%B8/">#Chromium内核</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>遇坑总结｜结构体大小与内存对齐问题</div>
+      <div>https://wuruofan.com/2022/10/13/sizeof-struct-and-memory-alignment-of-c-cpp/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/12/2022-lite-browser-developer-summary/" title="极速浏览器｜2022年浏览器开发总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">极速浏览器｜2022年浏览器开发总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/15/how-to-sink-in-debug-mode-of-360-lite-browser-by-developer/" title="极速浏览器｜开发者教你常驻开发者模式🌈🥚">
+                        <span class="hidden-mobile">极速浏览器｜开发者教你常驻开发者模式🌈🥚</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

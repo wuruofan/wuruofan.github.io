@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言小黑用Linux系统可以追溯到上学时期某一次玩DOTA时候XP系统蓝屏了，一生气就把双系统的XP盘格式化了，只保留了Ubuntu系统，从那时候开始学会使用vim，由于工作内容基本是C&#x2F;C++，所以之后基本开发都是Ubuntu+Vim为主了。 上班后虽说公司配的是古老的winXP电脑，但是好在有一台带界面的Ubuntu服务器可以供我使用，基本环境也是xlaunch+Ubuntu+Vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MacOS&#x2F;Linux程序员Win10平台生存指北">
+<meta property="og:url" content="https://wuruofan.com/2021/04/01/working-guide-on-win-10-of-linux-macos-programmers/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="前言小黑用Linux系统可以追溯到上学时期某一次玩DOTA时候XP系统蓝屏了，一生气就把双系统的XP盘格式化了，只保留了Ubuntu系统，从那时候开始学会使用vim，由于工作内容基本是C&#x2F;C++，所以之后基本开发都是Ubuntu+Vim为主了。 上班后虽说公司配的是古老的winXP电脑，但是好在有一台带界面的Ubuntu服务器可以供我使用，基本环境也是xlaunch+Ubuntu+Vim">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/03/17/JDBljOc2tYkgZeu.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/18/VyPeo1XvGwkpME8.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/18/syDrY5ojizauOXS.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/18/Yzqm3KZiMk9XQ6l.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/26/D6SQHk1sXd58vTw.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/29/ptQBOmEUkaz2XKv.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/29/XQqhTdNxSrGsvkL.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/29/IN4mJPEh7cqY9v8.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/01/wvF2UdahBZV3n8s.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/6W8ASKJBjY5Twl7.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/saXFRx39pQj4kgT.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/VrsB7Jd6Lc3UWeO.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/TG2oWcvKJkDlmFM.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/JuXiYV3wWqBm8t6.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/FedtONEC2ZvAohV.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/JEqf1nOpNZWe6dK.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/2vc7KFy8hqMePTx.png">
+<meta property="article:published_time" content="2021-04-01T17:46:05.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.346Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="生产力工具">
+<meta property="article:tag" content="Win10">
+<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="使用指南">
+<meta property="article:tag" content="开发工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/17/JDBljOc2tYkgZeu.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>MacOS/Linux程序员Win10平台生存指北 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/valley-banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MacOS/Linux程序员Win10平台生存指北"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-01 17:46" pubdate>
+          2021年4月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          5.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          48 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MacOS/Linux程序员Win10平台生存指北</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>小黑用Linux系统可以追溯到上学时期某一次玩DOTA时候XP系统蓝屏了，一生气就把双系统的XP盘格式化了，只保留了Ubuntu系统，从那时候开始学会使用vim，由于工作内容基本是C&#x2F;C++，所以之后基本开发都是Ubuntu+Vim为主了。</p>
+<p>上班后虽说公司配的是古老的winXP电脑，但是好在有一台带界面的Ubuntu服务器可以供我使用，基本环境也是xlaunch+Ubuntu+Vim。</p>
+<p>自己的电脑是Mac，说白了也是Unix系统，出差在外也是Vim为主，涉及Windows版本就虚拟机</p>
+<p>去年换了工作后，公司配的依旧是Windows本，不过是Win10了，依旧很难使用。</p>
+<h2 id="命令行与WSL"><a href="#命令行与WSL" class="headerlink" title="命令行与WSL"></a>命令行与WSL</h2><p>现在回过头来看，就我个人而言，Windows平台开发效率低的原因最主要的一个就是命令行孱弱。原来的<code>cmd</code>工具和<code>bat</code>批处理脚本几乎无法使用，想使用Linux shell，只能选择<code>MinGW</code>或者<code>msys</code>，痛苦且不优雅。</p>
+<p>好在近些年的微软变得越来越开放，发布了适用于Linux的Windows子系统（Windows Subsystem for Linux，简称<strong>WSL</strong>）。</p>
+<p>这对我来说简直棒极了，完全解决了我的痛点。</p>
+<p><strong>WSL</strong>不同于模拟Linux命令行，而是原生系统内置的子系统，在内核级别完成Linux系统接口的转换，有点像半虚拟化。（2020下半年发布的<code>WSL2</code>有点像是全虚拟化。）</p>
+<p>我们可以看一下<code>WSL</code>和<code>WSL2</code>之间的区别，官网给出的比较如下图：</p>
+<p><img src="https://i.loli.net/2021/03/17/JDBljOc2tYkgZeu.png" srcset="/img/loading.gif" lazyload alt="WSL1与WSL2功能对比"></p>
+<p>WSL2以虚拟机的形式运行完整的Linux内核，也就是说Windows现在可以享受到最新Linux发行版了。</p>
+<p><strong>跨 OS 文件系统的性能</strong>说的是现在不推荐跨操作系统去操作文件，将文件存储在 WSL 文件系统，这样可以获得更快的性能速度。在Windows的文件管理器的地址栏输入<code>\\wsl$\Ubuntu-20.04\home\</code>，即可以以网络连接的形式访问WSL的文件系统。</p>
+<h2 id="WSL安装与升级"><a href="#WSL安装与升级" class="headerlink" title="WSL安装与升级"></a><code>WSL</code>安装与升级</h2><p><strong>WSL</strong>整体的安装过程都比较简单，步骤如下：</p>
+<h3 id="1-开启Windows功能中相关特性"><a href="#1-开启Windows功能中相关特性" class="headerlink" title="1 开启Windows功能中相关特性"></a>1 开启Windows功能中相关特性</h3><p>去“控制面板” -  “程序” - “程序和功能” - “启用或关闭Windows功能”中开启“<strong>适用于 Linux 的 Windows 子系统</strong>”，如果需要使用WSL2，还要勾选“<strong>虚拟机平台</strong>”特性。</p>
+<p><img src="https://i.loli.net/2021/03/18/VyPeo1XvGwkpME8.png" srcset="/img/loading.gif" lazyload alt="启用WSL所需Windows功能"></p>
+<p>另外，WSL2要求Windows10版本在2004或更高版本以上。</p>
+<h3 id="2-安装WSL2-Linux内核更新包"><a href="#2-安装WSL2-Linux内核更新包" class="headerlink" title="2. 安装WSL2 Linux内核更新包"></a>2. 安装WSL2 Linux内核更新包</h3><p>下载最新<a target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">适用于 x64 计算机的 WSL2 Linux 内核更新包</a>并安装。</p>
+<p>如果时ARM64版本的Windows10，需要下载<a target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_arm64.msi">ARM64版本内核更新包</a>。</p>
+<h3 id="3-设置默认WSL版本"><a href="#3-设置默认WSL版本" class="headerlink" title="3. 设置默认WSL版本"></a>3. 设置默认WSL版本</h3><p>在cmd命令行执行<code>wsl --set-default-version 2</code>，以后安装的Linux发行版就是WSL2了。</p>
+<h3 id="4-下载并安装Linux发行版"><a href="#4-下载并安装Linux发行版" class="headerlink" title="4. 下载并安装Linux发行版"></a>4. 下载并安装Linux发行版</h3><p>去<a target="_blank" rel="noopener" href="https://aka.ms/wslstore">Microsoft Store</a>市场，选择想安装的Linux版本，点击获取，自动安装就可以啦。</p>
+<p><img src="https://i.loli.net/2021/03/18/syDrY5ojizauOXS.png" srcset="/img/loading.gif" lazyload alt="微软市场WSL支持的发行版"></p>
+<p>目前商店里支持的Linux有不少，小黑选择的是Ubuntu-20.04 LTS版本。</p>
+<p>安装的过程需要设置账户和密码，常规操作了。</p>
+<h3 id="5-更新已安装的WSL1到WSL2"><a href="#5-更新已安装的WSL1到WSL2" class="headerlink" title="5. 更新已安装的WSL1到WSL2"></a>5. 更新已安装的WSL1到WSL2</h3><p>上面流程使用与第一次安装WSL2，如果你和我一样已经安装过WSL1了，需要做的步骤大概就可以简化如下：</p>
+<ol>
+<li>开启“虚拟机平台”。</li>
+<li>安装“WSL2 Linux内核更新包”。</li>
+<li>设置默认安装版本为WSL2。</li>
+<li>设置已安装WSL1版本的Linux发行版为WSL2。</li>
+</ol>
+<p>在升级WSL之前，需要查看要升级的Linux发行版名称，使用<code>wsl --list --verbose</code>查看，缩写命令是<code>wsl -l -v</code>。该命令会列出当前已安装所有Linux发行版本的名称、状态、版本号。</p>
+<p><img src="https://i.loli.net/2021/03/18/Yzqm3KZiMk9XQ6l.png" srcset="/img/loading.gif" lazyload alt="WSL状态"></p>
+<p>然后使用<code>wsl --set-version &lt;distribution name&gt; &lt;versionNumber&gt;</code>，比如<code>wsl --set-version Ubuntu-20.04 2</code>。</p>
+<p>这个转换耗时并不是像官方文档说的那样需要花费几分钟，而是和你原来安装WSL系统大小有关，而且转换的时候需要占用额外的C盘空间，我的WSL转换时可以肉眼看到C盘占用空间的增加，大约13GB左右，在转换完成后释放掉。<br>因此，转换WSL之前最好确保C盘有足够的空间。</p>
+<h2 id="Windows-Terminal"><a href="#Windows-Terminal" class="headerlink" title="Windows Terminal"></a>Windows Terminal</h2><p>Windows Terminal简单来说就是一个命令行程序的终端软件，可以运行&#x2F;加载命令行工具、 PowerShell 和WSL命令行），它的主要功能包括多个选项卡、窗格、Unicode 和 UTF-8 字符支持、GPU 加速文本呈现引擎，支持各种自定义配置。</p>
+<p><img src="https://i.loli.net/2021/03/26/D6SQHk1sXd58vTw.png" srcset="/img/loading.gif" lazyload alt="Windows Terminal界面"></p>
+<p>上面图片是官方介绍给出的图片，具体如何配置可以参考<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/terminal/">官方文档</a>，以及少数派的文章：<a target="_blank" rel="noopener" href="https://sspai.com/post/59380">新生代 Windows 终端：Windows Terminal 的全面自定义</a>。</p>
+<p>对于我个人来说，需要解决默认启用WSL Ubuntu的终端即可。<code>Ctrl + ,</code>快捷键打开json设置文件，修改<code>defaultProfile</code>对应键值，为<code>profiles</code> - <code>list</code>列表中你想要启用终端的<code>guid</code>值即可。</p>
+<h3 id="zsh插件加载失败"><a href="#zsh插件加载失败" class="headerlink" title="zsh插件加载失败"></a>zsh插件加载失败</h3><p><code>zsh</code>、<code>Oh-my-zsh</code> 、<code>Powerline字体</code>当然是必不可少的终端环境了，比<code>bash</code>更强大也更美观，需要注意的是zsh的一些插件可能<code>apt-get</code>直接安装会加载不成功。</p>
+<p>需要卸载apt安装的插件，然后通过git clone安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting<br></code></pre></td></tr></table></figure>
+
+<h3 id="右键在当前目录打开Windows-Terminal"><a href="#右键在当前目录打开Windows-Terminal" class="headerlink" title="右键在当前目录打开Windows Terminal"></a>右键在当前目录打开Windows Terminal</h3><p>Windows Terminal安装完成后应该会在文件管理器右键添加<code>Open in Windows Terminal</code>菜单，旧版本有点问题，右键点击该菜单只会打开用户目录，这时候需要手动删除配置中<code>profiles</code> 的<code>startingDirectory</code>值设置成<code>null</code>，原配置应该是<code>&quot;%USERPROFILE%&quot;</code>。</p>
+<p>如果已经将默认profile设置成WSL，那么现在已经可以在文件管理器右键打开Linux命令行了。</p>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><h3 id="nvim"><a href="#nvim" class="headerlink" title="nvim"></a>nvim</h3><p><code>NeoVim</code>命令行版本可用，这就可以解决大部分问题了。</p>
+<h3 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h3><p>VSCode的<code>Remote - WSL</code>插件支持在WSL环境中打开工程目录，插件会把WSL认为是一台远程机器，然后尝试连接，并在WSL环境下打开工程。</p>
+<p><img src="https://i.loli.net/2021/03/29/ptQBOmEUkaz2XKv.png" srcset="/img/loading.gif" lazyload alt="Remote-WSL插件"></p>
+<p>一旦使用WSL打开，那么编译环境、执行环境、终端都会切换到WSL，VSCode加载的配置文件、插件等都是安装在WSL中的。</p>
+<p><img src="https://i.loli.net/2021/03/29/XQqhTdNxSrGsvkL.png" srcset="/img/loading.gif" lazyload alt="Remote-WSL状态"></p>
+<p>打开后界面左下角会有一个蓝色标注，显示当前是本地环境打开还是用WSL打开；点击即可切换打开方式。</p>
+<p><img src="https://i.loli.net/2021/03/29/IN4mJPEh7cqY9v8.png" srcset="/img/loading.gif" lazyload alt="Remote-WSL指令"></p>
+<h2 id="WSL运行exe"><a href="#WSL运行exe" class="headerlink" title="WSL运行exe"></a>WSL运行exe</h2><p>WSL命令行里其实是可以运行Windows可执行程序（<code>exe</code>）文件的，而且Windows系统的环境变量<code>PATH</code>也会默认被添加到WSL中。</p>
+<p>因此，我们可以在WSL的zsh里直接执行<code>explorer.exe .</code>使用文件浏览器打开当前目录。</p>
+<h2 id="WSL与adb"><a href="#WSL与adb" class="headerlink" title="WSL与adb"></a>WSL与adb</h2><p>这是调试过程中遇到最坑的地方了。</p>
+<p>首先，不要使用<code>apt-get</code>安装的adb工具，若已经安装，需要先卸载。从Android开发者官网下载<a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/platform-tools">SDK Platform Tools</a>，Windows版本和Linux版本都需要下载。</p>
+<p>WSL1下的adb使用简单些，只需要Windows和Linux中adb版本一致即可，WSL中adb遇到问题需要在命令行提示符cmd中<code>adb kill-server</code>和<code>adb start-server</code>即可恢复。</p>
+<p>WSL2下的adb就坑一些，保持相同版本号已经不行了，可能和使用了虚拟化平台后，网络连接变化有关，虚拟机中的网卡和真实网卡桥接起来了。不像是原WSL1的系统调用类似半虚拟化，adb直接可以访问到Windows中的adb server，现在必须手动设置Windows中adb服务端和WSL中adb客户端连接了。</p>
+<h3 id="方案1：alias别名"><a href="#方案1：alias别名" class="headerlink" title="方案1：alias别名"></a>方案1：alias别名</h3><p>可以使用<code>alias</code>将WSL2中的adb指向Windows中的adb.exe解决问题。</p>
+<p>在你使用的<code>.bashrc</code>或者<code>.zshrc</code>中添加如下设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [[ ! -z <span class="hljs-variable">$WSL_DISTRO_NAME</span> ]];<span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">alias</span> adb=<span class="hljs-string">&#x27;adb.exe&#x27;</span><br>    <span class="hljs-built_in">alias</span> fastboot=<span class="hljs-string">&#x27;fastboot.exe&#x27;</span><br>    <span class="hljs-built_in">alias</span> aapt=<span class="hljs-string">&#x27;aapt.exe&#x27;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>优点</strong>是配置简单，<strong>缺点</strong>是强迫症要死，而且<strong>无法使用高版本adb shell的补全功能</strong>，比如当前电脑连接了两个Android手机，原生adb输入<code>adb -s</code>之后点击<code>TAB</code>按键就会列出当前连接设备的id，或者在<code>adb shell ls /sdcard/</code>之后点击<code>TAB</code>，就会列出该目录下所有文件。</p>
+<h3 id="方案2：设置adb连接"><a href="#方案2：设置adb连接" class="headerlink" title="方案2：设置adb连接"></a>方案2：设置adb连接</h3><p>首先，设置WSL2中adb使用远程服务器的地址。</p>
+<p>在你使用的<code>.bashrc</code>或<code>.zshrc</code>中添加如下设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> WSL_HOST_IP=<span class="hljs-string">&quot;<span class="hljs-subst">$(tail -1 /etc/resolv.conf | cut -d&#x27; &#x27; -f2)</span>&quot;</span> <span class="hljs-comment"># 按照Microsoft给出的方法获取宿主机的IP地址，</span><br><span class="hljs-built_in">export</span> ADB_SERVER_SOCKET=tcp:<span class="hljs-variable">$WSL_HOST_IP</span>:5037 <span class="hljs-comment"># 设置adb远程服务器地址</span><br></code></pre></td></tr></table></figure>
+
+<p>然后，需要在Windows命令行终端cmd中重新启用adb server。</p>
+<p>执行如下操作：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">adb<span class="hljs-selector-class">.exe</span> kill-server<br>adb<span class="hljs-selector-class">.exe</span> -<span class="hljs-selector-tag">a</span> -P <span class="hljs-number">5037</span> nodaemon server<br></code></pre></td></tr></table></figure>
+
+<p>之后，WSL2中的adb就可以正常运行了！现在还有一点不好的是，cmd还不能关闭，因为adb server还在运行。</p>
+<p>解决方案是建立一个vbs脚本并加入开机启动，或者每次手动双击运行。</p>
+<p>vbs脚本如下，其中具体adb的路径和个人路径有关，需要自行修改。：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">CreateObject</span><span class="hljs-params">(<span class="hljs-string">&quot;WScript.Shell&quot;</span>)</span></span><span class="hljs-selector-class">.Run</span> <span class="hljs-string">&quot;%USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe kill-server&quot;</span>, <span class="hljs-number">0</span>, True<br><span class="hljs-function"><span class="hljs-title">CreateObject</span><span class="hljs-params">(<span class="hljs-string">&quot;WScript.Shell&quot;</span>)</span></span><span class="hljs-selector-class">.Run</span> <span class="hljs-string">&quot;%USERPROFILE%\AppData\Local\Android\Sdk\platform-tools\adb.exe -a -P 5037 nodaemon server&quot;</span>, <span class="hljs-number">0</span>, True<br></code></pre></td></tr></table></figure>
+
+<p>我的脚本名称为<code>start_adb.vbs</code>，放到系统环境变量所在路径下，使用<code>Win-R</code>后输入脚本名称进行运行。</p>
+<p><img src="https://i.loli.net/2021/04/01/wvF2UdahBZV3n8s.png" srcset="/img/loading.gif" lazyload alt="运行vbs脚本"></p>
+<h2 id="其他小工具"><a href="#其他小工具" class="headerlink" title="其他小工具"></a>其他小工具</h2><h3 id="PowerToys：小工具合集"><a href="#PowerToys：小工具合集" class="headerlink" title="PowerToys：小工具合集"></a>PowerToys：小工具合集</h3><p>这是微软自己出品的小工具集合，包含窗口管理器、颜色选择、批量重命名、快速启动等工具。</p>
+<p><img src="https://i.loli.net/2021/03/31/6W8ASKJBjY5Twl7.png" srcset="/img/loading.gif" lazyload alt="PowerToys设置界面"></p>
+<p>窗口管理器（FancyZones）功能可以自定义各程序窗口的布局。</p>
+<p>PowerToys Run也就是快速启动，勉强称为MacOS下<code>Alfred</code>的极简版吧，再简陋点还可以用<code>Win+S</code>使用Win10自己的搜索功能。</p>
+<p>PowerToys Run可以通过快捷键<code>Win+Space</code>呼出一个对话框，执行各种快速操作，如启动应用、搜索文件、访问网址、切换窗口等，可惜不支持更多的自定义插件。</p>
+<p><img src="https://i.loli.net/2021/03/31/saXFRx39pQj4kgT.png" srcset="/img/loading.gif" lazyload alt="PowerToys Run输入chrome"></p>
+<h3 id="uTools：快速启动"><a href="#uTools：快速启动" class="headerlink" title="uTools：快速启动"></a>uTools：快速启动</h3><p>也是MacOS下<code>Alfred</code>的替代品。</p>
+<p>用uTools官方介绍来说，“uTools是一款极简、插件化、跨平台的现代桌面软件，只有一个简单的输入框，你可以在任何时候通过全局快捷键（默认<code>Alt+Space</code>）快速打开它”。</p>
+<p>其实Windows平台下Wox可能大家推荐的多一些，但是个人觉得uTools的界面更好看，插件中心更易用一些。</p>
+<p><img src="https://i.loli.net/2021/03/31/VrsB7Jd6Lc3UWeO.png" srcset="/img/loading.gif" lazyload alt="uTools插件中心界面"></p>
+<p>uTools的输入框支持拼音、中文联想，激活插件，执行功能。</p>
+<p><img src="https://i.loli.net/2021/03/31/TG2oWcvKJkDlmFM.png" srcset="/img/loading.gif" lazyload alt="uTools翻译插件使用界面"></p>
+<p>总的来说，uTools还是不错的，但是发现PowerToys Run的切换当前运行的窗口功能似乎uTools并不支持。</p>
+<p>更多扩展阅读：<a target="_blank" rel="noopener" href="https://sspai.com/post/56739">uTools | 时隔一年，uTools 这位 Spotlight 新秀现在变得怎么样了?</a></p>
+<h3 id="QuickLook：文件预览"><a href="#QuickLook：文件预览" class="headerlink" title="QuickLook：文件预览"></a>QuickLook：文件预览</h3><p>MacOS以及最新Ubuntu相同已经支持选中一个文件后，点击空格即可预览文件内容了，Windows还需要安装QuickLook。</p>
+<p>QuickLook支持各种文件类型的插件，Markdown和Office文档都无压力。</p>
+<p><img src="https://i.loli.net/2021/03/31/JuXiYV3wWqBm8t6.png" srcset="/img/loading.gif" lazyload alt="QuickLook预览Markdown文件"></p>
+<h3 id="CLCL：多粘贴板"><a href="#CLCL：多粘贴板" class="headerlink" title="CLCL：多粘贴板"></a>CLCL：多粘贴板</h3><p>Win10其实自己默认支持多剪切板，设置里搜索剪贴板即可，使用快捷键<code>Win+V</code>打开。</p>
+<p>CLCL是一个比较久远的程序了，支持保存一些自定义的短语，设置界面<code>Template</code>右键<code>New Item</code>即可。</p>
+<p><img src="https://i.loli.net/2021/03/31/FedtONEC2ZvAohV.png" srcset="/img/loading.gif" lazyload alt="CLCL设置界面"></p>
+<h3 id="Snipaste：截图工具"><a href="#Snipaste：截图工具" class="headerlink" title="Snipaste：截图工具"></a>Snipaste：截图工具</h3><p>Win10自带截图的快捷键是<code>Win-Shift-S</code>，支持窗口、全屏、自定义范围等截图模式。</p>
+<p>但是Snipaste更强大一些，支持将刚截的图再贴回屏幕上，或者固定在屏幕上。这个功能在对比文字、图片细节时很好用。</p>
+<p><img src="https://i.loli.net/2021/03/31/JEqf1nOpNZWe6dK.png" srcset="/img/loading.gif" lazyload alt="Snipaste固定截图到屏幕"></p>
+<h3 id="EasyWindowSwitcher：同应用窗口切换"><a href="#EasyWindowSwitcher：同应用窗口切换" class="headerlink" title="EasyWindowSwitcher：同应用窗口切换"></a>EasyWindowSwitcher：同应用窗口切换</h3><p>Win10现在的窗口切换器已经支持多个虚拟桌面，也支持类似MacOS的expose窗口展示的功能。但是，同一个应用多个窗口间的切换居然不支持。在Ubuntu和MacOS使用<code>Alt+`</code>即可切换同一个应用内的多个窗口。还好已经有人实现了这个功能，安装EasyWindowSwitcher接可，这个软件功能很单纯，就这一个功能，开机之后也找不到它，省心。</p>
+<h3 id="Velocity：代码手册阅读"><a href="#Velocity：代码手册阅读" class="headerlink" title="Velocity：代码手册阅读"></a>Velocity：代码手册阅读</h3><p>MacOS下有一个神器叫做<code>dash</code>，整合了各种语言的参考手册，可以下载离线使用。Velocity就是Windows版的dash，界面还算ok，支持dash的文档源。</p>
+<p><img src="https://i.loli.net/2021/03/31/2vc7KFy8hqMePTx.png" srcset="/img/loading.gif" lazyload alt="Velocity界面"></p>
+<p>在输入框中输入语言名称后，再输入<code>:</code>，就可以指定搜索该语言的文档。</p>
+<p>该软件可以免费使用，但是每隔一段时间会弹出提示窗口，可以技术上去除。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>大概就是以上这些，已经足够我日常Windows平台的开发工作了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/" class="category-chain-item">软件工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/">#生产力工具</a>
+      
+        <a href="/tags/Win10/">#Win10</a>
+      
+        <a href="/tags/WSL/">#WSL</a>
+      
+        <a href="/tags/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">#使用指南</a>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">#开发工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MacOS/Linux程序员Win10平台生存指北</div>
+      <div>https://wuruofan.com/2021/04/01/working-guide-on-win-10-of-linux-macos-programmers/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年4月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/20/xmlabit-a-xml-node-sort-tool/" title="XML排序小工具——xmlabit">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">XML排序小工具——xmlabit</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/01/jeb2deobsureclass-deobfuscation-script-modification-record/" title="JEB2Deobsecure反混淆脚本修改记录">
+                        <span class="hidden-mobile">JEB2Deobsecure反混淆脚本修改记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

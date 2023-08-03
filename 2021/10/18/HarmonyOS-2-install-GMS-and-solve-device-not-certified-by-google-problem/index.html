@@ -1,0 +1,778 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前情由于美国对华为的制裁，谷歌不再为华为设备提供服务，导致华为手机安装Google服务框架和Google Play商店会遇到各种问题。这种情况，已经安装GMS服务的手机并不会受到影响，可以继续使用。 同时，谷歌也不再为华为新款设备提供认证，会导致新款手机以及鸿蒙OS即使安装上了Google服务框架也会提示“此设备未经过Play认证”，无法使用Chrome、Gmail、日历等程序。 我的Mate30">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸿蒙OS 2.0安装谷歌服务框架 &amp; 解决设备未经Play认证问题">
+<meta property="og:url" content="https://wuruofan.com/2021/10/18/HarmonyOS-2-install-GMS-and-solve-device-not-certified-by-google-problem/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="前情由于美国对华为的制裁，谷歌不再为华为设备提供服务，导致华为手机安装Google服务框架和Google Play商店会遇到各种问题。这种情况，已经安装GMS服务的手机并不会受到影响，可以继续使用。 同时，谷歌也不再为华为新款设备提供认证，会导致新款手机以及鸿蒙OS即使安装上了Google服务框架也会提示“此设备未经过Play认证”，无法使用Chrome、Gmail、日历等程序。 我的Mate30">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg">
+<meta property="article:published_time" content="2021-10-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.342Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="避坑指北">
+<meta property="article:tag" content="遇坑总结">
+<meta property="article:tag" content="鸿蒙OS">
+<meta property="article:tag" content="安装GMS">
+<meta property="article:tag" content="此设备未经过Play认证">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>鸿蒙OS 2.0安装谷歌服务框架 &amp; 解决设备未经Play认证问题 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="鸿蒙OS 2.0安装谷歌服务框架 &amp; 解决设备未经Play认证问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-18 16:00" pubdate>
+          2021年10月18日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">鸿蒙OS 2.0安装谷歌服务框架 &amp; 解决设备未经Play认证问题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h2><p>由于美国对华为的制裁，谷歌不再为华为设备提供服务，导致华为手机安装Google服务框架和Google Play商店会遇到各种问题。这种情况，已经安装GMS服务的手机并不会受到影响，可以继续使用。</p>
+<p>同时，谷歌也不再为华为新款设备提供认证，会导致新款手机以及鸿蒙OS即使安装上了Google服务框架也会提示“此设备未经过Play认证”，无法使用Chrome、Gmail、日历等程序。</p>
+<p>我的Mate30手机去年安装的Google服务框架，一直使用正常，最近几天开始出现“此设备未经过Play认证”的提示，一打开Chrome就闪退了。尝试了很多方法都不行，最后卸载所有组件重新安装才解决问题，记录下过程。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/device_not_certified_by_google.jpg" srcset="/img/loading.gif" lazyload alt="此设备未经过Play认证"></p>
+<p>整篇文章涉及的视频和所使用的软件工具，我一并上传到360云盘上：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://yunpan.360.cn/surl_yM3C9aCLah5">https://yunpan.360.cn/surl_yM3C9aCLah5</a> 提取码：0a8a</p>
+</blockquote>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>手机：华为Mate30手机，鸿蒙OS2.0系统</p>
+<p>网络：轻快VPN（<a target="_blank" rel="noopener" href="https://qingkuai.org/#/register?code=2LEPMSrc">https://qingkuai.org/#/register?code=2LEPMSrc</a>）</p>
+<p>如果之前有安装过谷歌服务框架，但是遇到和小黑一样的问题，最好卸载之前安装的GMS服务。</p>
+<p>进入“设置 - 应用与服务 - 应用管理”，搜索栏输入“Google”，然后右上角菜单键“显示系统程序”，卸载Google服务框架、Google Play服务、Google通讯录同步等应用。</p>
+<p>注意：“谷歌安装助手”应用可以不用卸载，因为重新安装的第一步就是要装这个软件。</p>
+<h2 id="安装GMS"><a href="#安装GMS" class="headerlink" title="安装GMS"></a>安装GMS</h2><p>我安装时候参考的是Youtube上 @工匠先森 的一个视频：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=0bMesV_en3M">https://www.youtube.com/watch?v=0bMesV_en3M</a>，教程中涉及的操作有一小部分需要在电脑端进行操作，绝大部分手机即可。</p>
+<blockquote>
+<p>这一步骤涉及的文件如下：</p>
+<ol>
+<li>01-华为手机鸿蒙2.0系统Ha…40 Mate30荣耀v30.mp4</li>
+<li>01a-电脑端.zip，</li>
+<li>01b-手机端.zip</li>
+</ol>
+</blockquote>
+<h3 id="电脑端操作"><a href="#电脑端操作" class="headerlink" title="电脑端操作"></a>电脑端操作</h3><p>主要就是使用adb工具，<strong>卸载鸿蒙OS新版的“备份”APP，并安装旧版本“备份”APP。</strong></p>
+<p>其目的就是为了后面可以使用旧版本“备份”APP恢复特殊版本备份的“谷歌安装助手”。</p>
+<p>按照视频中的操作即可，<code>01a-电脑端.zip</code>解压后包括了adb工具和一个包含命令的txt文档。</p>
+<p>这一步操作，其实可以写一个bat批处理脚本，双击一键完成。回头我补上。</p>
+<h3 id="手机端操作"><a href="#手机端操作" class="headerlink" title="手机端操作"></a>手机端操作</h3><p>下载<code>01b-手机端.zip</code>到手机，用自带“文件管理”解压即可。</p>
+<h4 id="1-通过“备份”APP恢复“谷歌安装助手”"><a href="#1-通过“备份”APP恢复“谷歌安装助手”" class="headerlink" title="1. 通过“备份”APP恢复“谷歌安装助手”"></a>1. 通过“备份”APP恢复“谷歌安装助手”</h4><p>按照视频操作一步步完成即可。</p>
+<ol>
+<li>将解压出来的<code>Huawei</code>目录拷贝到手机内部存储目录；</li>
+<li>点击“设置 - 系统与更新 - 备份与恢复”，进入后授予权限，返回退出，然后再次进入，右上角点击菜单，选择本机备份文件，恢复即可。</li>
+<li>返回桌面，找到“谷歌安装助手”，激活设备管理器，点击下载，回到桌面。</li>
+</ol>
+<h4 id="2-安装Googlefier"><a href="#2-安装Googlefier" class="headerlink" title="2. 安装Googlefier"></a>2. 安装Googlefier</h4><p>打开之前解压出来的<code>GMS</code>目录，安装Googlefier软件，这是一个半自动化的安装Google服务所需要的软件。</p>
+<p>Googlefier的主界面用01、02、03等图片标注了安装顺序，01是添加Google账户、02是添加更多账户、03是安装一系列Google服务所需软件；大部分用户用到的只有01、03两个步骤。</p>
+<ol>
+<li>点击01，安装<code>MiCrOG - HUAWEI FIX ElOyGomezTV</code>软件并运行，添加Google账号</li>
+<li>点击03，半自动化安装所有需要安装的软件一系列</li>
+<li>卸载01步骤安装的<code>MiCrOG - HUAWEI FIX ElOyGomezTV</code>。</li>
+</ol>
+<h4 id="3-卸载重装Google通讯录同步、Google-Play服务"><a href="#3-卸载重装Google通讯录同步、Google-Play服务" class="headerlink" title="3. 卸载重装Google通讯录同步、Google Play服务"></a>3. 卸载重装Google通讯录同步、Google Play服务</h4><p>卸载Googlefier默认安装的Google通讯录同步和Google Play服务软件，安装解压出来<code>GMS</code>目录中的对应软件即可。</p>
+<ol>
+<li>点击“设置-用户账户-google-同步联系人” 打开，此时会同步失败。</li>
+<li>点击“设置-应用与服务 - 应用管理”，搜索栏输入google，右上角菜单点击“显示系统程序”，卸载。</li>
+<li>重新安装<code>GMS</code>目录中的两个软件</li>
+</ol>
+<h2 id="解决“此设备未获得Play授权”弹窗和通知问题"><a href="#解决“此设备未获得Play授权”弹窗和通知问题" class="headerlink" title="解决“此设备未获得Play授权”弹窗和通知问题"></a>解决“此设备未获得Play授权”弹窗和通知问题</h2><p>参考视频：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=XAk2nYNDfMU">https://www.youtube.com/watch?v=XAk2nYNDfMU</a></p>
+<blockquote>
+<p>涉及文件：</p>
+<ol>
+<li>02-谷歌商店保护机制弹窗问题，华为mate40promate30手机解决谷歌商店保护机制弹窗问题转载John Wang.mp4</li>
+<li>02-DeviceID.apk：用于获取手机的内部谷歌服务框架特征值，用于将当前手机在线注册成自定义ROM。</li>
+</ol>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/device_id.jpg" srcset="/img/loading.gif" lazyload alt="DeviceID应用"></p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>安装并运行<code>02-DeviceID.apk</code>。</li>
+<li>复制界面上GSF ID（第二行），打开<a href="g.co/AndroidDeviceRegistration">g.co&#x2F;AndroidDeviceRegistration</a>，在线注册设备。</li>
+<li>打开飞行模式断网。</li>
+<li>第一次清除数据，“设置 - 应用与服务 - 应用管理”，搜索Google，右上角点击菜单选择“显示系统程序”。<ol>
+<li>点击“Google服务框架”，点击“存储 - 清理数据”，后退并点击“停止运行”，直到按钮变成灰色。</li>
+<li>点击“Google Play服务”，点击“存储 - <strong>清理缓存</strong>”，后退并点击“停止运行”，直到按钮变成灰色。</li>
+<li>点击“Google Play商店”，点击“存储 - 清理数据”，后退并点击“停止运行”，直到按钮变成灰色。</li>
+</ol>
+</li>
+<li>重启手机。</li>
+<li>第二次清除数据，“设置 - 应用与服务 - 应用管理”，搜索Google。</li>
+<li>点击“Google Play服务”，点击“存储 - <strong>管理空间 - 清除所有数据</strong>”，后退并点击“停止运行”，直到按钮变成灰色。</li>
+<li>重启手机。</li>
+<li>关闭手机飞行模式，打开VPN网络，应该就可以正常使用了。</li>
+</ol>
+<hr>
+<p>
+
+<p>以上，欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%81%BF%E5%9D%91%E6%8C%87%E5%8C%97/" class="category-chain-item">避坑指北</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%81%BF%E5%9D%91%E6%8C%87%E5%8C%97/">#避坑指北</a>
+      
+        <a href="/tags/%E9%81%87%E5%9D%91%E6%80%BB%E7%BB%93/">#遇坑总结</a>
+      
+        <a href="/tags/%E9%B8%BF%E8%92%99OS/">#鸿蒙OS</a>
+      
+        <a href="/tags/%E5%AE%89%E8%A3%85GMS/">#安装GMS</a>
+      
+        <a href="/tags/%E6%AD%A4%E8%AE%BE%E5%A4%87%E6%9C%AA%E7%BB%8F%E8%BF%87Play%E8%AE%A4%E8%AF%81/">#此设备未经过Play认证</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>鸿蒙OS 2.0安装谷歌服务框架 &amp; 解决设备未经Play认证问题</div>
+      <div>https://wuruofan.com/2021/10/18/HarmonyOS-2-install-GMS-and-solve-device-not-certified-by-google-problem/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年10月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/27/reading-note-jia-ping-wa-feed-a-mouse/" title="读 贾平凹《养鼠》">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">读 贾平凹《养鼠》</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/30/10-minutes-learning-mental-model-read-notes-13/" title="10分钟学点《思维模型》13：帕累托法则 &amp; 史特金定律 &amp; 帕金森定律">
+                        <span class="hidden-mobile">10分钟学点《思维模型》13：帕累托法则 &amp; 史特金定律 &amp; 帕金森定律</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

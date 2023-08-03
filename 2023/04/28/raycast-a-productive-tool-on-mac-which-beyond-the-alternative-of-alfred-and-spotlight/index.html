@@ -1,0 +1,780 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Intro⚠️⚠️ 本文多图预警！⚠️⚠️ 我个人一直在用免费版的Alfred，就我个人而言，大部分使用场景免费版已经足够了，但是有些快捷查词典翻译的需求，却必须Powerpack才可以。 这两天找到了一款非常好用的软件——Raycast，完全解决我的痛点，赶紧和大家分享下！ Raycast简介“Raycast”直译过来是“光线投射”的意思，官网上对自己的介绍如下：  Raycast is a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋">
+<meta property="og:url" content="https://wuruofan.com/2023/04/28/raycast-a-productive-tool-on-mac-which-beyond-the-alternative-of-alfred-and-spotlight/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="Intro⚠️⚠️ 本文多图预警！⚠️⚠️ 我个人一直在用免费版的Alfred，就我个人而言，大部分使用场景免费版已经足够了，但是有些快捷查词典翻译的需求，却必须Powerpack才可以。 这两天找到了一款非常好用的软件——Raycast，完全解决我的痛点，赶紧和大家分享下！ Raycast简介“Raycast”直译过来是“光线投射”的意思，官网上对自己的介绍如下：  Raycast is a">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-introduction-on-official-website.png">
+<meta property="article:published_time" content="2023-04-28T12:50:00.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.346Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="MacOS">
+<meta property="article:tag" content="效率工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-introduction-on-official-website.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-introduction-on-official-website.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-28 12:50" pubdate>
+          2023年4月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-introduction-on-official-website.png" srcset="/img/loading.gif" lazyload alt="官网简介"></p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p><em><strong>⚠️⚠️ 本文多图预警！⚠️⚠️</strong></em></p>
+<p>我个人一直在用免费版的Alfred，就我个人而言，大部分使用场景免费版已经足够了，但是有些快捷查词典翻译的需求，却必须Powerpack才可以。</p>
+<p>这两天找到了一款非常好用的软件——Raycast，完全解决我的痛点，赶紧和大家分享下！</p>
+<h2 id="Raycast简介"><a href="#Raycast简介" class="headerlink" title="Raycast简介"></a>Raycast简介</h2><p>“Raycast”直译过来是“光线投射”的意思，<a target="_blank" rel="noopener" href="https://www.raycast.com/">官网</a>上对自己的介绍如下：</p>
+<blockquote>
+<p>Raycast is a blazingly fast, totally extendable launcher. It lets you complete tasks, calculate, share common links, and much more.<br>⇒ Raycast 是一个极快、可扩展的启动器。它让你能够完成任务、计算、共享常用链接等等。</p>
+</blockquote>
+<p>使用下来，Raycast设计的思路和Alfred类似，也是命令式操作，都是希望手指不用离开键盘就可以完成大部分操作。</p>
+<h3 id="UI-界面"><a href="#UI-界面" class="headerlink" title="UI 界面"></a>UI 界面</h3><p>Raycat本身设计的很简洁，默认快捷键“Option+空格键”呼出界面。UI风格和系统自带的Spotlight（聚焦搜索）很像，但是默认界面会比Spotlight下面多出几排信息来。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-default-ui.png" srcset="/img/loading.gif" lazyload alt="默认UI"></p>
+<p>如上图，下面主要两个部分：</p>
+<ul>
+<li>一部分是<strong>Walkthrough</strong>，也就是“新手教程”，按照底部的快捷键提示可以“回车”进入，或者“Cmd+K”标记为已完成。这部分“新手任务”完成了，下次快捷键呼出就会消失。</li>
+<li>另一部分是<strong>Suggestion</strong>，也就是“推荐”，按照你之前使用的频率进行推荐<strong>命令</strong>。</li>
+</ul>
+<p>当然，如果不喜欢下面这部分推荐命令，可以在设置里关闭，在Window Mode项，选择Compact（紧凑的）即可。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-ui-settings.png" srcset="/img/loading.gif" lazyload alt="UI设置项"></p>
+<p>效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-compact-ui.png" srcset="/img/loading.gif" lazyload alt="紧凑模式UI"></p>
+<p>其中，Walkthrough在新手任务做完也会消失。假如你收藏了一些命令，就会显示在输入框的最右侧，支持快捷键<code>Cmd+1</code>、<code>Cmd+2</code>等，进行访问。</p>
+<p>⚠️ 目前，Raycast还没有中文界面，但是界面英文都比较简单。实际使用过程中，输入<strong>拼音</strong>的时候是可以顺利找到本机的相关应用的！</p>
+<h3 id="Walkthrough-新手任务"><a href="#Walkthrough-新手任务" class="headerlink" title="Walkthrough 新手任务"></a>Walkthrough 新手任务</h3><p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-walkthrough-tasks.png" srcset="/img/loading.gif" lazyload alt="Walkthrough"></p>
+<h2 id="基础功能"><a href="#基础功能" class="headerlink" title="基础功能"></a>基础功能</h2><p>通常情况就是快捷键呼出界面，直接输入你想要启动的程序、你想执行的命令即可，包括设置里的一些设置项，如WiFi、Bluetooth，也可以直接搜索的。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-searching-app-in-pinyin.png" srcset="/img/loading.gif" lazyload alt="应用支持拼音搜索"></p>
+<p>⚠️注意：在搜索系统设置项的时候，这里仅支持英文命令，具体查看设置里对应的分类。</p>
+<h3 id="Actions-更多动作"><a href="#Actions-更多动作" class="headerlink" title="Actions 更多动作"></a>Actions 更多动作</h3><p>Raycast所有的命令都支持<code>Cmd+K</code>查看更多动作。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-command-actions.png" srcset="/img/loading.gif" lazyload alt="更多动作"></p>
+<p>长按<code>Cmd</code>键会出现1、2、3、4快捷键显示，和Alfred一样，按下<code>Cmd+1/2/3/…</code>就可以直接选择第1&#x2F;2&#x2F;3&#x2F;…个候选项。</p>
+<p>⚠️ <strong>注意，Actions里展开时提示的这些快捷键，在不展示的时候是可以直接使用的！</strong> 因此，记住一些常用快捷键，是不需要<code>Cmd+K</code>多一步操作的，非常方便！</p>
+<h3 id="Quicklinks-快捷链接"><a href="#Quicklinks-快捷链接" class="headerlink" title="Quicklinks 快捷链接"></a><strong>Quicklinks</strong> 快捷链接</h3><p>可以实现一个快速的网页访问功能，通过自定义快捷链接，可以迅速的将输入的文字，替换到配置的链接中，打开指定应用进行访问。</p>
+<p>官网给了一个比较复杂的例子，谷歌翻译，支持选择语言、目标语言、文字，<code>&#123;&#125;</code>中的是占位提示符。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">https://translate.google.<span class="hljs-keyword">com</span>/?<span class="hljs-keyword">sl</span>=&#123;<span class="hljs-keyword">source</span> <span class="hljs-keyword">language</span>:auto&#125;&amp;<span class="hljs-keyword">tl</span>=&#123;target <span class="hljs-keyword">language</span>&#125;&amp;text=&#123;word&#125;&amp;op=translate<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-official-quicklinks-example.png" srcset="/img/loading.gif" lazyload alt="官网Quicklinks示例"></p>
+<p>另外，Quicklinks还支持自动使用当前选中的文字作为参数传入，这样可以再次提速。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-quicklinks-settings.png" srcset="/img/loading.gif" lazyload alt="Quicklinks设置读取当前选中文字"></p>
+<h3 id="Reminders-提醒事项"><a href="#Reminders-提醒事项" class="headerlink" title="Reminders 提醒事项"></a>Reminders 提醒事项</h3><p>Raycast支持系统的“提醒事项”应用，可以查看和创建提醒事项，标记任务已完成，甚至都不用打开应用。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-create-a-reminder.png" srcset="/img/loading.gif" lazyload alt="创建提醒事项"></p>
+<h3 id="Calculator-计算器"><a href="#Calculator-计算器" class="headerlink" title="Calculator 计算器"></a>Calculator 计算器</h3><p>说是计算器，其实不止是计算器，包含了各种转换的功能，比如国外的时间、几周后的周三是几号啊、1米等于多少英尺啊之类的。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-calculator-convert.png" srcset="/img/loading.gif" lazyload alt="计算器转换货币"></p>
+<p>这个功能不需要命令，直接在主界面输入要计算的内容，或者英文描述转换时间之类的短语：如“time in tokyo”。</p>
+<p>另外，计算结果还可以直接作为其他命令的输入，快速使用。</p>
+<h3 id="File-Search-文件搜索"><a href="#File-Search-文件搜索" class="headerlink" title="File Search 文件搜索"></a>File Search 文件搜索</h3><p>支持搜索电脑上的文件，需要授予权限，默认命令为<code>File Search</code>，直接输入<code>fs</code>就行，需要按回车进入下一个页面搜索，esc返回。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-file-search.png" srcset="/img/loading.gif" lazyload alt="文件搜索"></p>
+<h3 id="Define-Word-词典"><a href="#Define-Word-词典" class="headerlink" title="Define Word 词典"></a>Define Word 词典</h3><p>这个其实是系统默认的词典，但是在命令里给了<code>Define Word</code>，可以快速查词。</p>
+<h3 id="Floating-Notes-浮动笔记"><a href="#Floating-Notes-浮动笔记" class="headerlink" title="Floating Notes 浮动笔记"></a>Floating Notes 浮动笔记</h3><p>默认命令为<code>Floating Notes</code>，显示在窗口最顶层，支持改变主题，分享到备忘录、提醒事项。</p>
+<p>功能比较简单，颜值在线，临时做一个笔记还算凑合，就不截图了。</p>
+<h2 id="杀手功能"><a href="#杀手功能" class="headerlink" title="杀手功能"></a>杀手功能</h2><p>“杀手功能”是我自己划分的，是我觉得非常好用的功能。</p>
+<h3 id="Window-Management-窗口管理器"><a href="#Window-Management-窗口管理器" class="headerlink" title="Window Management 窗口管理器"></a>Window Management 窗口管理器</h3><p>支持快速调整窗口大小、分屏、2&#x2F;3、3&#x2F;4分屏等等，默认命令为<code>Window Management</code>，<code>wm</code>就行。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-window-manager.png" srcset="/img/loading.gif" lazyload alt="窗口管理"></p>
+<p>这个功能基本就可以代替<code>Magnet</code>类似软件了，而Alfred本身是不具备的。</p>
+<h3 id="Clipboard-History-剪切板历史"><a href="#Clipboard-History-剪切板历史" class="headerlink" title="Clipboard History 剪切板历史"></a>Clipboard History 剪切板历史</h3><p>默认命令为<code>Clipboard History</code>，这里会展示复制过的图片和文字，都支持<strong>预览</strong>，同时支持<strong>输入关键字过滤</strong>（filter<strong>）</strong>，支持<strong>固定</strong>（pin），直接回车键粘贴当前选中项到当前窗口，<code>Cmd+数字</code>可以粘贴对应第几个选项。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-clipboard-history.png" srcset="/img/loading.gif" lazyload alt="剪切板历史"></p>
+<p>🎉 特别喜欢的一点是，Raycast<strong>会自动识别图片中的文字</strong>，这样输入文字就可以过滤图片了！！</p>
+<p>Alfred也有剪切板功能，但是似乎不能识别图片中的文字，现在已经完全代替我之前用的Clipy软件了。</p>
+<p>类似，还有Snippets（片段）功能，通常用于文字替换，我用的不多，系统其实也自带一个，和剪切板功能类似，就不做介绍了。</p>
+<h3 id="Switch-Window-切换窗口"><a href="#Switch-Window-切换窗口" class="headerlink" title="Switch Window 切换窗口"></a>Switch Window 切换窗口</h3><p>属于<strong>Navigation</strong>（导航）的子功能，支持<strong>关键字过滤当前打开的所有窗口</strong>，比默认的<code>Cmd+Tab</code>或者<code>Alt-Tab</code>软件一个个找窗口要高效很多！</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-switch-window.png" srcset="/img/loading.gif" lazyload alt="切换窗口"></p>
+<p>这个功能Alfred也是不具备的！</p>
+<h3 id="Search-Menu-Items-搜索菜单项"><a href="#Search-Menu-Items-搜索菜单项" class="headerlink" title="Search Menu Items 搜索菜单项"></a>Search Menu Items 搜索菜单项</h3><p>也属于<strong>Navigation</strong>（导航）的子功能，支持<strong>关键字过滤当前应用菜单栏里的所有项</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-search-menu-item.png" srcset="/img/loading.gif" lazyload alt="搜索菜单项"></p>
+<p>其实这个功能MacOS系统默认也提供了，在<code>Help</code>菜单项里可以搜索，默认的快捷键是<code>Cmd+Shift+/</code>，但是估计绝大部分人都不知道，或者记不住。</p>
+<h3 id="Alias-amp-Hotkey-别名-amp-快捷键"><a href="#Alias-amp-Hotkey-别名-amp-快捷键" class="headerlink" title="Alias &amp; Hotkey 别名 &amp; 快捷键"></a>Alias &amp; Hotkey 别名 &amp; 快捷键</h3><p>这个功能我认为才是绝对的王牌🃏🃏，提效一大截！直接起飞！</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-alias-hotkey-settings.png" srcset="/img/loading.gif" lazyload alt="别名/快捷键设置"></p>
+<p>这么多命令，要输入这么多字符其实很难搞，但是Raycast很方便的支持了Alias（别名）和全局快捷键。</p>
+<p>这里我设置了剪切板快捷键是<code>Option+C</code>，这样直接按键就可以进入搜索剪切板的界面，一步到位！</p>
+<p>关于别名，词典是<code>dw</code>，文件搜索是<code>f</code>，切换窗口是<code>w</code>，搜索菜单是<code>m</code>，还是需要快捷键呼出Raycast界面，这时输入<code>命令别名+空格键</code>或者<code>命令别名+Tab键</code>即可进入对应功能界面！</p>
+<p>在使用的过程中不是方便一点点，因为正常情况是需要点击回车才可以的，不够流畅，简短的别名+空格&#x2F;TAB，畅享丝滑！</p>
+<h2 id="扩展功能"><a href="#扩展功能" class="headerlink" title="扩展功能"></a>扩展功能</h2><p>Raycast支持插件和自定义脚本。</p>
+<p>程序内置了插件商店，快捷键是<code>Store</code>。</p>
+<p>插件还没怎么研究明白，看介绍是可以实现Github合并、拉取，Jira等等相关操作，有些过于专业化了，不是所有人用的到。</p>
+<p>这里推荐一个词典插件<code>EasyDict</code>，很好用，远胜于系统词典，支持各大在线翻译接口同时查询，单词朗读。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-plugin-easydict.png" srcset="/img/loading.gif" lazyload alt="EasyDict查词"></p>
+<p>关于自定义脚本，一样还没研究，看介绍支持各类语言，比如Bash、Apple Script、Swift、Python、Ruby、Node.js等等，等我研究明白了再说。</p>
+<h2 id="定价"><a href="#定价" class="headerlink" title="定价"></a>定价</h2><p>目前，个人和基础团队功能都是免费的，功能都没啥区别，只不过团队功能多了，可以共享的Quicklinks、Snippets配置，以及可以建立私有插件商店。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-pricing.png" srcset="/img/loading.gif" lazyload alt="各版本定价"></p>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>总的来说，除了没有本地化，一切都很满足我个人的需求，看看以后有没有机会能帮忙本地化一下。</p>
+<p>最后，Notion AI总结如下：</p>
+<blockquote>
+<p>Raycast是一款MacOS下的快捷启动器，支持快速启动程序、执行命令、搜索系统设置、文件搜索、窗口管理、剪切板历史、词典、快捷链接、提醒事项等功能。支持别名和全局快捷键，还有插件和自定义脚本功能。个人和基础团队功能都是免费的。</p>
+</blockquote>
+<p>最后的最后，祝大家五一快乐！🤗</p>
+<p>
+
+<p>以上，欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload alt="小黑杂说"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/" class="category-chain-item">软件工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MacOS/">#MacOS</a>
+      
+        <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/">#效率工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋</div>
+      <div>https://wuruofan.com/2023/04/28/raycast-a-productive-tool-on-mac-which-beyond-the-alternative-of-alfred-and-spotlight/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/05/using-mirror-repo-to-resolve-connection-refused-error-during-nvm-install/" title="解决nvm安装脚本无法连接问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决nvm安装脚本无法连接问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/16/harmony-os-3-how-to-sovle-chrome-always-asking-to-log-google-account/" title="鸿蒙3.0解决Chrome等应用登录账户无效的问题">
+                        <span class="hidden-mobile">鸿蒙3.0解决Chrome等应用登录账户无效的问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,937 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rf.w">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写在前面这是一篇一直想写的东西，在上一份工作的时候给新员工培训，我就发现不止新入职的员工，很多多年工作经验的同事也对Unix系统和shell知之甚少，然而这些知识可以更好点帮你认识你所使用的系统原理、语言设计思想、提高工作效率。 整篇文章包含两部分，这是上半部分，主要介绍Unix系统和它的特性、Unix设计哲学以及Unix树形文件系统结构。 全文1.2w字，大部分都是我个人这些年使用类Unix系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿">
+<meta property="og:url" content="https://wuruofan.com/2022/03/09/20-minutes-learning-unix-system-and-its-philosophy/index.html">
+<meta property="og:site_name" content="小黑杂说">
+<meta property="og:description" content="写在前面这是一篇一直想写的东西，在上一份工作的时候给新员工培训，我就发现不止新入职的员工，很多多年工作经验的同事也对Unix系统和shell知之甚少，然而这些知识可以更好点帮你认识你所使用的系统原理、语言设计思想、提高工作效率。 整篇文章包含两部分，这是上半部分，主要介绍Unix系统和它的特性、Unix设计哲学以及Unix树形文件系统结构。 全文1.2w字，大部分都是我个人这些年使用类Unix系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/unix-logo.jpeg">
+<meta property="article:published_time" content="2022-03-09T23:36:14.000Z">
+<meta property="article:modified_time" content="2023-08-03T00:57:56.342Z">
+<meta property="article:author" content="rf.w">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="MacOS">
+<meta property="article:tag" content="Unix">
+<meta property="article:tag" content="Unix哲学">
+<meta property="article:tag" content="树状结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/unix-logo.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿 - 小黑杂说</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wuruofan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小黑杂说</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/valley-banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-09 23:36" pubdate>
+          2022年3月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          9.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          80 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/unix-logo.jpeg" srcset="/img/loading.gif" lazyload alt="Unix"></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这是一篇一直想写的东西，在上一份工作的时候给新员工培训，我就发现不止新入职的员工，很多多年工作经验的同事也对Unix系统和shell知之甚少，然而<strong>这些知识可以更好点帮你认识你所使用的系统原理、语言设计思想、提高工作效率。</strong></p>
+<p><strong>整篇文章包含两部分，这是上半部分</strong>，主要介绍<strong>Unix系统和它的特性</strong>、<strong>Unix设计哲学</strong>以及<strong>Unix树形文件系统结构</strong>。</p>
+<p>全文1.2w字，大部分都是我个人这些年使用类Unix系统的理解和总结，适合开发、测试同学阅读。</p>
+<p>阅读完上下整篇文章，你会：</p>
+<ul>
+<li>✅ 了解Unix系统特性与设计思想，了解Unix系统目录结构，以及各个目录功能。</li>
+<li>✅ 了解什么是终端和Shell，以及关于环境变量。</li>
+<li>✅ 获得一些实用的居家旅行、高效工作的 <del><em>装X技巧</em></del> shell和终端使用技巧。</li>
+</ul>
+<h2 id="常见操作系统"><a href="#常见操作系统" class="headerlink" title="常见操作系统"></a>常见操作系统</h2><p>目前市面上常见的电脑操作系统就这三种了——Windows、MacOS和Linux。</p>
+<p>大多数人一开始接触电脑时使用的应该都是微软的Windows系统；后来有一部分人先富起来了，就接触到了MacOS。</p>
+<p>然而很少一部分人才会接触到Linux，这部分人大概率是服务端开发、运维人员，或者是嵌入式开发、内核工程师，但是真正拿Linux系统作为日常工作生活的主力系统的人更少之又少。</p>
+<p>我算是其中一位，上学与工作期间使用Linux作为主力系统，换Mac也是最近些年的事情。</p>
+<blockquote>
+<p><em>我最初投向Linux怀抱的原因很好笑，就是单纯的打dota激战正酣的时候，windows蓝屏了，然后我一气之下就把双系统windows的盘符格式化了。😂😂😂</em></p>
+</blockquote>
+<h2 id="Linux、MacOS与Unix"><a href="#Linux、MacOS与Unix" class="headerlink" title="Linux、MacOS与Unix"></a>Linux、MacOS与Unix</h2><p>Linux，其实严格上来说，只是指操作系统内核。现在各种服务器和个人电脑中使用的是各种各样Linux发行版，也就是内核外面套着的各种界面和样式壳子。</p>
+<p>MacOS则是苹果公司推出的具有友好且优美图形界面的操作系统，从一开始开放硬件到现在的专属系统，不管怎么样，B格一定拉满。</p>
+<p>在我看来，Linux和Mac其实是一回事，都是一种类Unix的操作系统。</p>
+<blockquote>
+<p><em><strong>题外话：</strong></em></p>
+<p><em>就像现在经常听到的讨论鸿蒙OS是不是Android一样，在我看来，鸿蒙OS和Android都是一种Linux，Android在Linux上打了补丁套了一层虚拟机、framework和UI；鸿蒙OS是在Linux上打了补丁，套了一层虚拟机、自己的和Android的framework和UI。</em></p>
+</blockquote>
+<p>那么问题来了，<strong>Unix是啥</strong>？</p>
+<p>Unix系统是贝尔实验室研究开发的一套多用户、多任务、多层次（multi-user、multi-processor、multi-level）、支持多种处理器架构的分时操作系统，可以说是现代操作系统的起源。</p>
+<p>目前它的商标权由国际开放标准组织所拥有，只有符合单一UNIX规范的UNIX系统才能使用UNIX这个名称，否则只能称为类UNIX（UNIX-like）。</p>
+<blockquote>
+<p><em>当然Unix也不是凭空出现的，他的前身是<strong>Multics</strong>操作系统，<strong>多任务信息与计算系统</strong>（MULTiplexed Information and Computing System）的缩写，它是一套分时多任务操作系统，是1964年由贝尔实验室、麻省理工学院及美国通用电气公司所共同参与研发，并安装在大型主机上。1969年，因MULTICS项目的工作进度过于缓慢，最后终究遭裁撤的命运，贝尔实验室由此退出此项目。</em></p>
+<p><em>当时，肯·汤普逊正在撰写一个称为“<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Space_Travel">星际旅行</a>”（Space Travel）的游戏程序。贝尔实验室退出Multics计划后，由贝尔实验室的两位软件工程师肯·汤普逊与丹尼斯·里奇以B语言和汇编语言为基础而发展出UNIX，1973年汤普逊和里奇用C语言重写了Unix，成为后来普及的版本。</em></p>
+</blockquote>
+<p>一般来说，Linux是一套遵从POSIX（可移植操作系统接口，Portable Operating System Interface，<strong>X</strong>则表明其对Unix API的传承。）规范的一个操作系统，它能够在普通PC计算机上实现全部的UNIX特性，具有多任务、多用户的能力。</p>
+<p>MacOS内核名为Darwin，是以BSD源代码（<strong>B</strong>erkeley <strong>S</strong>oftware <strong>D</strong>istribution，伯克利Unix版本）和Mach微核心为基础，也就是是一个派生自Unix的操作系统，BSD非常地宽松，因此BSD常被当作工作站级别的Unix系统。</p>
+<p>Windows NT声称自己实现了部分POSIX，但是值得称赞的是，Win10H2版本后，微软迈出了重大的一步，系统利用虚拟化技术集成了WSL（<strong>W</strong>indows <strong>S</strong>ubsystem for <strong>L</strong>inux），可以在Windows系统中获得和原生Linux系统一致的体验，以至于很多人调侃，<strong>目前阶段，体验最好的Linux发行版是Windows。</strong>😂</p>
+<p>👉<em>扩展阅读：关于WSL安装与使用，请移步另一篇博客：<a href="https://wuruofan.com/2021/04/01/working-guide-on-win-10-of-linux-macos-programmers/">MacOS&#x2F;Linux程序员Win10平台生存指北 </a></em></p>
+<blockquote>
+<p><em>参考：</em></p>
+<ol>
+<li><em><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/UNIX">维基百科：UNIX</a></em></li>
+<li><em><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Linux">维基百科：Linux</a></em></li>
+<li><em><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/MacOS">维基百科：MacOS</a></em></li>
+</ol>
+</blockquote>
+<h2 id="Unix系统特点"><a href="#Unix系统特点" class="headerlink" title="Unix系统特点"></a>Unix系统特点</h2><h3 id="国外Geek如何看Unix"><a href="#国外Geek如何看Unix" class="headerlink" title="国外Geek如何看Unix"></a>国外Geek如何看Unix</h3><h4 id="1-Multiuser-System"><a href="#1-Multiuser-System" class="headerlink" title="1. Multiuser System :"></a>1. Multiuser System :</h4><p><strong>多用户系统</strong>：</p>
+<p>Unix系统采用时间片轮转的方式，保证计算资源在多个用户之间共享。</p>
+<h4 id="2-Multitask-System"><a href="#2-Multitask-System" class="headerlink" title="2. Multitask System :"></a>2. Multitask System :</h4><p><strong>多任务系统</strong>：</p>
+<p>单个用户可以同时处理多个任务，比如，编辑一个文件的同时打印另一个文件，发送邮件的同时浏览网络。</p>
+<p>内核从设计之初就支持用户的多任务需求，这里的多任务的设计，可以让用户看到一个任务在前台，其他任务在后台。用户可以切换、终止或挂起任务。</p>
+<h4 id="3-The-Building-Block-Approach"><a href="#3-The-Building-Block-Approach" class="headerlink" title="3. The Building-Block Approach :"></a>3. The Building-Block Approach :</h4><p><strong>积木式方法</strong>：</p>
+<p>Unix开发者一贯坚持简洁原则，因此Unix有一堆命令，每个命令只完成一件事情。但是你可以通过”|”管道符号将两个命令连接起来，完成更多的业务。</p>
+<p>直至今日，很多Unix工具都支持将另一个程序的输出作为自己的输入。我们通过这种机制可以得到各种各样的新工具。</p>
+<blockquote>
+<p><em><strong>个人理解</strong>：</em></p>
+<p><em>这点设计思想和Windows截然不同，Windows上的软件习惯提供给用户一堆功能，而Linux依然贯彻小而美的理念，当然无可厚非，面向用户不同，Unix面向的是Developers，Windows面向的是普罗大众；这直接也决定了操作系统的生态与主要用途。</em></p>
+</blockquote>
+<h4 id="4-The-UNIX-Toolkit"><a href="#4-The-UNIX-Toolkit" class="headerlink" title="4. The UNIX Toolkit :"></a>4. The UNIX Toolkit :</h4><p><strong>UNIX实用工具箱</strong>：</p>
+<p>Unix有一个内核，但仅靠内核无法帮助用户。因此，我们需要使用通常与UNIX系统一起附带的各式各样实用工具。（各种命令行工具）</p>
+<h4 id="5-Pattern-Matching"><a href="#5-Pattern-Matching" class="headerlink" title="5. Pattern Matching :"></a>5. Pattern Matching :</h4><p><strong>模式匹配</strong>：</p>
+<p>Unix提供了非常复杂的模式匹配功能，可以使用正则表达式进行匹配。</p>
+<h4 id="6-Programming-Facility"><a href="#6-Programming-Facility" class="headerlink" title="6. Programming Facility :"></a>6. Programming Facility :</h4><p><strong>便于编程</strong>：</p>
+<p>Unix提供shell程序，同时这也是为程序员而不是为普通用户设计的编程语言。它具有编程所需的所有控制结构、循环和变量。这些功能用于设计shell脚本（可以调用UNIX命令的程序）。</p>
+<p>系统的许多功能都可以由这些shell脚本控制和管理。</p>
+<h4 id="7-Documentation"><a href="#7-Documentation" class="headerlink" title="7. Documentation :"></a>7. Documentation :</h4><p><strong>完善的文档</strong></p>
+<p>它有一个代表手册的“man”命令，这是任何命令及其配置文件最重要的参考手册。</p>
+<blockquote>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/features-of-unix/">Features of Unix</a></em></p>
+</blockquote>
+<h3 id="国内学者如何看Unix"><a href="#国内学者如何看Unix" class="headerlink" title="国内学者如何看Unix"></a>国内学者如何看Unix</h3><ol>
+<li><p>UNIX系统在结构上分为核心程序（kernel）和外围程序（shell）两部分，而且两者有机结合成为一个整体。核心部分承担系统内部的各个模块的功能，即处理机和进程管理、存储管理、设备管理和文件系统。核心程序的特点是精心设计、简洁精干，只需占用很小的空间而常驻内存，以保证系统的高效率运行。外围部分包括系统的用户界面、系统实用程序以及应用程序，用户通过外围程序使用计算机。 </p>
+</li>
+<li><p>UNIX系统提供了良好的用户界面，具有使用方便、功能齐全、清晰而灵活、易于扩充和修改等特点。UNIX系统的使用有两种形式：一种是操作命令，即shell语言，是用户可以通过终端与系统发生交互作用的界面；另一种是面向用户程序的界面，它不仅在汇编语言，而且在C语言中向用户提供服务。</p>
+</li>
+<li><p>UNIX系统的文件系统是树形结构。它由基本文件系统和若干个可装卸的子文件系统组成，既能扩大文件存储空间，又有利于安全和保密。</p>
+</li>
+<li><p>UNIX系统把文件、文件目录和设备统一处理。它把文件作为不分任何记录的字符流进行顺序或随机存取，并使得文件、文件目录和设备具有相同的语法语义和相同的保护机制，这样既简化了系统设计，又便于用户使用。 </p>
+</li>
+<li><p>UNIX系统包含有非常丰富的语言处理程序、实用程序和开发软件用的工具性软件，向用户提供了相当完备的软件开发环境。</p>
+</li>
+<li><p>UNIX系统的绝大部分程序是用C语言编程的，只有约占5%的程序用汇编语言编程。C语言是一种高级程序设计语言，它使得UNIX系统易于理解、修改和扩充，并且具有非常好的移植性。</p>
+</li>
+<li><p>UNIX系统还提供了进程间的简单通信功能。</p>
+</li>
+</ol>
+<blockquote>
+<p><em>参考：赵文庆．UNIX和计算机软件技术基础．上海：复旦大学出版社，2011：9-23</em></p>
+</blockquote>
+<h2 id="Unix的设计思想"><a href="#Unix的设计思想" class="headerlink" title="Unix的设计思想"></a>Unix的设计思想</h2><p>UNIX不仅仅是一个操作系统，更是一种生活方式。经过几十年的发展，UNIX在技术上日臻成熟的过程中，它独特的设计哲学和美学也深深地吸引了一大批技术人员，他们在维护、开发、使用UNIX的同时，UNIX也影响了他们的思考方式和看待世界的角度。</p>
+<p><strong>UNIX重要的设计原则</strong>：</p>
+<ul>
+<li>简洁至上（KISS原则）</li>
+<li>提供机制而非策略</li>
+</ul>
+<p>道格拉斯·麦克罗伊是Unix系统上管道机制，也是Unix文化的缔造者之一。他归纳的Unix哲学如下：</p>
+<ol>
+<li>程序应该只关注一个目标，并尽可能把它做好。</li>
+<li>让程序能够互相协同工作。</li>
+<li>应该让程序处理文本数据流，因为这是一个通用的接口。</li>
+</ol>
+<blockquote>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Unix%E5%93%B2%E5%AD%A6">Unix哲学</a></em></p>
+</blockquote>
+<h3 id="简洁至上"><a href="#简洁至上" class="headerlink" title="简洁至上"></a>简洁至上</h3><p>这也就是著名的<strong>KISS（Keep It Simple, Stupid）原则</strong>，在Unix中，尽可能让一个代码模块只做一件事情，把这件事情做好，然后把一个个小功能组合起来实现大功能。</p>
+<blockquote>
+<p><em>关于这一点，阮一峰大佬的笔记如下：</em></p>
+<p><em><strong>1. 清晰原则。</strong></em></p>
+<p><em>代码要写得尽量清晰，避免晦涩难懂。清晰的代码不容易崩溃，而且容易理解和维护。重视注释。不为了性能的一丁点提升，而大幅增加技术的复杂性，因为复杂的技术会使得日后的阅读和维护更加艰难。</em></p>
+<p><em><strong>2. 模块原则。</strong></em></p>
+<p><em>每个程序只做一件事，不要试图在单个程序中完成多个任务。在程序的内部，面向用户的界面（前端）应该与运算机制（后端）分离，因为前端的变化往往快于后端。</em></p>
+<p><em><strong>3. 组合原则。</strong></em></p>
+<p><em>不同的程序之间通过接口相连。接口之间用文本格式进行通信，因为文本格式是最容易处理、最通用的格式。这就意味着尽量不要使用二进制数据进行通信，不要把二进制内容作为输出和输入。</em></p>
+<p><em><strong>4. 优化原则。</strong></em></p>
+<p><em>在功能实现之前，不要考虑对它优化。最重要的是让一切先能够运行，其次才是效率。”先求运行，再求正确，最后求快。”（Make it run, then make it right, then make it fast.）90%的功能现在能实现，比100%的功能永远实现不了强。先做出原型，然后找出哪些功能不必实现，那些不用写的代码显然无需优化。目前，最强大的优化工具恐怕是Delete键。</em></p>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2009/06/unix_philosophy.html">https://www.ruanyifeng.com/blog/2009/06/unix_philosophy.html</a></em></p>
+</blockquote>
+<h3 id="提供机制而非策略"><a href="#提供机制而非策略" class="headerlink" title="提供机制而非策略"></a>提供机制而非策略</h3><p>如何理解机制（mechanism）和策略（policy）呢？</p>
+<p>就像前面说到的“积木式方法”，我们拼乐高，<strong>乐高积木的凸起和凹槽就是机制，我们如何拼便是策略</strong>。</p>
+<p>我的理解：<strong>机制是接口能力、是框架，策略是业务实体。前者是不变的，或者变化较少的；后者是善变的，根据不同场景可以进行调整的。</strong></p>
+<p>这样的方式更灵活，也更强大。</p>
+<p>下面是我对这个特性的一些理解。</p>
+<h4 id="让程序处理文本数据流"><a href="#让程序处理文本数据流" class="headerlink" title="让程序处理文本数据流"></a>让程序处理文本数据流</h4><p>道格拉斯·麦克罗伊归纳的Unix哲学之一，绝大数Unix程序都会把标准输入<code>stdin</code>作为自己的输入，然后把需要输出的信息打印到标准输出<code>stdout</code>。这样利用管道机制，就可以让数据在命令间串行流动起来。</p>
+<p>我们再把现在的那些流式编程思想和Unix比较，是不是有些类似？<strong>用管道连接的每一个命令，其实都是这个文本输入流的过滤器。</strong></p>
+<p>这个思想也引入了另一个Unix理念：“<strong>沉默是金</strong>”。</p>
+<p>其含义也很简单，如果没有必要，就别输出乱七八糟的信息，以免影响下一个命令的处理流程。</p>
+<h4 id="设备驱动框架"><a href="#设备驱动框架" class="headerlink" title="设备驱动框架"></a>设备驱动框架</h4><p>我们日常使用的手机，包含了各式各样的外设：触摸屏、按键、摄像头、扬声器等等，都是基于Linux设备驱动框架进行实现的。</p>
+<p>Linux内核本身提供了Device - Bus - Driver设备驱动框架（机制），各个厂商才可以实现各种各样外设驱动（策略）供用户使用。</p>
+<h4 id="SELinux强制访问控制"><a href="#SELinux强制访问控制" class="headerlink" title="SELinux强制访问控制"></a>SELinux强制访问控制</h4><p>Linux内核提供了LSM（Linux Secrity Module）安全机制，才有了后来NSA（美国国家安全局）实现的SELinux（Security-Enhanced Linux）模块。</p>
+<p>当然后者其实也是一种机制，各个系统厂商可以配置自己的策略文件sepolicy去实现不同的强制访问控制——任何未经明确允许的行为都会被拒绝。我们现在使用的Android手机，在4.4版本之后已经默认集成并开启了这项功能。</p>
+<h4 id="一切皆文件"><a href="#一切皆文件" class="headerlink" title="一切皆文件"></a>一切皆文件</h4><p>在Unix系统中一切皆文件。我们平时接触到的文件和目录都是文件，各种外设（鼠标、屏幕）在Unix系统中也是一个个设备节点文件，我们网络编程访问网络使用的套接字（Socket）在Unix系统中也是一个文件，系统中正在运行的进程也有文件与之对应。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/all-things-are-files-in-unix.png" srcset="/img/loading.gif" lazyload alt="一切皆文件"></p>
+<p>这些文件都可以简单的利用Linux提供的文件操作接口（File Operations），使用fopen、fclose、fwrite、fread等方法进行访问操作。</p>
+<p>举个例子，在有权限的情况，你可以通过向对应的屏幕设备节点写入1或者0，进行屏幕亮灭的控制。</p>
+<h2 id="文件系统树状结构"><a href="#文件系统树状结构" class="headerlink" title="文件系统树状结构"></a>文件系统树状结构</h2><h3 id="单一根文件的树状存储"><a href="#单一根文件的树状存储" class="headerlink" title="单一根文件的树状存储"></a>单一根文件的树状存储</h3><p>在Unix 操作系统中，所有的文件和目录都被组织成以一个根节点开始的倒置的树状结构。</p>
+<p>文件系统的最顶层是由根目录开始的，系统使用 <strong>&#x2F;</strong> 来表示根目录。在根目录之下的既可以是目录，也可以是文件，而每一个目录中又可以包含子目录文件。如此反复，构成一个庞大的文件系统。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/linux-tree-root-directory-structure.jpeg" srcset="/img/loading.gif" lazyload alt="Linux根目录树状结构"></p>
+<p><strong>举个例子</strong>：</p>
+<p>一个Android系统中常见路径：<code>/storage/emulated/0/Download/</code>，通常以<code>/</code>结尾会被认为是一个目录的路径。</p>
+<p>第一个<code>/</code>被认为是根目录，根路径是树状结构的起始，可以当做是0，所以<code>/</code>文件分隔符前没有任何字符，之后的<code>storage/</code>和<code>emulated/</code>、<code>0/</code>、<code>Download/</code>都代表一级子目录。</p>
+<h3 id="特殊目录与隐藏文件"><a href="#特殊目录与隐藏文件" class="headerlink" title="特殊目录与隐藏文件"></a>特殊目录与隐藏文件</h3><p>在Unix文件系统中有两个特殊的目录：</p>
+<ol>
+<li><strong>当前目录</strong>：通常用一个<code>.</code>表示，表示用户所在的工作目录（working directory）</li>
+<li><strong>父目录</strong>：通常用两个点 <code>..</code> 来表示，就是当前目录的上一级目录。</li>
+</ol>
+<p>这两个目录在每一个目录下都会以链接的形式存在，使用<code>ls -a</code>的时候就可以看到。</p>
+<p>同样，用这个命令我们还可以看到一些以<code>.</code>开头的文件或者目录，比如用户home目录下经常遇到的<code>~/.bashrc</code>文件或者<code>~/.ssh/</code>目录，这些都是<strong>隐藏文件&#x2F;目录</strong>——在默认方式访问时，文件管理器和shell程序并不会显示这些文件&#x2F;目录。</p>
+<h3 id="各目录功能"><a href="#各目录功能" class="headerlink" title="各目录功能"></a>各目录功能</h3><p>以下是对<strong>Linux系统根目录</strong>一些子目录的解释：</p>
+<h4 id="x2F-bin"><a href="#x2F-bin" class="headerlink" title="&#x2F;bin"></a>&#x2F;bin</h4><p> Binaries （二进制文件） 的缩写，存放着各种<strong>基础命令</strong>的二进制可执行文件。</p>
+<blockquote>
+<p><em><code>/bin</code>目录中通常存放的是系统管理员和用户都能使用的命令，这些命令可以在系统修复、启动时使用，不需要依赖文件系统。</em></p>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/5915/difference-between-bin-and-usr-bin/5935">Difference between &#x2F;bin and &#x2F;usr&#x2F;bin</a></em></p>
+</blockquote>
+<h4 id="x2F-boot"><a href="#x2F-boot" class="headerlink" title="&#x2F;boot"></a>&#x2F;boot</h4><p>启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+<h4 id="x2F-dev"><a href="#x2F-dev" class="headerlink" title="&#x2F;dev"></a>&#x2F;dev</h4><p>Device（设备） 的缩写，该目录下存放的是 Linux 的外部设备节点文件，利用文件操作接口即可方便的控制外设。</p>
+<h4 id="x2F-etc"><a href="#x2F-etc" class="headerlink" title="&#x2F;etc"></a>&#x2F;etc</h4><p>“等等”的缩写，该目录下存放的一些系统程序所需要的配置文件。</p>
+<h4 id="x2F-home"><a href="#x2F-home" class="headerlink" title="&#x2F;home"></a>&#x2F;home</h4><p>Unix是一个多用户系统，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的，</p>
+<p>Linux系统用户的主目录通常在这个目录下对应用户名的子目录中，如上图中的 alice、bob 和 eve。</p>
+<p><strong>用户拥有其用户主目录下文件的所有访问操作权限</strong>，通常在命令行会使用<code>~</code>代替<code>/home/&lt;username&gt;</code>。</p>
+<p>注：MacOS系统的用户目录通常在<code>/Users/&lt;username&gt;</code>。</p>
+<h4 id="x2F-lib"><a href="#x2F-lib" class="headerlink" title="&#x2F;lib"></a>&#x2F;lib</h4><p>Library（库）的缩写，该目录存放着系统动态链接库（so），类似于Windows里的 DLL 文件。</p>
+<p>注：MacOS的Library目录和Linux的区别较大，主要是一些系统程序。</p>
+<h4 id="x2F-lost-found"><a href="#x2F-lost-found" class="headerlink" title="&#x2F;lost+found"></a>&#x2F;lost+found</h4><p>该目录一般情况下是空的，可以理解为回收站，当系统异常关机后，这里就存放了一些文件。</p>
+<h4 id="x2F-kernel"><a href="#x2F-kernel" class="headerlink" title="&#x2F;kernel"></a>&#x2F;kernel</h4><p>该目录存放系统的内核文件。</p>
+<h4 id="x2F-media"><a href="#x2F-media" class="headerlink" title="&#x2F;media"></a>&#x2F;media</h4><p>系统自动挂载的设备所在目录，Linux系统会自动识别一些设备，例如U盘、mp3、光驱等等，系统识别后，Linux设备驱动框架会把识别的设备挂载到media目录下。</p>
+<p>注：MacOS系统对应目录为<code>/Volumns</code>。</p>
+<h4 id="x2F-mnt"><a href="#x2F-mnt" class="headerlink" title="&#x2F;mnt"></a>&#x2F;mnt</h4><p>mount（挂载）的缩写，通常是为了用户临时手动挂载一些设备所使用。比如一些默认无法识别的文件系统，可以通过手动挂载的方式进行访问。</p>
+<p>注：MacOS系统对应目录为<code>/Volumns</code>。</p>
+<h4 id="x2F-opt"><a href="#x2F-opt" class="headerlink" title="&#x2F;opt"></a>&#x2F;opt</h4><p>optional（可选） 的缩写，一些应用软件会安装到此目录，通常是用户级的。比如你自己下载了一个软件，可以选择安装到此目录，<strong>它所有的数据、库文件等等都是放在同个目录下面。</strong></p>
+<p><strong>安装到此目录的应用，通常隐含着一个意思，就是我随时可以把这个目录<code>rm -rf</code>强制删除，当个渣男说拜拜。</strong></p>
+<h4 id="x2F-proc"><a href="#x2F-proc" class="headerlink" title="&#x2F;proc"></a>&#x2F;proc</h4><p>Processes（进程） 的缩写，此目录下存放的并不是真实存在的文件或者外设，而是一套虚拟文件系统，存储的是当前内核运行状态的一系列特殊文件，它是系统内存的映射，系统内存中运行的每一个进程都会在此目录存在对应的文件，我们可以通过一些指令，获取指定进程的状态，也可以改变进程的状态。</p>
+<p>比如Android native开发时会通过一些系统命令获取当前的进程信息，监控当前进程所打开&#x2F;持有的inode数目，便是通过<code>/proc/self/</code>下的信息进行获得。</p>
+<p>比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-number">1</span> &gt; <span class="hljs-regexp">/proc/</span>sys<span class="hljs-regexp">/net/i</span>pv4/icmp_echo_ignore_all<br></code></pre></td></tr></table></figure>
+
+<p>注：MacOS无此目录。</p>
+<blockquote>
+<p><em>扩展阅读：<a target="_blank" rel="noopener" href="https://blog.spoock.com/2019/10/08/proc/">Linux下&#x2F;proc目录简介</a></em></p>
+</blockquote>
+<h4 id="x2F-root"><a href="#x2F-root" class="headerlink" title="&#x2F;root"></a>&#x2F;root</h4><p>系统管理员（超级用户）的用户主目录，普通用户的主目录在<code>/home/&lt;username&gt;</code>。</p>
+<p>我对root账户的理解就是可以操作<code>/</code>根（root）目录的用户。</p>
+<h4 id="x2F-sbin"><a href="#x2F-sbin" class="headerlink" title="&#x2F;sbin"></a>&#x2F;sbin</h4><p>s就是Super User（超级用户）的意思，超级用户的二进制文件，这里存放的是一些需要超级用户权限才能使用的“高级”命令。</p>
+<h4 id="x2F-selinux"><a href="#x2F-selinux" class="headerlink" title="&#x2F;selinux"></a>&#x2F;selinux</h4><p>前面我提到过，一套强制访问控制（MAC）机制对应的存储目录。</p>
+<h4 id="x2F-srv"><a href="#x2F-srv" class="headerlink" title="&#x2F;srv"></a>&#x2F;srv</h4><p>通常和服务器有关，个人电脑没怎么见过，该目录存放一些服务启动之后需要的数据。</p>
+<blockquote>
+<p><em><strong>是用户主动生产的数据、对外提供服务所使用的文件。</strong></em></p>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u012107143/article/details/54972544">关于linux下&#x2F;srv、&#x2F;var和&#x2F;tmp的职责区分</a></em></p>
+</blockquote>
+<h4 id="x2F-sys"><a href="#x2F-sys" class="headerlink" title="&#x2F;sys"></a>&#x2F;sys</h4><p>也是内核设备框架sysfs文件系统使用的目录，类似于<code>/proc</code>目录，只不过这个目录映射的是系统内核的设备树，用户态程序可以通过sysfs获取当前系统外设的一些信息，并使用驱动暴露的一些文件接口操纵外设。</p>
+<h4 id="x2F-tmp"><a href="#x2F-tmp" class="headerlink" title="&#x2F;tmp"></a>&#x2F;tmp</h4><p>temporary（临时）的缩写，用来存放一些临时文件的、缓存文件的目录，比如浏览器下载过程中会先在此目录进行缓冲。</p>
+<blockquote>
+<p><em><strong>保存一些使用完毕后可随时销毁的缓存文件。</strong>（有可能是由系统或程序产生、也有可能是用户主动放入的临时数据、系统会自动清理）</em></p>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u012107143/article/details/54972544">关于linux下&#x2F;srv、&#x2F;var和&#x2F;tmp的职责区分</a></em></p>
+</blockquote>
+<h4 id="x2F-usr"><a href="#x2F-usr" class="headerlink" title="&#x2F;usr"></a>&#x2F;usr</h4><p>虽然 <strong>&#x2F;usr</strong> 目录发音是 <strong>user</strong> ，但实际它是 <strong>Unix System Resources</strong> 的缩写，意思是 <strong>Unix 系统资源</strong> 。用户的很多应用程序、运行库、文档、配置都存在都这个目录下，有点类似于Windows下的program files目录。这个目录中的文件都是只读的。</p>
+<ul>
+<li><p>&#x2F;usr&#x2F;bin：包含对所有用户都能使用的<strong>非基础命令</strong>，是系统中大部分命令的存储目录。（注：与<code>/bin</code>目录区别。）</p>
+</li>
+<li><p>&#x2F;usr&#x2F;include：C语言头文件所在目录（Unix是用C语言写的）。</p>
+</li>
+<li><p>&#x2F;usr&#x2F;lib：包含着所有 <code>/usr/bin</code>和 <code>/usr/sbin</code>目录中可执行命令程序需调用的库文件。</p>
+</li>
+<li><p>&#x2F;usr&#x2F;share：通常包含着命令的一些数据文件、配置、文档等。</p>
+</li>
+<li><p>&#x2F;usr&#x2F;local：通常通过源码编译安装的软件会安装到此目录，Unix程序员约定俗成的目录。</p>
+</li>
+<li><p>&#x2F;usr&#x2F;src：内核源代码所在目录（你用Unix系统很容易就可以接触到源码）。</p>
+<blockquote>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://learnku.com/server/wikis/36496">Linux 目录结构：Unix 系统资源目录（&#x2F;usr）</a></em></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="x2F-var"><a href="#x2F-var" class="headerlink" title="&#x2F;var"></a>&#x2F;var</h4><p>variable（变量）的缩写，通常习惯将那些易变的、易失的文件放在这个目录下，很多程序的日志文件保存在此目录。</p>
+<p>比如你在本机搭建了一个Apache或者nginx服务器，通常网站数据也被保存在这个目录。</p>
+<blockquote>
+<p><em><strong>系统产生的不可自动销毁的缓存文件、日志记录。</strong>（系统和程序运行后产生的数据、不对外提供服务、只能用户手动清理）（包括mail、数据库文件、日志文件）</em></p>
+<p><em>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u012107143/article/details/54972544">关于linux下&#x2F;srv、&#x2F;var和&#x2F;tmp的职责区分</a></em></p>
+</blockquote>
+<h4 id="x2F-run"><a href="#x2F-run" class="headerlink" title="&#x2F;run"></a>&#x2F;run</h4><p>是一个临时文件系统，存储的是系统启动、运行需要的文件，系统重启时，该目录下文件会被抛弃重新生成。通常<code>/var/run</code>目录，会链接到 <code>/run目录</code>。</p>
+<blockquote>
+<p> <em>参考：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-system-contents.html">Linux 系统目录结构</a></em></p>
+</blockquote>
+<h3 id="为什么这么设计？"><a href="#为什么这么设计？" class="headerlink" title="为什么这么设计？"></a>为什么这么设计？</h3><p>可能上面的那些目录，大多数看了也头晕，为什么<code>/usr</code>目录下很多内容和<code>/</code>目录里的是相同的？</p>
+<p>历史原因和发展原因。</p>
+<p>以下摘自阮一峰大佬博客<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2012/02/a_history_of_unix_directory_structure.html">Unix目录结构的来历</a>：</p>
+<blockquote>
+<p><em>话说1969年，Ken Thompson和Dennis Ritchie在小型机PDP-7上发明了Unix。1971年，他们将主机升级到了PDP-11。</em></p>
+<p><em><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/PDP-7-computer.jpeg" srcset="/img/loading.gif" lazyload alt="小型机PDP-7"></em></p>
+<p><em>当时，他们使用一种叫做RK05的储存盘，一盘的容量大约是1.5MB。</em></p>
+<p><em><img src="https://raw.githubusercontent.com/wuruofan/image_repo/main/img/rk05-storage-disk.jpeg" srcset="/img/loading.gif" lazyload alt="RK05存储磁盘"></em></p>
+<p><em>没过多久，操作系统（根目录）变得越来越大，一块盘已经装不下了。于是，他们加上了第二盘RK05，并且规定第一块盘专门放系统程序，第二块盘专门放用户自己的程序，因此挂载的目录点取名为&#x2F;usr。也就是说，根目录”&#x2F;“挂载在第一块盘，”&#x2F;usr”目录挂载在第二块盘。除此之外，两块盘的目录结构完全相同，第一块盘的目录（&#x2F;bin, &#x2F;sbin, &#x2F;lib, &#x2F;tmp…）都在&#x2F;usr目录下重新出现一次。</em></p>
+<p><em>后来，第二块盘也满了，他们只好又加了第三盘RK05，挂载的目录点取名为&#x2F;home，并且规定&#x2F;usr用于存放用户的程序，&#x2F;home用于存放用户的数据。</em></p>
+<p><em>从此，这种目录结构就延续了下来。</em></p>
+<p><em>注：这部分原文来自<a target="_blank" rel="noopener" href="http://lists.busybox.net/pipermail/busybox/2010-December/074114.html">Rob Landley的邮件</a></em></p>
+</blockquote>
+<h2 id="…"><a href="#…" class="headerlink" title="…"></a>…</h2><p>以上，未完待续。</p>
+<p>欢迎关注公众号“<strong>小黑杂说</strong>”。</p>
+<p><img src="https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" class="category-chain-item">技术总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/MacOS/">#MacOS</a>
+      
+        <a href="/tags/Unix/">#Unix</a>
+      
+        <a href="/tags/Unix%E5%93%B2%E5%AD%A6/">#Unix哲学</a>
+      
+        <a href="/tags/%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/">#树状结构</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿</div>
+      <div>https://wuruofan.com/2022/03/09/20-minutes-learning-unix-system-and-its-philosophy/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rf.w</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/21/20-minutes-learning-terminal-and-unix-shell/" title="20分钟入门｜Terminal与Unix Shell——程序员应该知道的那些事儿">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">20分钟入门｜Terminal与Unix Shell——程序员应该知道的那些事儿</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/19/using-intdef-annotation-instead-of-enum-for-android/" title="Android｜使用IntDef注解代替枚举类">
+                        <span class="hidden-mobile">Android｜使用IntDef注解代替枚举类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
