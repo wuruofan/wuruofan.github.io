@@ -3,7 +3,7 @@ export const SITE = {
   author: "wuruofan",
   profile: "https://github.com/wuruofan",
   desc: "个人博客 - 记录技术笔记与思考",
-  title: "Stardust Blog",
+  title: "小黑杂说",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
