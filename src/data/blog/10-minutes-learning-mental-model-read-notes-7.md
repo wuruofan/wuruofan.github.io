@@ -2,8 +2,8 @@
 title: 10分钟学点《思维模型》7：接受同行评议 & 找出自我缺陷
 pubDatetime: 2021-08-18T00:35:00Z
 modDatetime: 2021-08-18T00:35:00Z
-heroImage: ...
-description: 10分钟学点《思维模型》7：接受同行评议 heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%8E%84%E9%87%8C%E6%96%AF%E9%AD%94%E9%95%9C.jpg 找出自我缺陷
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%8E%84%E9%87%8C%E6%96%AF%E9%AD%94%E9%95%9C.jpg
+description: 10分钟学点《思维模型》7：接受同行评议 & 找出自我缺陷
 draft: false
 tags:
   - 思维导图

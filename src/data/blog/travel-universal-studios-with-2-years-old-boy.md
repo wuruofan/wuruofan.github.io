@@ -2,7 +2,7 @@
 title: 环球影城与肩膀差点裂开的爸爸
 pubDatetime: 2021-11-06T22:00:00Z
 modDatetime: 2021-11-06T22:00:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg
 description: 环球影城与肩膀差点裂开的爸爸
 draft: false
 tags:

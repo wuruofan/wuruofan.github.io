@@ -2,7 +2,7 @@
 title: Android｜使用IntDef注解代替枚举类
 pubDatetime: 2022-02-19T23:30:00Z
 modDatetime: 2022-02-19T23:30:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/android-robot-logo.jpg
 description: Android｜使用IntDef注解代替枚举类
 draft: false
 tags:

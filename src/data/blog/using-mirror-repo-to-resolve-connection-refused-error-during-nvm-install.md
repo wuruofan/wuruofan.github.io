@@ -2,7 +2,7 @@
 title: 解决nvm安装脚本无法连接问题
 pubDatetime: 2023-06-05T19:00:00Z
 modDatetime: 2023-06-05T19:00:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png
 description: 解决nvm安装脚本无法连接问题
 draft: false
 tags:

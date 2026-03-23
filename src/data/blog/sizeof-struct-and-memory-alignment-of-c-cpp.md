@@ -2,7 +2,7 @@
 title: 遇坑总结｜结构体大小与内存对齐问题
 pubDatetime: 2022-10-13T19:23:36Z
 modDatetime: 2022-10-13T19:23:36Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg
 description: 遇坑总结｜结构体大小与内存对齐问题
 draft: false
 tags:

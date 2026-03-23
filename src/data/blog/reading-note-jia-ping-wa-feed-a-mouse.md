@@ -2,7 +2,7 @@
 title: 读 贾平凹《养鼠》
 pubDatetime: 2021-10-27T21:30:00Z
 modDatetime: 2021-10-27T21:30:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qibaishi-mouse.jpeg
 description: 读 贾平凹《养鼠》
 draft: false
 tags:

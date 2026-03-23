@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》10：学会反向思考
 pubDatetime: 2021-09-08T23:00:00Z
 modDatetime: 2021-09-08T23:00:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/parking-car-quiz.jpg
 description: 10分钟学点《思维模型》10：学会反向思考
 draft: false
 tags:

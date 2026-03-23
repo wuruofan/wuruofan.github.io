@@ -2,8 +2,8 @@
 title: 10分钟学点《思维模型》8：寻找根本原因（五问法&鱼骨图）
 pubDatetime: 2021-08-24T20:00:00Z
 modDatetime: 2021-08-24T20:00:00Z
-heroImage: ...
-description: 10分钟学点《思维模型》8：寻找根本原因（五问法heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE2.png鱼骨图）
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE2.png
+description: 10分钟学点《思维模型》8：寻找根本原因（五问法&鱼骨图）
 draft: false
 tags:
   - 思维导图

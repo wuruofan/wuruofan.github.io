@@ -2,7 +2,7 @@
 title: Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏
 pubDatetime: 2023-02-01T20:20:00Z
 modDatetime: 2023-02-01T20:20:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/coordinator_layout_webkul.png
 description: Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏
 draft: false
 tags:

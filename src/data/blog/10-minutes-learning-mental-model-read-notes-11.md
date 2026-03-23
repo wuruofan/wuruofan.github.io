@@ -2,8 +2,8 @@
 title: 10分钟学点《思维模型》11：不办事项清单 & 避免阻力最小道路
 pubDatetime: 2021-09-15T20:00:00Z
 modDatetime: 2021-09-15T20:00:00Z
-heroImage: ...
-description: 10分钟学点《思维模型》11：不办事项清单 heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/choose-harder-right-instead-of-easier-wrong-small.jpg 避免阻力最小道路
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/choose-harder-right-instead-of-easier-wrong-small.jpg
+description: 10分钟学点《思维模型》11：不办事项清单 & 避免阻力最小道路
 draft: false
 tags:
   - 思维导图

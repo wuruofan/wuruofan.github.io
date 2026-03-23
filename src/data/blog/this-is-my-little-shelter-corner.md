@@ -2,7 +2,7 @@
 title: 这是我的避世小角落，你的呢？
 pubDatetime: 2021-12-27T22:30:00Z
 modDatetime: 2021-12-27T22:30:00Z
-heroImage: ...
+heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/my-medaka-fish-tank.jpg
 description: 这是我的避世小角落，你的呢？
 draft: false
 tags:
