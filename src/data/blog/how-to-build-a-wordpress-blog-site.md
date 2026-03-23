@@ -1,5 +1,6 @@
 ---
 title: VPS搭建WordPress博客全记录
+description: VPS搭建WordPress博客全记录
 pubDatetime: 2020-04-11T11:44:45Z
 modDatetime: 2020-04-11T11:44:45Z
 draft: false

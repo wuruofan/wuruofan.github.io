@@ -2,7 +2,8 @@
 title: 【读书笔记】10分钟学点《思维模型》（二）
 pubDatetime: 2021-07-15T22:30:00Z
 modDatetime: 2021-07-15T22:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4.jpeg
+heroImage: ...
+description: 【读书笔记】10分钟学点《思维模型》（二）
 draft: false
 tags:
   - 思维导图

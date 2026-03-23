@@ -1,5 +1,6 @@
 ---
 title: JEB2Deobsecure反混淆脚本修改记录
+description: JEB2Deobsecure反混淆脚本修改记录
 pubDatetime: 2021-02-01T18:30:44Z
 modDatetime: 2021-02-01T18:30:44Z
 draft: false

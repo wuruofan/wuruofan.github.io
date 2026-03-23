@@ -1,5 +1,6 @@
 ---
 title: C++如何在类的构造函数中调用另一个构造函数
+description: C++如何在类的构造函数中调用另一个构造函数
 pubDatetime: 2020-07-22T23:46:59Z
 modDatetime: 2020-07-22T23:46:59Z
 draft: false

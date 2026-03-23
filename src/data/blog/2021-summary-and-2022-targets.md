@@ -2,7 +2,8 @@
 title: 2021总结——33岁离开央企的第一年
 pubDatetime: 2022-01-08T23:00:00Z
 modDatetime: 2022-01-08T23:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/2021-read-books.png
+heroImage: ...
+description: 2021总结——33岁离开央企的第一年
 draft: false
 tags:
   - 2021年

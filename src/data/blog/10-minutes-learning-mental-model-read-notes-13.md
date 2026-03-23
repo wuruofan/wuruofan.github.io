@@ -2,7 +2,8 @@
 title: 10分钟学点《思维模型》13：帕累托法则 & 史特金定律 & 帕金森定律
 pubDatetime: 2021-09-30T22:00:00Z
 modDatetime: 2021-09-30T22:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/The-rule-of-80-20.jpg
+heroImage: ...
+description: 10分钟学点《思维模型》13：帕累托法则 heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/The-rule-of-80-20.jpg 史特金定律 heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/The-rule-of-80-20.jpg 帕金森定律
 draft: false
 tags:
   - 思维导图

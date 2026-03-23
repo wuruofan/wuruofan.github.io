@@ -1,5 +1,6 @@
 ---
 title: CMake学习笔记
+description: CMake学习笔记
 pubDatetime: 2020-05-11T17:32:05Z
 modDatetime: 2020-05-11T17:32:05Z
 draft: false

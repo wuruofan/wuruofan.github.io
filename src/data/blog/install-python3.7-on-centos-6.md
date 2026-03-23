@@ -1,5 +1,6 @@
 ---
 title: 【避坑指北】CentOS 6安装Python3.7+
+description: 【避坑指北】CentOS 6安装Python3.7+
 pubDatetime: 2021-06-23T20:01:28Z
 modDatetime: 2021-06-23T20:01:28Z
 draft: false

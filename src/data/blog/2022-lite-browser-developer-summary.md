@@ -1,8 +1,10 @@
 ---
 title: 2022-lite-browser-developer-summary
+description: 2022-lite-browser-developer-summary
 draft: false
 ---
 title: 极速浏览器｜2022年浏览器开发总结
+description: 2022-lite-browser-developer-summary
 
 date: 2023-01-12 20:20:00
 

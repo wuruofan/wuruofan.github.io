@@ -2,7 +2,8 @@
 title: 10分钟学点《思维模型》9：激发创意 & 第一性原理
 pubDatetime: 2021-09-01T23:58:00Z
 modDatetime: 2021-09-01T23:58:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/spaceX.png
+heroImage: ...
+description: 10分钟学点《思维模型》9：激发创意 heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/spaceX.png 第一性原理
 draft: false
 tags:
   - 思维导图

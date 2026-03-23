@@ -1,5 +1,6 @@
 ---
 title: 使用dotfiles管理配置文件
+description: 使用dotfiles管理配置文件
 pubDatetime: 2020-04-13T21:53:27Z
 modDatetime: 2020-04-13T21:53:27Z
 draft: false

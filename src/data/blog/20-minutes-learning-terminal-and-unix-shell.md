@@ -2,7 +2,8 @@
 title: 20分钟入门｜Terminal与Unix Shell——程序员应该知道的那些事儿
 pubDatetime: 2022-03-21T20:00:00Z
 modDatetime: 2022-03-21T20:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/unix-logo.jpeg
+heroImage: ...
+description: 20分钟入门｜Terminal与Unix Shell——程序员应该知道的那些事儿
 draft: false
 tags:
   - Linux

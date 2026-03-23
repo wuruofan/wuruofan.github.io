@@ -1,5 +1,6 @@
 ---
 title: vim-gutentags插件异常问题解决 & gtags源码编译安装
+description: vim-gutentags插件异常问题解决 & gtags源码编译安装
 pubDatetime: 2020-07-07T22:18:19Z
 modDatetime: 2020-07-07T22:18:19Z
 draft: false

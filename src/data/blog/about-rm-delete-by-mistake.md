@@ -1,5 +1,6 @@
 ---
 title: 从rm -rf误删文件说起
+description: 从rm -rf误删文件说起
 pubDatetime: 2019-10-04T23:41:50Z
 modDatetime: 2019-10-04T23:41:50Z
 draft: false

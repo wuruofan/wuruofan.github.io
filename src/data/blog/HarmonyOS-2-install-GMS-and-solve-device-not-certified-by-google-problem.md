@@ -1,9 +1,11 @@
 ---
 title: HarmonyOS-2-install-GMS-and-solve-device-not-certified-by-google-problem
+description: HarmonyOS-2-install-GMS-and-solve-device-not-certified-by-google-problem
 draft: false
 ---
 ---
 title: 鸿蒙OS 2.0安装谷歌服务框架 & 解决设备未经Play认证问题
+description: HarmonyOS-2-install-GMS-and-solve-device-not-certified-by-google-problem
 date: 2021-10-18 16:00:00
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg
 banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Huawei-GMS.jpg

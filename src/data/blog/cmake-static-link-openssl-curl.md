@@ -1,5 +1,6 @@
 ---
 title: CMake静态链接openssl和curl
+description: CMake静态链接openssl和curl
 pubDatetime: 2020-05-24T12:19:28Z
 modDatetime: 2020-05-24T12:19:28Z
 draft: false

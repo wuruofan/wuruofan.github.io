@@ -1,5 +1,6 @@
 ---
 title: MacOS/Linux程序员Win10平台生存指北
+description: MacOS/Linux程序员Win10平台生存指北
 pubDatetime: 2021-04-01T17:46:05Z
 modDatetime: 2021-04-01T17:46:05Z
 draft: false

@@ -2,7 +2,8 @@
 title: 🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋
 pubDatetime: 2023-04-28T12:50:00Z
 modDatetime: 2023-04-28T12:50:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-introduction-on-official-website.png
+heroImage: ...
+description: 🌈效率工具｜MacOS下好用的快捷启动器Raycast，Alfred再见👋
 draft: false
 tags:
   - MacOS

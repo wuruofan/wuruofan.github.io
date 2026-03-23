@@ -1,5 +1,6 @@
 ---
 title: CMake 跨平台交叉编译zlib、OpenSSL、Curl
+description: CMake 跨平台交叉编译zlib、OpenSSL、Curl
 pubDatetime: 2020-06-09T17:35:15Z
 modDatetime: 2020-06-09T17:35:15Z
 draft: false

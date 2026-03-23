@@ -1,5 +1,6 @@
 ---
 title: MacOS CMake链接Curl静态库找不到ldap相关符号问题
+description: MacOS CMake链接Curl静态库找不到ldap相关符号问题
 pubDatetime: 2020-07-09T15:12:41Z
 modDatetime: 2020-07-09T15:12:41Z
 draft: false

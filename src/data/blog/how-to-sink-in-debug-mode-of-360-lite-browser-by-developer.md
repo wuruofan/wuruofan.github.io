@@ -2,7 +2,8 @@
 title: 极速浏览器｜开发者教你常驻开发者模式🌈🥚
 pubDatetime: 2022-09-15T10:00:00Z
 modDatetime: 2022-09-15T10:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+heroImage: ...
+description: 极速浏览器｜开发者教你常驻开发者模式🌈🥚
 draft: false
 tags:
   - 极速浏览器
