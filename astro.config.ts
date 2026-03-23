@@ -59,6 +59,5 @@ export default defineConfig({
   },
   experimental: {
     preserveScriptOrder: true,
-    fonts: false, // 禁用 Google Fonts
   },
 });
