@@ -3,15 +3,23 @@ layout: ../layouts/AboutLayout.astro
 title: "关于"
 ---
 
-你好！我是 **wuruofan**。
-
-这是一个个人技术博客，记录日常开发中的笔记和思考。
+你好！我是 **wuruofan**，你也可以叫我**小黑**。
 
 ## 关于我
 
-- 开发者，热爱技术
-- 关注 Python、Node.js、AI 等领域
-- 喜欢折腾各种开源项目
+- C/C++，Java，Android，HarmonyOS
+- Linux Kernel / Driver 开发
+- 半完美主义强迫症患者 🔧
+- Vimer / 阅读者 📚
+
+2020 年离开央企加入互联网，喜欢学习新技术。
+
+## 技术栈
+
+- **后端**: Python, Node.js
+- **移动端**: Android, HarmonyOS
+- **系统**: Linux
+- **AI**: 关注中 🤖
 
 ## 联系方式
 
