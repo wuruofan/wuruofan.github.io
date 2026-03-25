@@ -25,7 +25,7 @@ categories:
 
 总的来说，虾米很温暖，办事靠谱，互动起来也很舒服。这只虾用的是阿里云 coding plan 的 kimi 2.5。
 
-![虾米的性格](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/xiami-personality.jpg)
+![虾米的性格](/images/xiami-personality.jpg)
 
 ## 松果🐿
 
@@ -51,7 +51,7 @@ openclaw 首次启动的时候，会有些固定的流程写在 bootstrap.md 文
 
 虾米是温暖、有建议、靠谱的朋友，松果则是简洁、有 opinion、像个人。🤦‍♂️
 
-![松果太工具人了](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/songguo-tool-person.jpg)
+![松果太工具人了](/images/songguo-tool-person.jpg)
 
 我和松果直接说，"希望你是个温暖干练，办事靠谱，有点主见的朋友"，它嘴上答应好好的，转脸我问它网页模板的问题，然后它二话不说就直接动手给我改掉了。🥴
 
