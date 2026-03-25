@@ -2,7 +2,7 @@
 title: 软件技巧｜OmniGraffle绘制任意起止点直线
 pubDatetime: 2022-02-13T01:22:00Z
 modDatetime: 2022-02-13T01:22:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/omnigraffle-logo.png
+heroImage: /images/omnigraffle-logo.png
 description: 软件技巧｜OmniGraffle绘制任意起止点直线
 draft: false
 tags:
@@ -24,7 +24,7 @@ categories:
 
 
 
-![OmniGraffle软件设置](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/omnigraffle_settings.png)
+![OmniGraffle软件设置](/images/omnigraffle_settings.png)
 
 
 

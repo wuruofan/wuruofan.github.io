@@ -2,7 +2,7 @@
 title: 【读书笔记】10分钟学点《思维模型》（一）
 pubDatetime: 2021-07-09T22:30:00Z
 modDatetime: 2021-07-09T22:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4.jpeg
+heroImage: /images/%E6%80%9D%E7%BB%B4.jpeg
 description: 【读书笔记】10分钟学点《思维模型》（一）
 draft: false
 tags:
@@ -17,7 +17,7 @@ categories:
 >
 > 这本书是年初时部门复盘培训活动的小组奖品，本以为是一本网文凑数的书，觉得可能2、3个小时也就翻完了，后来才发现这是本不错的书，放在床头每晚读两篇，是上半年读过二十多本书中的TOP3。
 >
-> ![书上折的那些角](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mental-model-book.jpg)
+> ![书上折的那些角](/images/mental-model-book.jpg)
 
 
 ## 芒格与思维模型
@@ -55,7 +55,7 @@ categories:
 - 多个模型可以相互质疑，形成更统一的整体观点。
 - 即使你不懂得无数个学科的所有来龙去脉，也可以使用多个思维模型，只要了解几个重要学科的要点和基本原理就可以。
 
-![芒格与思维模型](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%8A%92%E6%A0%BC%E4%B8%8E%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B.png)
+![芒格与思维模型](/images/%E8%8A%92%E6%A0%BC%E4%B8%8E%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B.png)
 
 
 
@@ -85,7 +85,7 @@ categories:
 
 
 
-![艾森豪威尔矩阵](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%89%BE%E6%A3%AE%E8%B1%AA%E5%A8%81%E5%B0%94%E7%9F%A9%E9%98%B5.jpg)
+![艾森豪威尔矩阵](/images/%E8%89%BE%E6%A3%AE%E8%B1%AA%E5%A8%81%E5%B0%94%E7%9F%A9%E9%98%B5.jpg)
 
 - “今天就做”的对象应该是绝对刻不容缓的事情，必须尽快完成，才能避免不良后果或不可收拾的局面，越早完成，日后需要做的工作就越少(越是轻松)。通常是有期限的任务。
 
@@ -97,7 +97,7 @@ categories:
 
 - “不重要任务”，对你自己不那么重要的任务，但不代表对别人不重要(不过也不排除这种可能)，这些活动由其他人来完成或许更合适或更有意义。
 
-![思维模型1_关注“重要”任务，忽略“紧急”任务](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B1_%E5%85%B3%E6%B3%A8%E2%80%9C%E9%87%8D%E8%A6%81%E2%80%9D%E4%BB%BB%E5%8A%A1%EF%BC%8C%E5%BF%BD%E7%95%A5%E2%80%9C%E7%B4%A7%E6%80%A5%E2%80%9D%E4%BB%BB%E5%8A%A1.png)
+![思维模型1_关注“重要”任务，忽略“紧急”任务](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B1_%E5%85%B3%E6%B3%A8%E2%80%9C%E9%87%8D%E8%A6%81%E2%80%9D%E4%BB%BB%E5%8A%A1%EF%BC%8C%E5%BF%BD%E7%95%A5%E2%80%9C%E7%B4%A7%E6%80%A5%E2%80%9D%E4%BB%BB%E5%8A%A1.png)
 
 ### 思维模型2：设想出所有多米诺骨牌
 
@@ -163,7 +163,7 @@ categories:
 
    主动寻求和表述别人可能看到的多米诺骨牌效应，从他们的角度看一下多米诺骨牌是怎样倒下的。并非所有的角度都站得住脚，但这可以为你提供更多信息。
 
-![思维模型2：设想出所有多米诺骨牌](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B2%EF%BC%9A%E8%AE%BE%E6%83%B3%E5%87%BA%E6%89%80%E6%9C%89%E5%A4%9A%E7%B1%B3%E8%AF%BA%E9%AA%A8%E7%89%8C.png)
+![思维模型2：设想出所有多米诺骨牌](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B2%EF%BC%9A%E8%AE%BE%E6%83%B3%E5%87%BA%E6%89%80%E6%9C%89%E5%A4%9A%E7%B1%B3%E8%AF%BA%E9%AA%A8%E7%89%8C.png)
 
 
 

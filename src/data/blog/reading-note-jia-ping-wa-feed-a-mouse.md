@@ -2,7 +2,7 @@
 title: 读 贾平凹《养鼠》
 pubDatetime: 2021-10-27T21:30:00Z
 modDatetime: 2021-10-27T21:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qibaishi-mouse.jpeg
+heroImage: /images/qibaishi-mouse.jpeg
 description: 读 贾平凹《养鼠》
 draft: false
 tags:
@@ -17,7 +17,7 @@ categories:
 
 文章的名字是《养鼠》，但是大多数情况下，人们是不喜欢老鼠的，有很多和老鼠有关的成语都不是什么好词的，那贾老为何会要养鼠呢？贾老养的是什么鼠呢？
 
-![《人生从容》](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/ren-sheng-cong-rong.jpeg)
+![《人生从容》](/images/ren-sheng-cong-rong.jpeg)
 
 
 
@@ -61,7 +61,7 @@ categories:
 
 
 
-![齐白石画鼠](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qibaishi-mouse.jpeg)
+![齐白石画鼠](/images/qibaishi-mouse.jpeg)
 
 
 

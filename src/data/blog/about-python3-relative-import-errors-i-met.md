@@ -2,7 +2,7 @@
 title: 【避坑指北】Python3相对路径导入方法
 pubDatetime: 2021-08-27T20:00:00Z
 modDatetime: 2021-08-27T20:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Python.jpeg
+heroImage: /images/Python.jpeg
 description: 【避坑指北】Python3相对路径导入方法
 draft: false
 tags:

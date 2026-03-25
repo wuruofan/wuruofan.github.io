@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》8：寻找根本原因（五问法&鱼骨图）
 pubDatetime: 2021-08-24T20:00:00Z
 modDatetime: 2021-08-24T20:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE2.png
+heroImage: /images/%E9%B1%BC%E9%AA%A8%E5%9B%BE2.png
 description: 10分钟学点《思维模型》8：寻找根本原因（五问法&鱼骨图）
 draft: false
 tags:
@@ -92,7 +92,7 @@ categories:
 
 通常在复盘思维这种课程中，“五问法”和“鱼骨图”总是形影不离的。“鱼骨图”可以帮助我们根据观察到的结果推断原因，是演绎法不可或缺的一部分。
 
-![鱼骨图](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE.png)
+![鱼骨图](/images/%E9%B1%BC%E9%AA%A8%E5%9B%BE.png)
 
 
 
@@ -114,7 +114,7 @@ categories:
 
 “大骨”代表着你找出原因的不同类别。你要按照需要处理的问题，想出类别的名称。
 
-![鱼骨图-大骨](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%B1%BC%E9%AA%A8%E5%9B%BE-%E5%A4%A7%E9%AA%A8.png)
+![鱼骨图-大骨](/images/%E9%B1%BC%E9%AA%A8%E5%9B%BE-%E5%A4%A7%E9%AA%A8.png)
 
 
 
@@ -124,7 +124,7 @@ categories:
 
 然后，对引起问题的每一个原因进一步细化，追问这可能是什么导致的，写在这个原因旁边——以此类推，直到你再也找不出更原始的原因为止。
 
-![更细致的鱼骨图](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%9B%B4%E7%BB%86%E8%87%B4%E7%9A%84%E9%B1%BC%E9%AA%A8%E5%9B%BE.png)
+![更细致的鱼骨图](/images/%E6%9B%B4%E7%BB%86%E8%87%B4%E7%9A%84%E9%B1%BC%E9%AA%A8%E5%9B%BE.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 【读书笔记】10分钟学点《思维模型》（六）
 pubDatetime: 2021-08-11T23:55:00Z
 modDatetime: 2021-08-11T23:55:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%BF%9B%E5%8C%96%E8%AE%BA.jpg
+heroImage: /images/%E8%BF%9B%E5%8C%96%E8%AE%BA.jpg
 description: 【读书笔记】10分钟学点《思维模型》（六）
 draft: false
 tags:
@@ -38,7 +38,7 @@ categories:
 
 提到达尔文，大多数人的第一印象应该就是“物种起源”、“适者生存”的理论。达尔文取得了举世瞩目的成就，但是，他的成功其实靠的是**智商以外的才能**。
 
-![物种起源](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E7%89%A9%E7%A7%8D%E8%B5%B7%E6%BA%90.jpeg)
+![物种起源](/images/%E7%89%A9%E7%A7%8D%E8%B5%B7%E6%BA%90.jpeg)
 
 
 
@@ -82,7 +82,7 @@ categories:
 
 正所谓“打破砂锅问（纹）到底”，不要忽视否定观点，跟着证据走，这就是我们需要从达尔文身上学到的。
 
-![思维模型11：借鉴达尔文](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B11%EF%BC%9A%E5%80%9F%E9%89%B4%E8%BE%BE%E5%B0%94%E6%96%87.png)
+![思维模型11：借鉴达尔文](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B11%EF%BC%9A%E5%80%9F%E9%89%B4%E8%BE%BE%E5%B0%94%E6%96%87.png)
 
 
 
@@ -102,7 +102,7 @@ categories:
 
 丹尼尔·卡尼曼(*Daniel Kahneman*)教授在《思考，快与慢》一书中，通过一系列的实验，提出了一个模型，解释了大脑用于吸收各种信息并做出反应的两个过程，富有想象力地命名为“**系统1思维**”和“**系统2思维**”。
 
-![双系统思维模型](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B.webp)
+![双系统思维模型](/images/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B.webp)
 
 #### “快”思维
 
@@ -162,7 +162,7 @@ categories:
 
 
 
-![思维模型12：调动系统2思维](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B12%EF%BC%9A%E8%B0%83%E5%8A%A8%E7%B3%BB%E7%BB%9F2%E6%80%9D%E7%BB%B4.png)
+![思维模型12：调动系统2思维](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B12%EF%BC%9A%E8%B0%83%E5%8A%A8%E7%B3%BB%E7%BB%9F2%E6%80%9D%E7%BB%B4.png)
 
 
 
@@ -220,7 +220,7 @@ categories:
 
 了解两者之间的差异，**承认系统1思维的存在，然后努力跳到系统2思维。**
 
-![第二章要点总结](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93.png)
+![第二章要点总结](/images/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93.png)
 
 
 ---

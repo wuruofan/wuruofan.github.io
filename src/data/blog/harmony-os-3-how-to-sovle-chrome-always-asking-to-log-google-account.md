@@ -10,9 +10,9 @@ description: harmony-os-3-how-to-sovle-chrome-always-asking-to-log-google-accoun
 
 date: 2023-04-16 19:30:00
 
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/high%20quality%2C%204k%20resolution%2C%20girl%20look%20at%20sunset%20aboving%20reflecting%20water%2C%20crepuscular%20rays%2C%20digital%20art%2C%20art%20by%20monet.png
+index_img: /images/high%20quality%2C%204k%20resolution%2C%20girl%20look%20at%20sunset%20aboving%20reflecting%20water%2C%20crepuscular%20rays%2C%20digital%20art%2C%20art%20by%20monet.png
 
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/high%20quality%2C%204k%20resolution%2C%20girl%20look%20at%20sunset%20aboving%20reflecting%20water%2C%20crepuscular%20rays%2C%20digital%20art%2C%20art%20by%20monet.png
+banner_img: /images/high%20quality%2C%204k%20resolution%2C%20girl%20look%20at%20sunset%20aboving%20reflecting%20water%2C%20crepuscular%20rays%2C%20digital%20art%2C%20art%20by%20monet.png
 
 categories:
 
@@ -41,7 +41,7 @@ tags:
 
 大概截图如下：
 
-![此账号已在您的设备上](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/harmony-os-3-chrome-google-account-already-login.jpg)
+![此账号已在您的设备上](/images/harmony-os-3-chrome-google-account-already-login.jpg)
 
 
 
@@ -93,7 +93,7 @@ tags:
 
 
 
-![Chrome成功识别账户信息](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/harmony-os-3-chrome-google-account-login-success.jpg)
+![Chrome成功识别账户信息](/images/harmony-os-3-chrome-google-account-login-success.jpg)
 
 
 

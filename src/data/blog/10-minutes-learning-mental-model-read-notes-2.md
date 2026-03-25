@@ -2,7 +2,7 @@
 title: 【读书笔记】10分钟学点《思维模型》（二）
 pubDatetime: 2021-07-15T22:30:00Z
 modDatetime: 2021-07-15T22:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4.jpeg
+heroImage: /images/%E6%80%9D%E7%BB%B4.jpeg
 description: 【读书笔记】10分钟学点《思维模型》（二）
 draft: false
 tags:
@@ -55,7 +55,7 @@ categories:
 
 
 
-![思维模型3：做出可逆的决策](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B3%EF%BC%9A%E5%81%9A%E5%87%BA%E5%8F%AF%E9%80%86%E7%9A%84%E5%86%B3%E7%AD%96.png)
+![思维模型3：做出可逆的决策](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B3%EF%BC%9A%E5%81%9A%E5%87%BA%E5%8F%AF%E9%80%86%E7%9A%84%E5%86%B3%E7%AD%96.png)
 
 
 
@@ -110,7 +110,7 @@ categories:
 
 
 
-![思维模型4：寻求“满意度”](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B4%EF%BC%9A%E5%AF%BB%E6%B1%82%E2%80%9C%E6%BB%A1%E6%84%8F%E5%BA%A6%E2%80%9D.png)
+![思维模型4：寻求“满意度”](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B4%EF%BC%9A%E5%AF%BB%E6%B1%82%E2%80%9C%E6%BB%A1%E6%84%8F%E5%BA%A6%E2%80%9D.png)
 
 <p>
 以上，未完待续。

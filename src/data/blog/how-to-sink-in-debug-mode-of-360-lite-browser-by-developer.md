@@ -2,7 +2,7 @@
 title: 极速浏览器｜开发者教你常驻开发者模式🌈🥚
 pubDatetime: 2022-09-15T10:00:00Z
 modDatetime: 2022-09-15T10:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+heroImage: /images/360-lite-browser.png
 description: 极速浏览器｜开发者教你常驻开发者模式🌈🥚
 draft: false
 tags:
@@ -73,7 +73,7 @@ Hi 大家好，我是小黑，又见面了。
 
 
 
-![重新释放内核](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser-force-release-qwvkernel.png)
+![重新释放内核](/images/360-lite-browser-force-release-qwvkernel.png)
 
 
 
@@ -87,7 +87,7 @@ Hi 大家好，我是小黑，又见面了。
 
 
 
-![常驻开发者设置](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser-developer-settings-in-settings-activity.png)
+![常驻开发者设置](/images/360-lite-browser-developer-settings-in-settings-activity.png)
 
 
 

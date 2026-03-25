@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》12：墨菲定律 & 奥卡姆剃刀定律 & 汉隆剃刀原则
 pubDatetime: 2021-09-27T22:00:00Z
 modDatetime: 2021-09-27T22:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Murphys-Law-V2.jpg
+heroImage: /images/Murphys-Law-V2.jpg
 description: 10分钟学点《思维模型》12：墨菲定律 & 奥卡姆剃刀定律 & 汉隆剃刀原则
 draft: false
 tags:

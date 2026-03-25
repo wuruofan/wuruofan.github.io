@@ -2,7 +2,7 @@
 title: 这是我的避世小角落，你的呢？
 pubDatetime: 2021-12-27T22:30:00Z
 modDatetime: 2021-12-27T22:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/my-medaka-fish-tank.jpg
+heroImage: /images/my-medaka-fish-tank.jpg
 description: 这是我的避世小角落，你的呢？
 draft: false
 tags:
@@ -12,7 +12,7 @@ tags:
 categories:
   - 生活小记
 ---
-![我的避世小角落](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/my-little-shelter-corner.jpg)
+![我的避世小角落](/images/my-little-shelter-corner.jpg)
 
 
 
@@ -38,7 +38,7 @@ categories:
 
 于是就开始看视频学习，最后养了这一缸子观背青鳉鱼。
 
-![观背青鳉](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/my-medaka-fish-tank.jpg)
+![观背青鳉](/images/my-medaka-fish-tank.jpg)
 
 
 现在每天看鱼，我都会很放松。夜深娃静，一抹灯光，一缸清水，鱼儿摆尾的波纹里，散尽了我白日里所有烦心。
@@ -88,7 +88,7 @@ PS.这也是我喜欢魔兽世界的原因。
 
 **其实，生活的诗意未必在远方，也在你的那个避世小角落里。**
 
-![doge](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/cat-also-like-fish-tank.jpg)
+![doge](/images/cat-also-like-fish-tank.jpg)
 
 <p>
 

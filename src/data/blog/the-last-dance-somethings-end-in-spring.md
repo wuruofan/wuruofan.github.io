@@ -10,9 +10,9 @@ description: the-last-dance-somethings-end-in-spring
 
 date: 2023-04-07 23:30:00
 
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/a_single_man_in_ragged_clothes_on_an_abandoned_deserted_lush_island_looking_at_the_sea_surrounded_by_a_vast_ocean.png
+index_img: /images/a_single_man_in_ragged_clothes_on_an_abandoned_deserted_lush_island_looking_at_the_sea_surrounded_by_a_vast_ocean.png
 
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/a_single_man_in_ragged_clothes_on_an_abandoned_deserted_lush_island_looking_at_the_sea_surrounded_by_a_vast_ocean.png
+banner_img: /images/a_single_man_in_ragged_clothes_on_an_abandoned_deserted_lush_island_looking_at_the_sea_surrounded_by_a_vast_ocean.png
 
 categories:
 
@@ -90,7 +90,7 @@ GPT帮我写了一段文字，我放在最后面了，的确很强大。另外�
 
 
 
-![a japanese girl in modern city](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/a_japanese_girl_in_modern_city_by_agnes_cecile_and_P._A._Works__Lens_reflection__detailed_vivid__Hyper_minimal.png)
+![a japanese girl in modern city](/images/a_japanese_girl_in_modern_city_by_agnes_cecile_and_P._A._Works__Lens_reflection__detailed_vivid__Hyper_minimal.png)
 
 
 

@@ -19,7 +19,7 @@ categories:
 
 思维导图大纲截图如下。
 
-![《编写高质量代码：改善Java程序的151个建议》1~4章](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/java-151-chapter-1-4.png)
+![《编写高质量代码：改善Java程序的151个建议》1~4章](/images/java-151-chapter-1-4.png)
 
 
 前4章基本是Java基础知识，个人觉得容易遗忘、混淆的知识点和比较重要的知识点有：
@@ -40,11 +40,11 @@ categories:
 
 前4章思维导图链接：[https://www.mubucm.com/doc/0iKf700ea-r](https://www.mubucm.com/doc/0iKf700ea-r)。长按或扫描下面二维码也可以直达。
 
-![思维导图二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qrcode-java-151-chapter-1-4.png)
+![思维导图二维码](/images/qrcode-java-151-chapter-1-4.png)
 
 点击每个“小标题”的箭头即可查看每个子项；点击右上角思维导图图标，可以切换大纲模式和导图模式。
 
-![导图模式](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%AF%BC%E5%9B%BE%E6%A8%A1%E5%BC%8F.png)
+![导图模式](/images/%E5%AF%BC%E5%9B%BE%E6%A8%A1%E5%BC%8F.png)
 
 ---
 
@@ -52,7 +52,7 @@ categories:
 
 欢迎使用我的邀请链接（[https://mubu.com/inv/19150](https://mubu.com/inv/19150)）进行注册，赠送30天会员。长按或扫描下面二维码也可以直达。
 
-![幕布邀请二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mubu_invite.png)
+![幕布邀请二维码](/images/mubu_invite.png)
 
 **注意**：在校学生记得认证学生身份，赠送一年会员。
 

@@ -38,7 +38,7 @@ categories:
 
 思维导图大纲截图如下。
 
-![《编写高质量代码：改善Java程序的151个建议》5~6章](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/编写高质量代码：改善Java程序的151个建议（第5_6章）.png)
+![《编写高质量代码：改善Java程序的151个建议》5~6章](/images/编写高质量代码：改善Java程序的151个建议（第5_6章）.png)
 
 
 
@@ -46,7 +46,7 @@ categories:
 
 
 
-![第5章 数组和集合](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mindmap-java-151-chapter-5.png)
+![第5章 数组和集合](/images/mindmap-java-151-chapter-5.png)
 
 
 
@@ -54,7 +54,7 @@ categories:
 
 长按或扫描下面二维码也可以直达。
 
-![第5~6章思维导图二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qrcode-java-151-chapter-5-6.png)
+![第5~6章思维导图二维码](/images/qrcode-java-151-chapter-5-6.png)
 
 
 
@@ -64,7 +64,7 @@ categories:
 
 欢迎使用我的邀请链接（[https://mubu.com/inv/19150](https://mubu.com/inv/19150)）进行注册，赠送30天会员。长按或扫描下面二维码也可以直达。
 
-![幕布邀请二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mubu_invite.png)
+![幕布邀请二维码](/images/mubu_invite.png)
 
 **注意**：在校学生记得认证学生身份，赠送一年会员。
 

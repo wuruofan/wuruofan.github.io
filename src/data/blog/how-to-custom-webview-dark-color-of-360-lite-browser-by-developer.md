@@ -2,7 +2,7 @@
 title: 极速浏览器｜开发者教你自定义网页暗黑模式颜色
 pubDatetime: 2022-09-01T19:23:36Z
 modDatetime: 2022-09-01T19:23:36Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+heroImage: /images/360-lite-browser.png
 description: 极速浏览器｜开发者教你自定义网页暗黑模式颜色
 draft: false
 tags:
@@ -72,7 +72,7 @@ categories:
 
 
 
-![设置网页全黑背景](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser-webview-black-background.gif)
+![设置网页全黑背景](/images/360-lite-browser-webview-black-background.gif)
 
 
 

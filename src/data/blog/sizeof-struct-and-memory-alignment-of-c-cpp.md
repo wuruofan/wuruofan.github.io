@@ -2,7 +2,7 @@
 title: 遇坑总结｜结构体大小与内存对齐问题
 pubDatetime: 2022-10-13T19:23:36Z
 modDatetime: 2022-10-13T19:23:36Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Cpp-programming-language.jpeg
+heroImage: /images/Cpp-programming-language.jpeg
 description: 遇坑总结｜结构体大小与内存对齐问题
 draft: false
 tags:
@@ -196,7 +196,7 @@ struct A {
 
 在64位CPU架构上，`char`占用1个字节、`short`是2个字节，`int`是4个字节、`double`是8个字节。对齐后的内存空间占用应该如下，其中每一个格子代表一个字节大小：
 
-![struct-with-memory-alignment](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/struct-with-memory-alignment.png)
+![struct-with-memory-alignment](/images/struct-with-memory-alignment.png)
 
 
 
@@ -220,7 +220,7 @@ struct A {
 
 
 
-![struct-without-memory-alignment](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/struct-without-memory-alignment.png)
+![struct-without-memory-alignment](/images/struct-without-memory-alignment.png)
 
 
 

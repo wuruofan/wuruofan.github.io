@@ -2,7 +2,7 @@
 title: Android｜使用IntDef注解代替枚举类
 pubDatetime: 2022-02-19T23:30:00Z
 modDatetime: 2022-02-19T23:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/android-robot-logo.jpg
+heroImage: /images/android-robot-logo.jpg
 description: Android｜使用IntDef注解代替枚举类
 draft: false
 tags:
@@ -229,7 +229,7 @@ class IntDefTest {
 
 
 
-![@Indef 传入参数](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/20220219221905.png)
+![@Indef 传入参数](/images/20220219221905.png)
 
 
 

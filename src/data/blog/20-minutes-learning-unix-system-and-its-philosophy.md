@@ -2,7 +2,7 @@
 title: 20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿
 pubDatetime: 2022-03-09T23:36:14Z
 modDatetime: 2022-03-09T23:36:14Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/unix-logo.jpeg
+heroImage: /images/unix-logo.jpeg
 description: 20分钟入门｜Unix系统与设计哲学——程序员应该知道的那些事儿
 draft: false
 tags:
@@ -14,7 +14,7 @@ tags:
 categories:
   - 技术总结
 ---
-![Unix](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/unix-logo.jpeg)
+![Unix](/images/unix-logo.jpeg)
 
 
 
@@ -329,7 +329,7 @@ Linux内核提供了LSM（Linux Secrity Module）安全机制，才有了后来N
 
 
 
-![一切皆文件](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/all-things-are-files-in-unix.png)
+![一切皆文件](/images/all-things-are-files-in-unix.png)
 
 
 
@@ -357,7 +357,7 @@ Linux内核提供了LSM（Linux Secrity Module）安全机制，才有了后来N
 
 
 
-![Linux根目录树状结构](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/linux-tree-root-directory-structure.jpeg)
+![Linux根目录树状结构](/images/linux-tree-root-directory-structure.jpeg)
 
 
 
@@ -598,11 +598,11 @@ variable（变量）的缩写，通常习惯将那些易变的、易失的文件
 
 > *话说1969年，Ken Thompson和Dennis Ritchie在小型机PDP-7上发明了Unix。1971年，他们将主机升级到了PDP-11。*
 >
-> *![小型机PDP-7](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/PDP-7-computer.jpeg)*
+> *![小型机PDP-7](/images/PDP-7-computer.jpeg)*
 >
 > *当时，他们使用一种叫做RK05的储存盘，一盘的容量大约是1.5MB。*
 >
-> *![RK05存储磁盘](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/rk05-storage-disk.jpeg)*
+> *![RK05存储磁盘](/images/rk05-storage-disk.jpeg)*
 >
 > *没过多久，操作系统（根目录）变得越来越大，一块盘已经装不下了。于是，他们加上了第二盘RK05，并且规定第一块盘专门放系统程序，第二块盘专门放用户自己的程序，因此挂载的目录点取名为/usr。也就是说，根目录"/"挂载在第一块盘，"/usr"目录挂载在第二块盘。除此之外，两块盘的目录结构完全相同，第一块盘的目录（/bin, /sbin, /lib, /tmp...）都在/usr目录下重新出现一次。*
 >

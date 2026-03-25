@@ -10,9 +10,9 @@ description: 2022-lite-browser-developer-summary
 
 date: 2023-01-12 20:20:00
 
-index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+index_img: /images/360-lite-browser.png
 
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+banner_img: /images/360-lite-browser.png
 
 categories:
 
@@ -88,7 +88,7 @@ tags:
 
 
 
-![一些记录](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/ku-an-release-log.jpg)
+![一些记录](/images/ku-an-release-log.jpg)
 
 
 

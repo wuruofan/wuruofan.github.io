@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》11：不办事项清单 & 避免阻力最小道路
 pubDatetime: 2021-09-15T20:00:00Z
 modDatetime: 2021-09-15T20:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/choose-harder-right-instead-of-easier-wrong-small.jpg
+heroImage: /images/choose-harder-right-instead-of-easier-wrong-small.jpg
 description: 10分钟学点《思维模型》11：不办事项清单 & 避免阻力最小道路
 draft: false
 tags:
@@ -60,7 +60,7 @@ categories:
 
 你挂念的事情越少越好——多余的任务会造成压力和焦虑，只会妨碍或扼杀生产力。
 
-![适合打印的不办事项清单](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Not-To-Do-List.jpg)
+![适合打印的不办事项清单](/images/Not-To-Do-List.jpg)
 
 
 **不该办事项清单可以消除大多数悬而未决的事情，为你减轻负担**，腾出心思，专注一下飞来的球，沉稳地逐一击球。 
@@ -129,7 +129,7 @@ categories:
 
 10天后，你大概会意识到自己的决策或行动对实现长期目标产生的不良后果，满腔懊悔。你一无所获，有时候还会倒退。
 
-![Choose the harder right instead of the easier wrong](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/choose-harder-right-instead-of-easier-wrong-small.jpg)
+![Choose the harder right instead of the easier wrong](/images/choose-harder-right-instead-of-easier-wrong-small.jpg)
 
 
 

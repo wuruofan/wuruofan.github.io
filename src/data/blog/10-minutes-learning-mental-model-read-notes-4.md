@@ -2,7 +2,7 @@
 title: 【读书笔记】10分钟学点《思维模型》（四）
 pubDatetime: 2021-07-27T23:30:00Z
 modDatetime: 2021-07-27T23:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%BB%91%E5%A4%A9%E9%B9%85%E4%BA%8B%E4%BB%B6.jpeg
+heroImage: /images/%E9%BB%91%E5%A4%A9%E9%B9%85%E4%BA%8B%E4%BB%B6.jpeg
 description: 【读书笔记】10分钟学点《思维模型》（四）
 draft: false
 tags:
@@ -35,7 +35,7 @@ categories:
 
 说实话，这两年看到“黑天鹅”的字眼几乎都是在股市的新闻中，其实，“黑天鹅”只是作为隐喻，描述了*令人的认知、视角和理解发生巨大变化的不可预测的事件*。
 
-![中国股市跳水](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E4%B8%AD%E5%9B%BD%E8%82%A1%E5%B8%82%E8%B7%B3%E6%B0%B4.jpeg)
+![中国股市跳水](/images/%E4%B8%AD%E5%9B%BD%E8%82%A1%E5%B8%82%E8%B7%B3%E6%B0%B4.jpeg)
 
 
 
@@ -64,7 +64,7 @@ categories:
 
 **黑天鹅事件是不应该改变认知或公认的知识的，因为这只是异常值而已**，只是令人意识到可能性的存在，但大多数黑天鹅事件都不值得在日常生活中纳入考虑。
 
-![思维模型7：忽略“黑天鹅”](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B7%EF%BC%9A%E5%BF%BD%E7%95%A5%E2%80%9C%E9%BB%91%E5%A4%A9%E9%B9%85%E2%80%9D.png)
+![思维模型7：忽略“黑天鹅”](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B7%EF%BC%9A%E5%BF%BD%E7%95%A5%E2%80%9C%E9%BB%91%E5%A4%A9%E9%B9%85%E2%80%9D.png)
 
 
 
@@ -78,7 +78,7 @@ categories:
 
 **收益递减规律**是指其他投入固定不变时，连续地增加某一种投入，所新增的产出最终会减少的规律。
 
-![收益递减](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%94%B6%E7%9B%8A%E9%80%92%E5%87%8F.png)
+![收益递减](/images/%E6%94%B6%E7%9B%8A%E9%80%92%E5%87%8F.png)
 
  这表明，我们应该寻找均衡点（或者转折点），以此准确评估和了解信息，以决定我们为了实现某个结果，应该投入多少努力。
 
@@ -102,7 +102,7 @@ categories:
 - 如果投入太少，你也会离开满意区——成果太少。
 - 如果对成果的期望过高或过低，那么你也会离开满意区。
 
-![思维模型8：寻找均衡点](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B8%EF%BC%9A%E5%AF%BB%E6%89%BE%E5%9D%87%E8%A1%A1%E7%82%B9.png)
+![思维模型8：寻找均衡点](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B8%EF%BC%9A%E5%AF%BB%E6%89%BE%E5%9D%87%E8%A1%A1%E7%82%B9.png)
 
 ---
 

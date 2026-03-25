@@ -2,7 +2,7 @@
 title: 【读书笔记】10分钟学点《思维模型》（五）
 pubDatetime: 2021-07-29T23:30:00Z
 modDatetime: 2021-07-29T23:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%BC%A0%E4%BC%9F%E8%AF%B7%E5%9D%90.jpeg
+heroImage: /images/%E5%BC%A0%E4%BC%9F%E8%AF%B7%E5%9D%90.jpeg
 description: 【读书笔记】10分钟学点《思维模型》（五）
 draft: false
 tags:
@@ -56,7 +56,7 @@ categories:
 就拿奥运会乒乓球日本运动员伊藤美诚混双战胜中国队一样，只是一种非正常的事件发生，在绝对实力面前，之后更大概率的模式便是回归常态。即使再有裁判照顾，可以抱怨灯光，也并不会有多少作用，孙颖莎4-0的比分便是最好的说明。
 
 
-![莎气藤藤](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%8E%8E%E6%B0%94%E8%97%A4%E8%97%A4.png)
+![莎气藤藤](/images/%E8%8E%8E%E6%B0%94%E8%97%A4%E8%97%A4.png)
 
 同样，均值回归这个思维模型经常被用在股票市场。
 
@@ -64,7 +64,7 @@ categories:
 
 巴菲特遇到芒格后演化出的“**价值投资思想**”其实也是如此，“选择一个具有稳定增长的好企业，在其价格低于价值的时候买入并持有”。
 
-![价值投资](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84.jpeg)
+![价值投资](/images/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84.jpeg)
 
 
 
@@ -74,7 +74,7 @@ categories:
 
 保持耐心，等待事件回归正常状态，届时你才能更好地掌握发生了什么变化。从统计学上来说，多半不会发生多少改变。
 
-![思维模型9：等待均值回归](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B9%EF%BC%9A%E7%AD%89%E5%BE%85%E5%9D%87%E5%80%BC%E5%9B%9E%E5%BD%92.png)
+![思维模型9：等待均值回归](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B9%EF%BC%9A%E7%AD%89%E5%BE%85%E5%9D%87%E5%80%BC%E5%9B%9E%E5%BD%92.png)
 
 
 
@@ -98,7 +98,7 @@ categories:
 
 这里有一个公式：
 
-![贝叶斯定理公式](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86.jpeg)
+![贝叶斯定理公式](/images/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86.jpeg)
 
 其中：
 
@@ -117,13 +117,13 @@ categories:
 
 带入上面的公式，得到如下概率：
 
-![龙卷风与大风](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E9%BE%99%E5%8D%B7%E9%A3%8E%E4%B8%8E%E5%A4%A7%E9%A3%8E.jpeg)
+![龙卷风与大风](/images/%E9%BE%99%E5%8D%B7%E9%A3%8E%E4%B8%8E%E5%A4%A7%E9%A3%8E.jpeg)
 
 ### 怎么做？
 
 可能很多人看完公式的第一个反应就是：迷茫。
 
-![迷茫](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E8%BF%B7%E8%8C%AB.jpeg)
+![迷茫](/images/%E8%BF%B7%E8%8C%AB.jpeg)
 
 先忘了这个公式吧，这个公式其实告诉我们，**你只需要三个数字就能够得出某件事在未来发生的大致概率**。
 
@@ -137,7 +137,7 @@ categories:
 
 这里，还有一个注意点，贝叶斯定理本身是依赖一些先决条件的概率，这个思维模型还要求我们**必须根据新的信息，不断地更新概率，虽然一切都是不确定的，但比你想象的更加确定。**
 
-![思维模型10：贝叶斯会怎样做](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B10%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%9A%E6%80%8E%E6%A0%B7%E5%81%9A.png)
+![思维模型10：贝叶斯会怎样做](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B10%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%9A%E6%80%8E%E6%A0%B7%E5%81%9A.png)
 
 
 ---

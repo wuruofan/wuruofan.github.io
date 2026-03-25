@@ -2,7 +2,7 @@
 title: 【读书笔记】10分钟学点《思维模型》（三）
 pubDatetime: 2021-07-21T23:30:00Z
 modDatetime: 2021-07-21T23:30:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4.jpeg
+heroImage: /images/%E6%80%9D%E7%BB%B4.jpeg
 description: 【读书笔记】10分钟学点《思维模型》（三）
 draft: false
 tags:
@@ -53,7 +53,7 @@ categories:
 
 
 
-![思维模型5：停留在40%_70%的区间](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B5%EF%BC%9A%E5%81%9C%E7%95%99%E5%9C%A840%25_70%25%E7%9A%84%E5%8C%BA%E9%97%B4.png)
+![思维模型5：停留在40%_70%的区间](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B5%EF%BC%9A%E5%81%9C%E7%95%99%E5%9C%A840%25_70%25%E7%9A%84%E5%8C%BA%E9%97%B4.png)
 
 
 
@@ -72,7 +72,7 @@ categories:
 
 这个思维模型也会**迫使你去思考你实际上想要怎样的未来，而不是你目前前进的方向通往的未来**。
 
-![思维模型6：遗憾最小化框架](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B6%EF%BC%9A%E9%81%97%E6%86%BE%E6%9C%80%E5%B0%8F%E5%8C%96%E6%A1%86%E6%9E%B6.png)
+![思维模型6：遗憾最小化框架](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B6%EF%BC%9A%E9%81%97%E6%86%BE%E6%9C%80%E5%B0%8F%E5%8C%96%E6%A1%86%E6%9E%B6.png)
 
 
 
@@ -119,7 +119,7 @@ categories:
 
 
 
-![思维模型_第一章_要点总结](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B_%E7%AC%AC%E4%B8%80%E7%AB%A0_%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93.png)
+![思维模型_第一章_要点总结](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B_%E7%AC%AC%E4%B8%80%E7%AB%A0_%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93.png)
 
 
 

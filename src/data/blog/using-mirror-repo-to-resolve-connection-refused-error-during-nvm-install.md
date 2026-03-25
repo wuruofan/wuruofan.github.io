@@ -89,7 +89,7 @@ curl: (7) Failed to connect to [raw.githubusercontent.com](http://raw.githubuse
 title: nodejs｜解决nvm安装脚本无法连接问题
 date: 2023-06-05 19:00:00
 index_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/image/nvm-node-version-manager.png
-banner_img: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/360-lite-browser.png
+banner_img: /images/360-lite-browser.png
 categories:
 
 - 技术总结

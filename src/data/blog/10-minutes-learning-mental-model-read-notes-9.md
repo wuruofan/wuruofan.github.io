@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》9：激发创意 & 第一性原理
 pubDatetime: 2021-09-01T23:58:00Z
 modDatetime: 2021-09-01T23:58:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/spaceX.png
+heroImage: /images/spaceX.png
 description: 10分钟学点《思维模型》9：激发创意 & 第一性原理
 draft: false
 tags:
@@ -34,7 +34,7 @@ categories:
 
 “奔驰法**SCAMPER**”常用于**头脑风暴**会议中激发创意，“SCAMPER”其实是7个单词缩写组成短语。
 
-![SCAMPER](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/SCAMPER.jpg)
+![SCAMPER](/images/SCAMPER.jpg)
 
 
 
@@ -189,7 +189,7 @@ categories:
 
 埃隆·马斯克（Elon Musk）最信奉的便是“第一性原理”，他曾问了一个问题：**我们怎样才能确定自己不是根据有瑕疵或不完整的信息来解决问题呢？**
 
-![第一性原理](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/first-principle.png)
+![第一性原理](/images/first-principle.png)
 
 
 

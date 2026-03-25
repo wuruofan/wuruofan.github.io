@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》7：接受同行评议 & 找出自我缺陷
 pubDatetime: 2021-08-18T00:35:00Z
 modDatetime: 2021-08-18T00:35:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E5%8E%84%E9%87%8C%E6%96%AF%E9%AD%94%E9%95%9C.jpg
+heroImage: /images/%E5%8E%84%E9%87%8C%E6%96%AF%E9%AD%94%E9%95%9C.jpg
 description: 10分钟学点《思维模型》7：接受同行评议 & 找出自我缺陷
 draft: false
 tags:
@@ -59,7 +59,7 @@ categories:
 
 
 
-![思维模型13：让你的观点接受同行评议](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/思维模型13：让你的观点接受同行评议.png)
+![思维模型13：让你的观点接受同行评议](/images/思维模型13：让你的观点接受同行评议.png)
 
 
 
@@ -93,7 +93,7 @@ categories:
 
 这时候需要把坏处往大了想，狗比猫或许相对忠诚，可是难伺候，养狗费用很高，有时候狗还会做出暴力行为。万一你养了一条暴力的狗，训练不好，它把家里的东西都毁了怎么办。
 
-![你以为的哈士奇](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E4%BD%A0%E4%BB%A5%E4%B8%BA%E7%9A%84%E5%93%88%E5%A3%AB%E5%A5%87.jpg)
+![你以为的哈士奇](/images/%E4%BD%A0%E4%BB%A5%E4%B8%BA%E7%9A%84%E5%93%88%E5%A3%AB%E5%A5%87.jpg)
 
 
 
@@ -126,7 +126,7 @@ categories:
 
 
 
-![思维模型14：找出自己的缺陷](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B14%EF%BC%9A%E6%89%BE%E5%87%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BC%BA%E9%99%B7.png)
+![思维模型14：找出自己的缺陷](/images/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B14%EF%BC%9A%E6%89%BE%E5%87%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BC%BA%E9%99%B7.png)
 
 
 

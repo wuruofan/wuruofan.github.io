@@ -2,7 +2,7 @@
 title: 10分钟学点《思维模型》13：帕累托法则 & 史特金定律 & 帕金森定律
 pubDatetime: 2021-09-30T22:00:00Z
 modDatetime: 2021-09-30T22:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/The-rule-of-80-20.jpg
+heroImage: /images/The-rule-of-80-20.jpg
 description: 10分钟学点《思维模型》13：帕累托法则 & 史特金定律 & 帕金森定律
 draft: false
 tags:
@@ -51,7 +51,7 @@ categories:
 
 
 
-![专注重要的20%](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/The-rule-of-80-20.jpg)
+![专注重要的20%](/images/The-rule-of-80-20.jpg)
 
 
 
@@ -94,7 +94,7 @@ categories:
 
 
 
-![社交网络用户参与度不平衡现象](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/participation-inequality.png)
+![社交网络用户参与度不平衡现象](/images/participation-inequality.png)
 
 
 
@@ -164,7 +164,7 @@ categories:
 
 
 
-![帕金森定律](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/Parkinson's_Laws.jpeg)
+![帕金森定律](/images/Parkinson's_Laws.jpeg)
 
 
 

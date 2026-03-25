@@ -44,17 +44,17 @@ categories:
 
 思维导图大纲截图如下。
 
-![《编写高质量代码：改善Java程序的151个建议》7~9章](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/outline-java-151-chapter-7-9.png)
+![《编写高质量代码：改善Java程序的151个建议》7~9章](/images/outline-java-151-chapter-7-9.png)
 
 
 
-![《编写高质量代码：改善Java程序的151个建议》10~12章](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/outline-java-151-chapter-10-12.png)
+![《编写高质量代码：改善Java程序的151个建议》10~12章](/images/outline-java-151-chapter-10-12.png)
 
 点击每个“小标题”的箭头即可查看每个子项；点击右上角思维导图图标，可以切换大纲模式和导图模式。
 
 
 
-![第7章 泛型和反射](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/mindmap-java-151-chapter-7.png)
+![第7章 泛型和反射](/images/mindmap-java-151-chapter-7.png)
 
 
 
@@ -62,13 +62,13 @@ categories:
 
 长按或扫描下面二维码也可以直达。
 
-![第7~9章思维导图二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qrcode-java-151-chapter-7-9.png)
+![第7~9章思维导图二维码](/images/qrcode-java-151-chapter-7-9.png)
 
 第10~12章思维导图链接：[https://www.mubucm.com/doc/AwQ3wFh23-](https://www.mubucm.com/doc/AwQ3wFh23-)
 
 长按或扫描下面二维码也可以直达。
 
-![第10~12章思维导图二维码](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/qrcode-java-151-chapter-10-12.png)
+![第10~12章思维导图二维码](/images/qrcode-java-151-chapter-10-12.png)
 
 
 

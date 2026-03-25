@@ -2,7 +2,7 @@
 title: Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏
 pubDatetime: 2023-02-01T20:20:00Z
 modDatetime: 2023-02-01T20:20:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/coordinator_layout_webkul.png
+heroImage: /images/coordinator_layout_webkul.png
 description: Android｜CoordinatorLayout+AppBarLayout实现可折叠工具栏
 draft: false
 tags:
@@ -19,7 +19,7 @@ categories:
 
 22年12月中旬的时候，由于其他迭代缺人，让我支援一下，其中有个页面的需求如下，要求实现一个可折叠效果的信息展示卡片，实现完大概就是下面动图的效果。
 
-![折叠效果](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/collapsing-toolbar-animation.gif)
+![折叠效果](/images/collapsing-toolbar-animation.gif)
 
 
 
@@ -27,7 +27,7 @@ categories:
 
 
 
-![ScrollingActivity效果](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/scrolling-activity-collapsing-toolbar-sample.webp)
+![ScrollingActivity效果](/images/scrolling-activity-collapsing-toolbar-sample.webp)
 
 
 
@@ -55,7 +55,7 @@ categories:
 
 
 
-![布局示意图](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/collapsing-toolbar-layout.png)
+![布局示意图](/images/collapsing-toolbar-layout.png)
 
 整体是个`CoordinatorLayout`，coordinator翻译过来就是“协调员”的意思，个人理解，它**通过`behavior`协调其中各个`View`的展示。**
 

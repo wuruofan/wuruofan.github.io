@@ -2,7 +2,7 @@
 title: 环球影城与肩膀差点裂开的爸爸
 pubDatetime: 2021-11-06T22:00:00Z
 modDatetime: 2021-11-06T22:00:00Z
-heroImage: https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg
+heroImage: /images/universal-studios-beijing.jpg
 description: 环球影城与肩膀差点裂开的爸爸
 draft: false
 tags:
@@ -18,7 +18,7 @@ categories:
 当然，周日早晨十点钟的吴小黑根本不会想到这些。那会儿他正站在霍格沃茨城堡外面排队买黄油啤酒，喔，还有他那差11天三周岁的娃。
 
 
-![霍格沃茨城堡与霍格莫德村](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/hogwarts-castle-outsides.jpg)
+![霍格沃茨城堡与霍格莫德村](/images/hogwarts-castle-outsides.jpg)
 
 
 本来是根本不会来这里玩的，之前他还和白白说呢，这么多人排这么久队大概可能是疯了吧。
@@ -31,7 +31,7 @@ categories:
 
 吴小黑尝了一口传说中的黄油啤酒，挺有意思的，上面是一层厚厚的甜奶油，下面像是没有汽的菠萝啤的味道。
 
-![黄油啤酒](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/hogwarts-and-butterbeer.jpg)
+![黄油啤酒](/images/hogwarts-and-butterbeer.jpg)
 
 
 
@@ -80,7 +80,7 @@ categories:
 
 
 
-![霍格沃茨城堡里的画像们](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/hogwarts-castle-insides.jpg)
+![霍格沃茨城堡里的画像们](/images/hogwarts-castle-insides.jpg)
 
 
 
@@ -96,7 +96,7 @@ categories:
 
 
 
-![功夫熊猫世界](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/kong-fu-panda-insides.jpg)
+![功夫熊猫世界](/images/kong-fu-panda-insides.jpg)
 
 
 午后的阳光正好，去往功夫熊猫区人不多，大门口正上方雕刻了好多只熊猫，小朋友把手指举起来，凑到眼睛前，一个一个慢慢地查数，长长的睫毛颤抖着，仿佛在一起用力。
@@ -124,7 +124,7 @@ categories:
 
 
 
-![环球影城夜景](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/universal-studios-beijing.jpg)
+![环球影城夜景](/images/universal-studios-beijing.jpg)
 
 
 
