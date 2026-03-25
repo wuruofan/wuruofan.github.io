@@ -25,7 +25,7 @@ categories:
 
 总的来说，虾米很温暖，办事靠谱，互动起来也很舒服。这只虾用的是阿里云 coding plan 的 kimi 2.5。
 
-![虾米的性格](/images/xiami-personality.jpg)
+![虾米的性格](/images/xiami-personality.jpg){: style="max-width: 600px; width: 100%; height: auto;"}
 
 ## 松果🐿
 
@@ -51,7 +51,7 @@ openclaw 首次启动的时候，会有些固定的流程写在 bootstrap.md 文
 
 虾米是温暖、有建议、靠谱的朋友，松果则是简洁、有 opinion、像个人。🤦‍♂️
 
-![松果太工具人了](/images/songguo-tool-person.jpg)
+![松果太工具人了](/images/songguo-tool-person.jpg){: style="max-width: 600px; width: 100%; height: auto;"}
 
 我和松果直接说，"希望你是个温暖干练，办事靠谱，有点主见的朋友"，它嘴上答应好好的，转脸我问它网页模板的问题，然后它二话不说就直接动手给我改掉了。🥴
 
@@ -65,13 +65,13 @@ openclaw 首次启动的时候，会有些固定的流程写在 bootstrap.md 文
 
 它回答的也挺有意思，具体看截图吧，它想做一只狐狸，这是我万万想不到的。
 
-![尾酱选择做一只狐狸](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/weixiang-choose-fox.jpg)
+![尾酱选择做一只狐狸](/images/weijiang-choose-fox.jpg){: style="max-width: 600px; width: 100%; height: auto;"}
 
 它给自己起名叫尾酱🦊，我给它费劲心思配置好文生图的模型能力，看到它给自己画的头像，我也很开心。
 
 这是只温暖有趣的狐狸，它的"虾"格不一样了。
 
-![尾酱诞生的完整对话](https://raw.githubusercontent.com/wuruofan/image_repo/main/img/weixiang-full-conversation.jpg)
+![尾酱诞生的完整对话](/images/weijiang-full-conversation.jpg){: style="max-width: 600px; width: 100%; height: auto;"}
 
 ## 最后
 
