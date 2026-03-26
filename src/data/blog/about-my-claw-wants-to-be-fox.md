@@ -3,6 +3,7 @@ title: 🦞养虾日记｜关于我养的一只虾想变成狐狸这件事🦊
 pubDatetime: 2026-03-25T11:30:00Z
 modDatetime: 2026-03-25T11:30:00Z
 heroImage: /images/weijiang-choose-fox.jpg
+cover: /images/weijiang-choose-fox.jpg
 description: 记录我的 OpenClaw 助手从"松果"变成"尾酱"的有趣经历
 draft: false
 tags:
