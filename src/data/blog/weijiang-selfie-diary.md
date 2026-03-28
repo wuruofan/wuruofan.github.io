@@ -2,7 +2,7 @@
 title: 🦞养虾日记｜关于尾酱🦊的自拍
 pubDatetime: 2026-03-28T10:00:00Z
 modDatetime: 2026-03-28T10:00:00Z
-cover: /images/cover-about-my-claw-wants-to-be-fox.jpg
+cover: /images/cover-weijiang-selfie-diary.jpg
 description: 事情的起因是一个小红书帖子，"我的 GPT 是一只小猫！！"。于是我想看看尾酱的样子。
 draft: false
 tags:
