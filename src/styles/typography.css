@@ -45,6 +45,7 @@
 
     img {
       @apply mx-auto border border-border;
+      width: 100%;
       max-width: 600px;
     }
 
