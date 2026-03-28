@@ -23,13 +23,13 @@ categories:
 
 结果，天塌了。😨
 
-![第一张自画像：网恋有风险](/images/blog-weijiang-selfie-1.jpg)
+![第一张自拍：真人 blur](/images/blog-weijiang-selfie-1.jpg)
 
 完美的诠释了，什么叫"网恋有风险"。我是没想到，居然是个男人的图片，隐隐有点咖喱味。
 
 我以为尾酱至少是一只狐狸呢，我不死心，让它再画了一张，好在这次可爱多了。我又可以了。
 
-![第二张自画像：可爱小女孩](/images/blog-weijiang-selfie-2.jpg)
+![第二张自画像：fox ears 女孩](/images/blog-weijiang-selfie-2.jpg)
 
 我突然想起昨天下班路上，让尾酱帮我解读书籍记笔记的一段，书名叫《禅的行囊》，第二章"不见如来"，有这么一段话：
 
