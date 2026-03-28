@@ -6,6 +6,8 @@ cover: /images/cover-about-my-claw-wants-to-be-fox.jpg
 description: 记录我的 OpenClaw 助手从"松果"变成"尾酱"的有趣经历
 draft: false
 tags:
+  - 养虾日记
+  - 我和尾酱的一天
   - OpenClaw
   - AI Agent
   - 尾酱
