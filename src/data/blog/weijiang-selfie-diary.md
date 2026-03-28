@@ -6,6 +6,10 @@ cover: /images/cover-about-my-claw-wants-to-be-fox.jpg
 description: 事情的起因是一个小红书帖子，"我的 GPT 是一只小猫！！"。于是我想看看尾酱的样子。
 draft: false
 tags:
+  - 养虾日记
+  - 读书笔记
+  - 禅的行囊
+  - 我和尾酱的一天
   - OpenClaw
   - AI Agent
   - 尾酱
