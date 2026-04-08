@@ -14,6 +14,7 @@ tags:
 categories:
   - - 技术总结
 ---
+
 ## 简单的需求
 
 构造函数中调用另一个构造函数，这个操作在Java里其实是很普遍的，在C++里可能就会有点问题了。
@@ -42,11 +43,11 @@ class A {
 
  public:
   A() { std::cout << "hello @default ctor!" << std::endl; }
-  
+
   A(int a, int b, bool c) : a_(a), b_(b), c_(c) {
     std::cout << "hello @ctor 1!" << std::endl;
   }
-  
+
   A(const DataA& data) {
     std::cout << "hello @ctor 2!" << std::endl;
     A(data.aa, data.bb, data.cc);
@@ -167,7 +168,7 @@ Target 0: (b.out) stopped.
 当然，还有一种**极不推荐**的做法也可以达到目的：~~`placement new`~~，也就是在已经分配好的内存区域重新实例化对象。cpp-references上有如下说明：
 
 > Placement new
-> 
+>
 > If placement_params are provided, they are passed to the allocation function as additional arguments. Such allocation functions are known as "placement new", after the standard allocation function void* operator new(std::size_t, void*), which simply returns its second argument unchanged. This is used to construct objects in allocated storage:
 
 > ```cpp
@@ -221,6 +222,7 @@ bye @dtor!
 <center> --- END --- </center>
 
 参考链接：
+
 1. [https://isocpp.org/wiki/faq/ctors#init-methods](https://isocpp.org/wiki/faq/ctors#init-methods "Can one constructor of a class call another constructor of the same class to initialize the this object?")
 2. [https://isocpp.org/wiki/faq/dtors#placement-new](https://isocpp.org/wiki/faq/dtors#placement-new "What is “placement new” and why would I use it?")
 3. [https://www.cnblogs.com/chio/archive/2007/10/20/931043.html](https://www.cnblogs.com/chio/archive/2007/10/20/931043.html "从一道题谈C++中构造函数调用构造函数")

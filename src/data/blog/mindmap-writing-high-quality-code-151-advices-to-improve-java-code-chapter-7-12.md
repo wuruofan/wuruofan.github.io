@@ -13,17 +13,12 @@ tags:
 categories:
   - 思维导图
 ---
+
 整理自《编写高质量代码：改善Java程序的151个建议》一书第7~12章，全书思维导图已更新完毕。
-
-
 
 > 《编写高质量代码：改善Java程序的151个建议》这本书有些年了，但是知识点较全面，**是本查漏补缺的书**，整本书的写作风格参考《Effective C++》条款式风格，是一本**适合碎片时间阅读**的书。
 >
-> 
->
 > 可以关注微信公众号：**小黑杂说**，回复关键字“**java151电子书**”获取完整电子书下载链接。
-
-
 
 第7章泛型和反射、第8章异常、第9章多线程和并发、第10章性能效率，重点看一下；第11、12章仅作为了解快速阅读即可，**重要的知识点**有：
 
@@ -40,25 +35,17 @@ categories:
 - 建议127，Lock和synchronized关键字的区别
 - 建议135，必须定义性能衡量标准，这个在实际开发过程中很重要
 
-
-
 思维导图大纲截图如下。
 
 ![《编写高质量代码：改善Java程序的151个建议》7~9章](/images/outline-java-151-chapter-7-9.png)
-
-
 
 ![《编写高质量代码：改善Java程序的151个建议》10~12章](/images/outline-java-151-chapter-10-12.png)
 
 点击每个“小标题”的箭头即可查看每个子项；点击右上角思维导图图标，可以切换大纲模式和导图模式。
 
-
-
 ![第7章 泛型和反射](/images/mindmap-java-151-chapter-7.png)
 
-
-
-第7~9章思维导图链接：[https://www.mubucm.com/doc/5QwfTKEG4_-](https://www.mubucm.com/doc/5QwfTKEG4_-)
+第7~9章思维导图链接：[https://www.mubucm.com/doc/5QwfTKEG4\_-](https://www.mubucm.com/doc/5QwfTKEG4_-)
 
 长按或扫描下面二维码也可以直达。
 
@@ -70,16 +57,10 @@ categories:
 
 ![第10~12章思维导图二维码](/images/qrcode-java-151-chapter-10-12.png)
 
-
-
 至此，全书思维导图更新完毕，下一本书的思维导图还在整理中。
-
-
 
 最后，欢迎分享。
 
 欢迎关注“小黑杂说”公众号，回复想了解的技术、思维导图或者电子书都可以。
-
-
 
 ![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)

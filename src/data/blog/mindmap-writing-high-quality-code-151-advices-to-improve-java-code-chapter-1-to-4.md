@@ -13,6 +13,7 @@ tags:
 categories:
   - 思维导图
 ---
+
 整理自《编写高质量代码：改善Java程序的151个建议》一书前四章，这本书有些年了，但是知识点较全面，是本查漏补缺的书，整本书的写作风格参考《Effective C++》条款式风格，是一本适合碎片时间阅读的书。
 
 > 可以关注微信公众号：**小黑杂说**，回复关键字“java151电子书”获取完整电子书下载链接。
@@ -20,7 +21,6 @@ categories:
 思维导图大纲截图如下。
 
 ![《编写高质量代码：改善Java程序的151个建议》1~4章](/images/java-151-chapter-1-4.png)
-
 
 前4章基本是Java基础知识，个人觉得容易遗忘、混淆的知识点和比较重要的知识点有：
 
@@ -57,7 +57,5 @@ categories:
 **注意**：在校学生记得认证学生身份，赠送一年会员。
 
 最后，欢迎分享。
-
-
 
 ![小黑杂说](https://raw.githubusercontent.com/wuruofan/wuruofan.github.io/master/img/qr-wechat-large.png)

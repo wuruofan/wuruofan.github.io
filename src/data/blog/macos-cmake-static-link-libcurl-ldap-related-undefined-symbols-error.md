@@ -12,6 +12,7 @@ tags:
 categories:
   - - 技术总结
 ---
+
 具体编译过程和前两篇文章类似，但是在链接`libcurl.a`的时候出现找不到ldap相关符号的提示：
 
 <!-- more -->
@@ -107,6 +108,5 @@ ld: symbol(s) not found for architecture x86_64
 3.  链接系统ldap库：添加额外的链接`target_link_libraries(my_target -lldap)`即可。
 
 都可以解决问题。
-
 
 <center>--- END ---</center>

@@ -15,6 +15,7 @@ tags:
 categories:
   - - 软件工具
 ---
+
 在ubuntu上gtags总是运行不正常，`ctrl-]`无法找到tags，`gutentags`有报错信息，今天找了下原因，记录下坎坷过程。
 
 首先在`.vimrc`中加上`let g:gutentags_trace = 1`，然后就可以用`:messages`查看具体出错日志。
@@ -38,12 +39,12 @@ gutentags: [job stderr]: ['ctags: cannot open option file "/home/parallels/.vim/
 im-gutentags/res/ctags_recursive.options" : Permission denied', '']
 ```
 
-把ctags\_recursive.options文件的权限改成666或者777，仍然是这个错误，依旧无法生成tags数据库。
+把ctags_recursive.options文件的权限改成666或者777，仍然是这个错误，依旧无法生成tags数据库。
 
 搜了很久在一个网站看到有人遇到相同的问题，似乎是snap上gtags的问题。
 
-> This is more of a warning to other users since i discovered the hard-way that universal-ctags installed by snap is NOT compatible with gutentags. For me it manifested as permission errors reading the ctags\_recursive.options file, but I could imagine different file perm errors depending on your config. The fs limitations are mentioned at https://snapcraft.io/universal-ctags and in https://github.com/universal-ctags/ctags-snap/issues/26. I don't think there is anything for gutentags to do except maybe include a warning in the doc about snap installed ctags.
-> 
+> This is more of a warning to other users since i discovered the hard-way that universal-ctags installed by snap is NOT compatible with gutentags. For me it manifested as permission errors reading the ctags_recursive.options file, but I could imagine different file perm errors depending on your config. The fs limitations are mentioned at https://snapcraft.io/universal-ctags and in https://github.com/universal-ctags/ctags-snap/issues/26. I don't think there is anything for gutentags to do except maybe include a warning in the doc about snap installed ctags.
+>
 > 参考：[https://www.bountysource.com/issues/90002621-universal-ctags-installed-by-snap-not-compatible-with-vim-gutentags](https://www.bountysource.com/issues/90002621-universal-ctags-installed-by-snap-not-compatible-with-vim-gutentags "universal-ctags installed by snap not compatible with vim-gutentags")
 
 ## 源码安装universal-ctags
@@ -110,7 +111,7 @@ There is NO WARRANTY, to the extent permitted by law.
 
 大功告成！
 
-* * *
+---
 
 最后，附上tags相关的VIM配置。
 

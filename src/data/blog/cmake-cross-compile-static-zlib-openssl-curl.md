@@ -15,6 +15,7 @@ tags:
 categories:
   - - 技术总结
 ---
+
 项目遇到跨平台交叉编译的问题，需要针对`mips64el`架构和`aarch64`架构进行编译。
 
 CMake本身支持通过指定交叉编译工具链的方式来完成跨平台编译的，通过`cmake -DCMAKE_TOOLCHAIN_FILE=</path/of/toolchain/file> ..`指定交叉编译工具链即可。
@@ -185,7 +186,5 @@ make install
 ## 结束
 
 至此，交叉编译方法本质上就是指定好交叉编译工具路径，配置好依赖的库和相关参数，并不难，主要交叉编译的目标平台可能会有些奇奇怪怪的问题需要解决。
-
-  
 
 <center>--- END ---</center>

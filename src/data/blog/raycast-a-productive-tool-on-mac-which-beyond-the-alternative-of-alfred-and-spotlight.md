@@ -10,16 +10,16 @@ tags:
 categories:
   - 软件工具
 ---
+
 ![官网简介](https://raw.githubusercontent.com/wuruofan/image_repo/main/image/raycast-introduction-on-official-website.png)
 
 ## Intro
 
-***⚠️⚠️ 本文多图预警！⚠️⚠️***
+**_⚠️⚠️ 本文多图预警！⚠️⚠️_**
 
 我个人一直在用免费版的Alfred，就我个人而言，大部分使用场景免费版已经足够了，但是有些快捷查词典翻译的需求，却必须Powerpack才可以。
 
 这两天找到了一款非常好用的软件——Raycast，完全解决我的痛点，赶紧和大家分享下！
-
 
 ## Raycast简介
 
@@ -29,7 +29,6 @@ categories:
 > ⇒ Raycast 是一个极快、可扩展的启动器。它让你能够完成任务、计算、共享常用链接等等。
 
 使用下来，Raycast设计的思路和Alfred类似，也是命令式操作，都是希望手指不用离开键盘就可以完成大部分操作。
-
 
 ### UI 界面
 
@@ -205,7 +204,6 @@ Raycast支持插件和自定义脚本。
 最后，Notion AI总结如下：
 
 > Raycast是一款MacOS下的快捷启动器，支持快速启动程序、执行命令、搜索系统设置、文件搜索、窗口管理、剪切板历史、词典、快捷链接、提醒事项等功能。支持别名和全局快捷键，还有插件和自定义脚本功能。个人和基础团队功能都是免费的。
-
 
 最后的最后，祝大家五一快乐！🤗
 

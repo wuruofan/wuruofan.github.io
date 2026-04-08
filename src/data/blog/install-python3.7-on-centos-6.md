@@ -13,10 +13,10 @@ tags:
 categories:
   - 避坑指北
 ---
+
 由于某种未知原因，一台老服务器上python3环境不见了，不清楚原安装方法与位置，现重新配置。
 
 用`cat /etc/issue`查看了下发行版信息，是CentOS 6.10。CentOS 6默认安装python版本为2.6，安装python3需要自行下载源码编译。
-
 
 ## 编译源码
 
@@ -79,19 +79,18 @@ openssl version
 
 #### 下载目标版本源码
 
-去官网https://www.python.org/downloads/，下载完成是一个.tar.gz压缩包，执行解压缩命令：`tar zxvf python****.tar.gz`
+去官网https://www.python.org/downloads/，下载完成是一个.tar.gz压缩包，执行解压缩命令：`tar zxvf python\*\*\*\*.tar.gz`
 
 #### 编译安装
-
 
 进入解压后源码目录，执行如下命令：
 
 ```bash
 # 使用上一步编译的ssl目录
-./configure --prefix=/usr/local/python3 --with-openssl=/usr/local/ssl --enable-shared 
- 
+./configure --prefix=/usr/local/python3 --with-openssl=/usr/local/ssl --enable-shared
+
 make
- 
+
 sudo make install
 ```
 
@@ -100,8 +99,6 @@ sudo make install
 由于安装到`/usr/local/`目录下，所有用户都可以访问，需要su权限安装。
 
 卸载如需要卸载，直接删除`/usr/local/python3`目录即可。
-
-
 
 ## 配置python环境
 
@@ -121,7 +118,7 @@ sudo make install
 
 ```bash
 sudo mv /usr/bin/python /usr/bin/python.bak
- 
+
 sudo ln -s /usr/local/python3/bin/python3 /usr/bin/python
 
 sudo ln -s /usr/local/python3/bin/python3 /usr/bin/python3
@@ -140,17 +137,15 @@ source ~/.bashrc
 
 这时配置完，bashrc中应当配置了两条LD_LIBRARY_PATH，`export LD_LIBRARY_PATH=/usr/local/ssl/lib:/usr/local/python3/lib:$LD_LIBRARY_PATH`。
 
-
 #### 配置yum（可选）
 
 由于CentOS的软件管理工具yum是默认依赖python2的，如果运行出现错误，需要修改yum脚本。
 
 用vim编辑`/usr/bin/yum`将首行`#!/usr/bin/python`改为`#!/usr/bin/python2.6`即可。
 
-
 ## 其他
 
-如果在python3配置过程中都已经按照说明进行了配置，但是仍有奇怪的问题，可能和python自身的环境变量有关，python2和python3都会使用`$PYTHONHOME`和`$PYTHONPATH`，可以执行清除命令。 
+如果在python3配置过程中都已经按照说明进行了配置，但是仍有奇怪的问题，可能和python自身的环境变量有关，python2和python3都会使用`$PYTHONHOME`和`$PYTHONPATH`，可以执行清除命令。
 
 ```bash
 unset $PYTHONHOME
