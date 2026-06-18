@@ -43,5 +43,17 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "astro": {
+      "vite": "^7.3.5"
+    },
+    "vitefu": {
+      "vite": "^8.0.16"
+    },
+    "@tailwindcss/vite": {
+      "vite": "^8.0.16"
+    }
   }
 }
