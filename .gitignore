@@ -26,3 +26,6 @@ pnpm-debug.log*
 # pagefind
 
 public/pagefind
+
+# agent workspace memory（.workbuddy/skills 的软链要跟着仓库走，别整体忽略）
+.workbuddy/memory/
