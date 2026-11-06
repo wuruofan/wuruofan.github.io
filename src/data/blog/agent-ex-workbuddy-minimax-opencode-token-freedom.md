@@ -1,7 +1,7 @@
 ---
 title: AI 工作流｜agent-ex：给你的 AI 找个“外援”
 pubDatetime: 2026-10-26T18:30:00Z
-description: 七个月前被 token 周限搞出焦虑，一狠心买了 MiniMax plan，结果便宜的 token 买不来会做方案的脑子。一个写 spec、一个 review，我成了中间传话的那个——agent-ex 就是把我从这条流水线上替下来的桥。
+description: 七个月前被 token 周限搞出焦虑，一狠心买了 MiniMax plan，结果便宜的 token 买不来会做方案的脑子。后来我就转向了 WorkBuddy/Trae，配合 MiniMax，一个写 spec、一个 review——agent-ex 就是整条流水线上的桥。
 draft: false
 tags:
   - agent-ex
