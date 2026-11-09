@@ -1,7 +1,7 @@
 ---
-title: AI 工作流｜agent-ex：给你的 AI 找个“外援”
+title: AI 工作流｜agent-ex：给你的 AI 找个免费“外援”
 pubDatetime: 2026-10-26T18:30:00Z
-description: 七个月前被 token 周限搞出焦虑，一狠心买了 MiniMax plan，结果便宜的 token 买不来会做方案的脑子。后来我就转向了 WorkBuddy/Trae，配合 MiniMax，一个写 spec、一个 review——agent-ex 就是整条流水线上的桥。
+description: 七个月前被 token 周限搞出了焦虑，于是买了 MiniMax plan，结果便宜的 token 买不来会做方案的脑子。后来我就转向了 WorkBuddy/Trae，配合 MiniMax，一个写 spec、一个 review——agent-ex 就是整条流水线上的桥。
 draft: false
 tags:
   - agent-ex
@@ -12,7 +12,7 @@ tags:
   - AI Agent
   - 工作流
   - 穷鬼
-  - token
+  - 免费 token
 categories:
   - 技术笔记
 ---
@@ -21,7 +21,7 @@ categories:
 
 ## 前情背景
 
-大概七个月前，MiniMax M2.7 刚发布的时候，我被一句「token 周限」的宣传搞出焦虑来了，冲动之下就买了 MiniMax 的 token plan 无周限版，放弃了同期 GLM 和 Kimi，结果发现，便宜是真便宜，但拉也是真的拉完了。
+大概七个月前，MiniMax M2.7 刚发布的时候，我被一句「token 周限」的宣传搞出焦虑来了，于是就买了 MiniMax 的 token plan，放弃了同期 GLM 和 Kimi，结果发现，便宜是真便宜，但拉也是真的拉完了。
 
 M2.7 越用越觉得菜，写个方案 spec + plan 真是要老命了，纯属鸡肋，每天都得激情开骂。DeepSeek V4 强一些，但没有 token plan，用多了也肉疼。
 
@@ -49,11 +49,11 @@ M2.7 越用越觉得菜，写个方案 spec + plan 真是要老命了，纯属�
 
 这个步骤是 loop 的主战场，上一步骤产出的 plan 会把任务拆分好，后续的执行其实就更适合交给**便宜的 worker 模型**去执行了：“请派发 agent-ex 任务进行开发，loop 执行”。
 
-整体上是个串行开发 + 验证的流程，串行是为了避免任务之间改动同一个工作区文件相互影响（可以支持 git worktree，暂时没做），外部 agent 执行完成后，主 agent 进行验收验证，然后再派下一个任务。验收的过程有几档置信度标准以及验收闸门，并不是轻易地接受外部 agent 结论。
+整体上是个**串行开发 + 验证**的流程，串行是为了避免任务之间改动同一个工作区文件相互影响（可以支持 `git worktree`，暂时没做），外部 agent 执行完成后，主 agent 进行验收验证，然后再派下一个任务。验收的过程有几档置信度标准以及验收闸门，并不是轻易地接受外部 agent 结论。
 
 ### `loop` 的前提
 
-这里需要特别注意，**loop** 的实现需要依赖 `主 agent` 支持 **「后台任务完成能触发新 turn」** 的能力，WorkBuddy 实测可以，Trae 有些问题，不支持后台任务，前台任务等待也有另一个小问题，所以，这里更推荐 WorkBuddy。
+这里需要特别注意，loop 的实现需要依赖 `主 agent` 支持 **「后台任务完成能触发新 turn」** 的能力，WorkBuddy 实测可以，Trae 有些问题，不支持后台任务，前台任务等待也有另一个小问题，所以，这里更推荐 WorkBuddy。
 
 其实 MiniMax Code 最新版本迭代也很快，后台任务能力实现的体感更好一些，但是考虑到主模型能力越强越好，更推荐 WorkBuddy 按需切换 GLM 或者 DeepSeek。
 
@@ -61,7 +61,7 @@ M2.7 越用越觉得菜，写个方案 spec + plan 真是要老命了，纯属�
 
 ### MCP + Skill 两层
 
-简单讲，就是 **agent-ex CLI 工具** 提供任务派发、执行、管理、存储的 **MCP server** 能力，需要配置到 主 agent 设置中去，同时还提供了 `agent-ex wait` 等待任务完成的能力，这是 loop 的核心。**dispatch skill** 规范了任务派发方式和派发时机，提供了任务 prompt 示例，以及任务验收标准。
+简单讲，就是 agent-ex CLI 工具提供任务派发、执行、管理、存储的 **MCP server** 能力，需要配置到 `主 agent` 设置中去，同时还提供了 `agent-ex wait` 等待任务完成的能力，这是 loop 的核心。**dispatch skill** 规范了任务派发方式和派发时机，提供了任务 prompt 示例，以及任务验收标准。
 
 ### 安装与配置
 
@@ -92,7 +92,7 @@ M2.7 越用越觉得菜，写个方案 spec + plan 真是要老命了，纯属�
 }
 ```
 
-> ⚠️ 注意：这里绝对路径是因为 MCP 客户端拉起 server 时很可能不继承你的 shell PATH，而不同 agent 会有沙箱设计的问题，导致 npm 路径无法识别到。
+> ⚠️ 注意：这里绝对路径是因为 MCP 客户端拉起 server 时很可能**不继承你的 shell `PATH`**，而不同 agent 会有沙箱设计的问题，导致 npm 路径无法识别到。
 
 #### 3. 安装 skills
 
@@ -102,7 +102,7 @@ WorkBuddy 有个问题比较烦，不识别通用的 `.agents/` 配置目录，`
 
 `ln -s ~/.agents/skills/agent-ex-dispatch ~/.workbuddy/skills/agent-ex-dispatch`
 
-> ⚠️ 注意：链接之前先保证目录 `~/.workbuddy/skills/` 存在，`ln` 对已存在的同名目录不会报错，它会把软链塞进那个目录里，看着成功、实际没生效。
+> ⚠️ 注意：链接之前先保证目录 `~/.workbuddy/skills/` 存在，**`ln` 对已存在的同名目录不会报错**，它会把软链塞进那个目录里，看着成功、实际没生效。
 
 #### 4. 更新方法
 
@@ -128,7 +128,7 @@ WorkBuddy 有个问题比较烦，不识别通用的 `.agents/` 配置目录，`
 
 1. 新建飞书群，然后进入群，`设置 → 群机器人 → 添加机器人 → 自定义机器人`，建完复制那串 `https://open.feishu.cn/open-apis/bot/v2/hook/...`。
 2. 安全设置只勾「自定义关键词」，词填 `agent-ex`。
-3. 把第 1 步复制的字符串发给 agent 工具：“帮我配置下 agent-ex 的 FEISHU_WEBHOOK_URL，xxxxx”。
+3. 把第 1 步复制的字符串发给 agent 工具：“帮我配置下 agent-ex 的 `FEISHU_WEBHOOK_URL`，xxxxx”。
 
 ![飞书机器人设置](/images/agent-ex-feishu-bot-setting.png)
 
@@ -141,11 +141,11 @@ WorkBuddy 有个问题比较烦，不识别通用的 `.agents/` 配置目录，`
 
 `agent-ex` 内置了免费模型的配置，如果 init 的时候没有创建，也可以使用 `agent-ex profile create opencode-zen-free --use` 一键创建并使用。
 
-> ⚠️ 注意：OpenCode Zen 免费模型会变，已经预置了优先级和轮换顺序，每次执行任务之前会拉取最新模型清单，按照预置的 `ZEN_FREE_PREFER` 优先级顺序（deepseek、glm、mimo）去使用。
+> ⚠️ 注意：OpenCode Zen 免费模型会变，已经预置了优先级和轮换顺序，每次执行任务之前会拉取最新模型清单，按照预置的 `ZEN_FREE_PREFER` 优先级顺序（`deepseek`、`glm`、`mimo`）去使用。
 
-## 吐槽
+## 🤬吐槽
 
-关于 Trae 曾经我用得最多，手机端会话同步得很快，用起来也很流畅，但是在 `agent-ex` 开发过程中发现很多问题，最重要的就是 Trae 本身**没有后台任务触发新 turn 的能力**，尝试过用定时器轮询去绕开，但是**定时器任务没法继承会话上下文**；如果选择前台任务等待的话，还会遇到**前台任务超时转后台任务**的问题。
+关于 Trae 曾经我用得最多，手机端会话同步得很快，用起来也很流畅，但是在 `agent-ex` 开发过程中发现很多问题，最重要的就是 Trae 本身**没有后台任务触发新 turn 的能力**，尝试过用定时器轮询去绕开，但是定时器任务没法继承会话上下文；如果选择前台任务等待的话，还会遇到前台任务超时转后台任务的问题。
 
 Trae 还有一个问题，**本地 stdio MCP server 重启时不会自动重连**，而且界面上没有任何报错提示，只能电脑端去设置里点击重启 MCP，给 Trae 的产品和开发反馈过，但开发人员不认为是问题，反馈了好久也没给解决。
 
@@ -153,7 +153,7 @@ Trae 还有一个问题，**本地 stdio MCP server 重启时不会自动重连*
 
 而 WorkBuddy 也有自己的问题，手机登录同步电脑端会话的时候总是需要重新拉取会话信息，会话缓存做的是一坨，拉取会话历史和加载都很慢，还容易出错。WorkBuddy 不识别通用的 `.agents/` 配置目录，`npx skills` 安装后需要手动链接一下，比较烦躁。
 
-但 WorkBuddy 更新频率比较高，模型上线速度较快，后台任务支持较好，总的来说，还是首推使用 WorkBuddy。
+但 WorkBuddy 更新频率比较高，模型上线速度较快，后台任务支持较好，**总的来说，还是首推使用 WorkBuddy**。
 
 该说不说，最近 MiniMax Code 迭代速度比较快，后台任务做得很好，很多次执行过程中，会主动在当前会话里启动后台定时任务去等待，应该是提示词里有专门的优化。
 
