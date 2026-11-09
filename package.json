@@ -13,24 +13,25 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.2",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.4.6",
+    "astro": "7.4.1",
     "dayjs": "^1.11.20",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
-    "satori": "^0.26.0",
-    "sharp": "^0.34.5",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
     "slugify": "^1.6.9",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/markdown-remark": "^7.3.6",
     "@pagefind/default-ui": "^1.5.0",
-    "@shikijs/transformers": "^4.0.2",
+    "@shikijs/transformers": "^4.6.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/lodash.kebabcase": "^4.1.9",
     "@typescript-eslint/parser": "^8.58.1",
@@ -45,15 +46,10 @@
     "typescript-eslint": "^8.58.1"
   },
   "overrides": {
-    "esbuild": "^0.28.1",
-    "astro": {
-      "vite": "^7.3.5"
-    },
-    "vitefu": {
-      "vite": "^8.0.16"
-    },
-    "@tailwindcss/vite": {
-      "vite": "^8.0.16"
+    "minimatch": "^11.0.5",
+    "fflate": "^0.7.5",
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "^6.1.5"
     }
   }
 }
