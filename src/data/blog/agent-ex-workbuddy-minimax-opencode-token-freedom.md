@@ -117,7 +117,7 @@ WorkBuddy 有个问题比较烦，不识别通用的 `.agents/` 配置目录，`
 ```
 帮我装一下 agent-ex，按顺序来：
 1. npm i -g agent-ex-mcp
-2. 跑 agent-ex init，用我本机已有的 claude 或 opencode，密钥写进 ~/.agent-ex/.env
+2. 跑 agent-ex init，选 opencode，profile 用 opencode-zen-free（免费模型）
 3. 把它打印的 MCP 注册片段（绝对路径那份）写进你的 MCP 设置里
 4. npx skills add wuruofan/agent-ex --skill agent-ex-dispatch -g -y
 5. 补一条软链：ln -s ~/.agents/skills/agent-ex-dispatch ~/.workbuddy/skills/agent-ex-dispatch
