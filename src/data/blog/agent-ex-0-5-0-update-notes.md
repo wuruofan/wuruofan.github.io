@@ -13,7 +13,7 @@ categories:
   - 技术笔记
 ---
 
-![装一次，链一片](/images/agent-ex-hero-0-5-0.webp)
+![装一次，链一片](/images/agent-ex-hero-0-5-0.png)
 
 上一篇写 `agent-ex` 怎么用，那会儿装 dispatch skill 得两步：`npx skills add` 再给 WorkBuddy 手动 `ln -s`。才过一周，`agent-ex-mcp` 就发到了 `0.5.0`，skill 直接内置在 npm 包里。
 
